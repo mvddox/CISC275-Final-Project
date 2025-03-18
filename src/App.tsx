@@ -46,7 +46,7 @@ function App() {
         <br></br>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
-      <footer>Authors: Ethan Rigor, John Shaw, Elijah <Jeudy></Jeudy> </footer>
+      <footer>Authors: Ethan Rigor, John Shaw, Elijah Jeudy </footer>
     </div>
   );
 }
