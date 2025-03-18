@@ -29,7 +29,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload. Elijah Jeudy
+          Edit <code>src/App.tsx</code> and save to reload. 
         </p>
         <a
           className="App-link"
@@ -46,7 +46,7 @@ function App() {
         <br></br>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
-      <footer>Authors: Ethan Rigor, John Shaw </footer>
+      <footer>Authors: Ethan Rigor, John Shaw, Elijah <Jeudy></Jeudy> </footer>
     </div>
   );
 }
