@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import './App.css';
-import './pages/BasicQuestions'
-import './pages/Home'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
-import BasicQuestionPage from './pages/BasicQuestions';
-
+// note change to respective comps
+// import logo from './logo.svg';
+// import './App.css';asd
+import { Button, Form, } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -15,8 +13,7 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
-
-function App() {
+function BasicQuestion() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   
   //sets the local storage item to the api key the user inputed
@@ -30,28 +27,33 @@ function App() {
     setKey(event.target.value);
   }
 
+  // for navigating between pages
+function NavigationButton(){
+    const navigate = useNavigate();
+    return (<div>
+      <Button onClick={() => navigate("/Home")}>
+          Click Here
+      </Button>
+    </div>)
+  }
+
+
   return (
-    <>
-            <BrowserRouter>
-                <Routes>
-                    <Route
-                        path="/Home"
-                      
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/"
-                      
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/Basic"
-                        element={<BasicQuestionPage />}
-                    />
-                </Routes>
-            </BrowserRouter>
-        </>
+    <div className="Basic">
+      <header className="Basic-header">
+        Basic 
+        <NavigationButton/>
+      </header>
+      <footer>
+      <Form>
+        <Form.Label>API Key:</Form.Label>
+        <Form.Control type="password" placeholder="Insert API Key Here" onChange={changeKey}></Form.Control>
+        <br></br>
+        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
+      </Form>
+      Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+    </div>
   );
 }
 
-export default App;
+export default BasicQuestion;
