@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import { Button, Form } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -22,7 +22,7 @@ function NavigationButton(){
   </div>)
 }
 
-function Home() {
+function HomePage() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   
   //sets the local storage item to the api key the user inputed
