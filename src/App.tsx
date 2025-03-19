@@ -2,7 +2,7 @@
 import './App.css';
 import './pages/BasicQuestions'
 import './pages/Home'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestions';
 
