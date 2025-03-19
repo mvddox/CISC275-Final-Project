@@ -2,7 +2,7 @@
 import './App.css';
 import './pages/BasicQuestions'
 import './pages/Home'
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestions';
 
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-            <BrowserRouter>
+            <Router>
                 <Routes>
                     <Route
                         path="/Home"
@@ -50,7 +50,7 @@ function App() {
                         element={<BasicQuestionPage />}
                     />
                 </Routes>
-            </BrowserRouter>
+            </Router>
         </>
   );
 }
