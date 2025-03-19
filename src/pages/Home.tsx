@@ -68,4 +68,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
