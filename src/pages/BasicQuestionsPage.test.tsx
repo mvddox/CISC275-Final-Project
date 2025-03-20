@@ -25,7 +25,7 @@ describe('Questions', () => {
 
     test('There are seven questions', () => {
     render(<HashRouter> <BasicQuestion /> </HashRouter>);
-    const linkElement = screen.getByText(/Basic/i);
+    const linkElement = screen.getByRole("form");
     expect(linkElement).toBeInTheDocument();
     });
     test('Each question has at least four answers', () => {

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import './BasicQuestions.css';
-import { Button } from 'react-bootstrap';
-function BasicQuestion() {
+import './BasicQuestionsPage.css';
+import { Form } from 'react-bootstrap';
+import { BasicQuestionType } from './BasicQuestionsList';
+
+function BasicQuestion(question: BasicQuestionType) {
     const [chosenAnswer, setChosenAnswer] = useState<string>("");
   return (
-    <div className="Basic">
-        <Button onClick={()=> setChosenAnswer(chosenAnswer + "1")}>
-            placeholder
-        </Button>
-    </div>
+    <Form className="">
+        <Form.Check
+                type="radio"
+                name="emotions"
+                onChange={()=>setChosenAnswer}
+                id={"Basic_" + question.id}
+                label="Happy"
+                value="happy"
+                checked={chosenAnswer === "happy"}
+            />
+    </Form>
   );
 }
 
