@@ -5,7 +5,7 @@ import './BasicQuestionsPage.css';
 import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
-import { QUESTIONS } from './BasicQuestionsList'
+import { BasicQuestionType, QUESTIONS } from './BasicQuestionsList'
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -48,7 +48,7 @@ function NavigationButton(){
         <NavigationButton/>
       </header>
       {/* placeholder */}
-      <BasicQuestion {...QUESTIONS[0]}></BasicQuestion>
+      {QUESTIONS.map((x: BasicQuestionType)=>(<BasicQuestion {...x}></BasicQuestion>))}
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

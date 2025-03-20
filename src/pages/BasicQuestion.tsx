@@ -3,19 +3,24 @@ import './BasicQuestionsPage.css';
 import { Form } from 'react-bootstrap';
 import { BasicQuestionType } from './BasicQuestionsList';
 
+
+
 function BasicQuestion(question: BasicQuestionType) {
     const [chosenAnswer, setChosenAnswer] = useState<string>("");
   return (
     <Form className="">
-        <Form.Check
+        <Form.Label>{question.instruction}</Form.Label>
+        {question.answers.map( ()=>
+        (<Form.Check
                 type="radio"
-                name="emotions"
+                name="answers"
                 onChange={()=>setChosenAnswer}
                 id={"Basic_" + question.id}
-                label="Happy"
-                value="happy"
+                label={question.answers}
+                value={question.answers}
                 checked={chosenAnswer === "happy"}
-            />
+            />))
+            }
     </Form>
   );
 }
