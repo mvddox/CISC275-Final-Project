@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 //import userEvent from '@testing-library/user-event'
-import BasicQuestion from './BasicQuestions';
+import BasicQuestion from './BasicQuestionsPage';
 import "react-router";
 import { HashRouter } from 'react-router';
 

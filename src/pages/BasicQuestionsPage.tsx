@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // note change to respective comps
 // import logo from './logo.svg';
-import './BasicQuestions.css';
+import './BasicQuestionsPage.css';
 import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 
@@ -13,7 +13,7 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
-function BasicQuestion() {
+function BasicQuestionsPage() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   
   //sets the local storage item to the api key the user inputed
@@ -57,4 +57,4 @@ function NavigationButton(){
   );
 }
 
-export default BasicQuestion;
+export default BasicQuestionsPage;
