@@ -7,7 +7,7 @@ function BasicQuestion({question, allAnswers, setAnswers}:
     { question : BasicQuestionType, allAnswers:string[], setAnswers: (newAnswers: string[])=> void}) {
     const [chosenAnswer, setChosenAnswer] = useState<string>("");
   return (
-    <Form className="">
+    <Form className="" data-testid={"question"}>
       Question {question.id+1}:
         <Form.Label>{question.instruction}</Form.Label>
         {question.answers.map( (answer: string, index: number)=>
@@ -24,6 +24,8 @@ function BasicQuestion({question, allAnswers, setAnswers}:
                 id={"Basic_" + question.id + "_" + index}
                 label={answer}
                 value={answer}
+                key={"Basic_" + question.id + "_" + index}
+                data-testid={"answer"}
                 checked={chosenAnswer === answer}
             />))
             }

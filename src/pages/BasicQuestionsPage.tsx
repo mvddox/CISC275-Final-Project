@@ -76,10 +76,11 @@ function NavigationButton(){
         <Container>
           
       {questionCol([...QUESTIONS], 2).map((row:BasicQuestionType[], i:number) => (
-        <Row>
+        <Row key={i}>
           {row.map((col, j) => (
-              <Col>
-                <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers}></BasicQuestion>
+              <Col key={j}>
+                <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
+                  key={col.id}></BasicQuestion>
               </Col>
           ))}
         </Row>
