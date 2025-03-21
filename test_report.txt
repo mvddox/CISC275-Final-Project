@@ -3,34 +3,95 @@
 > react-scripts test --coverage
 
 PASS src/App.test.tsx
-  ✓ renders learn react link (42 ms)
+PASS src/pages/BasicQuestionsPage.test.tsx
+  ● Console
 
----------------------|---------|----------|---------|---------|-------------------
-File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
----------------------|---------|----------|---------|---------|-------------------
-All files            |   34.21 |       25 |   23.07 |   34.21 |                   
- src                 |    8.33 |        0 |   33.33 |    8.33 |                   
-  App.tsx            |     100 |      100 |     100 |     100 |                   
-  index.tsx          |       0 |      100 |     100 |       0 | 7-19              
-  reportWebVitals.ts |       0 |        0 |       0 |       0 | 3-10              
- src/pages           |   46.15 |       50 |      20 |   46.15 |                   
-  BasicQuestions.tsx |   30.76 |       50 |       0 |   30.76 | 13-41             
-  Home.tsx           |   61.53 |       50 |      40 |   61.53 | 12,19,30-36       
----------------------|---------|----------|---------|---------|-------------------
-Test Suites: 1 passed, 1 total
-Tests:       1 passed, 1 total
+    console.log
+      [
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
+        ],
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
+        ]
+      ]
+
+      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
+
+    console.log
+      [
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
+        ],
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
+        ]
+      ]
+
+      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
+
+    console.log
+      [
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
+        ],
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
+        ]
+      ]
+
+      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
+
+    console.log
+      [
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
+        ],
+        [
+          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
+          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
+        ]
+      ]
+
+      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+-------------------------|---------|----------|---------|---------|-------------------
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------------|---------|----------|---------|---------|-------------------
+All files                |   65.75 |    56.25 |      50 |   65.27 |                   
+ src                     |    8.33 |        0 |   33.33 |    8.33 |                   
+  App.tsx                |     100 |      100 |     100 |     100 |                   
+  index.tsx              |       0 |      100 |     100 |       0 | 7-19              
+  reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10              
+ src/pages               |   77.04 |       75 |   52.63 |   76.66 |                   
+  BasicQuestion.tsx      |      50 |      100 |      50 |      50 | 19-24             
+  BasicQuestionsList.tsx |     100 |      100 |     100 |     100 |                   
+  BasicQuestionsPage.tsx |   82.35 |       80 |      60 |   81.81 | 15,28-34,43,95    
+  Home.tsx               |   61.53 |       50 |      40 |   61.53 | 12,19,30-36       
+-------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 2 passed, 2 total
+Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        2.662 s
+Time:        3.921 s
 Ran all test suites.
-[0;33mOne of your dependencies, babel-preset-react-app, is importing the
-"@babel/plugin-proposal-private-property-in-object" package without
-declaring it in its dependencies. This is currently working because
-"@babel/plugin-proposal-private-property-in-object" is already in your
-node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
-
-babel-preset-react-app is part of the create-react-app project, [1mwhich
-is not maintianed anymore[0;33m. It is thus unlikely that this bug will
-ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
-your devDependencies to work around this error. This will make this message
-go away.[0m
-  
