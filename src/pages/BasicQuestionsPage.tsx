@@ -15,8 +15,12 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
+
 function BasicQuestionsPage() {
+  const [answers, setAnswers] = useState<string[]>([])
+  const [clickedResults, setClickedResults] = useState<boolean>(false)
   const [key, setKey] = useState<string>(keyData); //for api key input
+
   
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -28,6 +32,7 @@ function BasicQuestionsPage() {
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
+
 
   // for navigating between pages
 function NavigationButton(){
@@ -47,8 +52,13 @@ function NavigationButton(){
         Basic 
         <NavigationButton/>
       </header>
-      {/* placeholder */}
-      {QUESTIONS.map((x: BasicQuestionType)=>(<BasicQuestion {...x}></BasicQuestion>))}
+      <div className="Basic-Body">
+      {QUESTIONS.map((x: BasicQuestionType, i: number)=>
+        (<span> Question {i+1}: <BasicQuestion question={{...x}} allAnswers={answers} setAnswers={setAnswers}></BasicQuestion></span>))}
+      </div>
+      <div><Button onClick={()=>{setClickedResults(!clickedResults)}}>
+        Show results</Button>{clickedResults && <span>Your results are 
+          {answers.map((x: string)=> x + ", ")}</span>}</div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

@@ -23,12 +23,12 @@ describe('Header', () => {
 describe('Questions', () => {
     // beforeEach(() => render(<BasicQuestion/>))
 
-    test('There are seven questions', () => {
-    render(<HashRouter> <BasicQuestion /> </HashRouter>);
-    const linkElement = screen.getByRole("form");
-    expect(linkElement).toBeInTheDocument();
+    test('There IS a question', () => {
+        render(<HashRouter> <BasicQuestion /> </HashRouter>);
+        const linkElement = screen.getAllByRole("form");
+        expect(linkElement).toBeInTheDocument();
     });
-    test('Each question has at least four answers', () => {
+    test('Each question has at least one answer', () => {
         render(<HashRouter> <BasicQuestion /> </HashRouter>);
         const linkElement = screen.getByText(/Basic/i);
         expect(linkElement).toBeInTheDocument();

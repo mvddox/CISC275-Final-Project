@@ -9,4 +9,4 @@ export interface BasicQuestionType {
 export const QUESTION_ZERO: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
 
 //list of all basic questions
-export const QUESTIONS: BasicQuestionType[] = [QUESTION_ZERO]
+export const QUESTIONS: BasicQuestionType[] = [QUESTION_ZERO, QUESTION_ZERO, QUESTION_ZERO, QUESTION_ZERO, QUESTION_ZERO, QUESTION_ZERO, QUESTION_ZERO,]
