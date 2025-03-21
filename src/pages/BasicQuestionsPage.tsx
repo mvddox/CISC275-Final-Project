@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // note change to respective comps
 // import logo from './logo.svg';
 import './BasicQuestionsPage.css';
-import { Button, Form, } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
 import { BasicQuestionType, QUESTIONS } from './BasicQuestionsList'
@@ -18,6 +18,7 @@ if (prevKey !== null) {
 
 function BasicQuestionsPage() {
   const [answers, setAnswers] = useState<string[]>([])
+  const givenAnswers: string = answers.join(", ")
   const [clickedResults, setClickedResults] = useState<boolean>(false)
   const [key, setKey] = useState<string>(keyData); //for api key input
 
@@ -44,8 +45,27 @@ function NavigationButton(){
       </Button>
     </div>)
   }
+// to slice the big list of questions into many columns
+  const questionCol = (questions: BasicQuestionType[], n: number) => {
+    const col: BasicQuestionType[] = [...questions]
+    let currCol: BasicQuestionType[] = []
+    let cols: BasicQuestionType[][] = []
+    cols = col.reduce((total:BasicQuestionType[][], value:BasicQuestionType, 
+        index: number):BasicQuestionType[][]=>{
+          if((index) % (col.length/n) < 1){
+            if(index){total = [...total, [...currCol]]}
+            currCol = []
+          }
+          currCol = [...currCol, value]
+          if(index === col.length -1){
+            total = [...total, [...currCol]]
+          }
+        return total
+      }, [])
 
-
+    return cols;
+  };
+  console.log(questionCol(QUESTIONS,2))
   return (
     <div className="Basic">
       <header className="Basic-header">
@@ -53,12 +73,22 @@ function NavigationButton(){
         <NavigationButton/>
       </header>
       <div className="Basic-Body">
-      {QUESTIONS.map((x: BasicQuestionType, i: number)=>
-        (<span> Question {i+1}: <BasicQuestion question={{...x}} allAnswers={answers} setAnswers={setAnswers}></BasicQuestion></span>))}
+        <Container>
+          
+      {questionCol([...QUESTIONS], 2).map((row:BasicQuestionType[], i:number) => (
+        <Row>
+          {row.map((col, j) => (
+              <Col>
+                <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers}></BasicQuestion>
+              </Col>
+          ))}
+        </Row>
+      ))}
+      </Container>
       </div>
       <div><Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
-          {answers.map((x: string)=> x + ", ")}</span>}</div>
+          {" " +givenAnswers}</span>}</div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
