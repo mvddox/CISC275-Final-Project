@@ -15,8 +15,10 @@ function BasicQuestion({question, allAnswers, setAnswers}:
                 name="answers"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>)=>
                     {setChosenAnswer(event.target.value)
+                    /* Collects selected answer to a list of all the answers
+                     tracks each question by adding a label to the first part*/
                      setAnswers([...allAnswers.filter((answer: string): boolean => 
-                        (question.id.toString() === answer.slice(0,  question.id.toString().length))), event.target.value])
+                        (question.id.toString() !== answer.slice(0,  question.id.toString().length))), question.id + "_" + event.target.value])
                     }}
                 id={"Basic_" + question.id + "_" + index}
                 label={answer}
