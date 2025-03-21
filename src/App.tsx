@@ -1,10 +1,10 @@
 //import React, { useState } from 'react';
 import './App.css';
-import './pages/BasicQuestions'
+import './pages/BasicQuestionsPage'
 import './pages/Home'
 import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
-import BasicQuestionPage from './pages/BasicQuestions';
+import BasicQuestionPage from './pages/BasicQuestionsPage';
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
