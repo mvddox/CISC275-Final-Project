@@ -16,18 +16,19 @@ describe('Header', () => {
     });
     test('There is a return button', () => {
         render(<HashRouter> <BasicQuestionsPage /> </HashRouter>);
-        const linkElement = screen.getByText(/Basic/i);
+        const linkElement = screen.getByText(/Return Home?/i);
         expect(linkElement).toBeInTheDocument();
         });
 })
 describe('Questions', () => {
     // beforeEach(() => render(<BasicQuestion/>))
-
+    // NOTE: Important that you have every child in a
+    // list be accounted for by a unique key! (<Thing key=("key")><\Thing>)
     test('There IS a question', () => {
         render(<HashRouter> <BasicQuestionsPage /> </HashRouter>);
         const questions = screen.getAllByTestId("question");
         // for all getAlls or similiar, use a to be greater than or equal to
-        //expect(questions).toBeInTheDocument();
+        // don't use expect(questions).toBeInTheDocument();
         expect(questions.length).toBeGreaterThanOrEqual(7);
     });
     test('Each question has at least one answer', () => {

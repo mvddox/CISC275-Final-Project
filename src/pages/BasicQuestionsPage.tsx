@@ -17,9 +17,9 @@ if (prevKey !== null) {
 
 
 function BasicQuestionsPage() {
-  const [answers, setAnswers] = useState<string[]>([])
-  const givenAnswers: string = answers.join(", ")
-  const [clickedResults, setClickedResults] = useState<boolean>(false)
+  const [answers, setAnswers] = useState<string[]>([]) //for the answers of all questions collected
+  const givenAnswers: string = answers.join(", ") 
+  const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   
@@ -45,7 +45,11 @@ function NavigationButton(){
       </Button>
     </div>)
   }
-// to slice the big list of questions into many columns
+/** to slice the big list of questions into many columns
+ *@param {BasicQuestionType[]} questions : the BasicQuestionType array to be split up
+ *@param {number} n: the height of each column
+ *@returns an array of array of questions, that is the collection of split arrays
+ */ 
   const questionCol = (questions: BasicQuestionType[], n: number) => {
     const col: BasicQuestionType[] = [...questions]
     let currCol: BasicQuestionType[] = []
@@ -74,8 +78,9 @@ function NavigationButton(){
       </header>
       <div className="Basic-Body">
         <Container>
-          
-      {questionCol([...QUESTIONS], 2).map((row:BasicQuestionType[], i:number) => (
+          {/*Important to make a grid structure of the questions.
+          Second argument of questionCol gives height of each col*/}
+      {questionCol([...QUESTIONS], QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
         <Row key={i}>
           {row.map((col, j) => (
               <Col key={j}>
