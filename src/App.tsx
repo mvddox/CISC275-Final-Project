@@ -1,10 +1,12 @@
 //import React, { useState } from 'react';
 import './App.css';
 import './pages/BasicQuestionsPage'
+import './pages/DetailedQuestionPage'
 import './pages/Home'
 import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestionsPage';
+import DetailedQuestionPage from './pages/DetailedQuestionPage'
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
@@ -48,6 +50,10 @@ function App() {
                     <Route
                         path="/Basic"
                         element={<BasicQuestionPage />}
+                    />
+                    <Route
+                        path="/Detail"
+                        element={<DetailedQuestionPage />}
                     />
                 </Routes>
             </Router>

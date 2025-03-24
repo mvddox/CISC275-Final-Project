@@ -12,23 +12,28 @@ if (prevKey !== null) {
 }
 
 // for navigating between pages
-function NavigationButton(){
+function NavigationButton() {
   const navigate = useNavigate();
-  return (<div>
-    <Button onClick={() => navigate("/Basic")}>
+  return (
+    <div>
+      <Button onClick={() => navigate("/Basic")}>
         Basic Question Page
-    </Button>
-  </div>)
+      </Button>
+    </div>
+  );
 }
-//button for detailed question page
-function NavigationDetailedButton(){
+
+function NavigationDetailedButton() {
   const navigate = useNavigate();
-  return (<div>
-    <Button onClick={() => navigate("/Basic")}>
+  return (
+    <div>
+      <Button onClick={() => navigate("/Detail")}>
         Detailed Question Page
-    </Button>
-  </div>)
+      </Button>
+    </div>
+  );
 }
+
 
 function HomePage() {
 
@@ -60,10 +65,10 @@ function HomePage() {
   return (
   
     <div className="App-header">
-      <div className="header-content"> {/* Added this div */}
+      <div className="header-content"> 
       <h1>Welcome Cisc275 Group Project</h1>
       </div>
-      <div className="PagesButtons"> {/* Added this div */}
+      <div className="PagesButtons"> 
       <NavigationButton />
       <NavigationDetailedButton />
       </div>
