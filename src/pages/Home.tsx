@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import './Home.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 
@@ -12,7 +12,7 @@ if (prevKey !== null) {
 }
 
 // for navigating between pages
-function NavigationButton() {
+function NavigationBasicButton() {
   const navigate = useNavigate();
   return (
     <div>
@@ -69,7 +69,7 @@ function HomePage() {
       <h1>Welcome Cisc275 Group Project</h1>
       </div>
       <div className="PagesButtons"> 
-      <NavigationButton />
+      <NavigationBasicButton />
       <NavigationDetailedButton />
       </div>
     
