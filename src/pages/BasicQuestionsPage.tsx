@@ -5,7 +5,7 @@ import './BasicQuestionsPage.css';
 import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
-import { BasicQuestionType, QUESTIONS } from './BasicQuestionsList'
+import { BasicQuestionType, AnswerRecord, QUESTIONS } from './BasicQuestionsList'
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -16,13 +16,36 @@ if (prevKey !== null) {
 }
 
 
+const splitQuestions = (questions: BasicQuestionType[], max: number): BasicQuestionType[][] => {
+  const fullQuestions: BasicQuestionType[] = [...questions]
+  let currentSubQuestions: BasicQuestionType[] = []
+  let splitQuestions: BasicQuestionType[][] = []
+  splitQuestions = fullQuestions.reduce((total:BasicQuestionType[][], value:BasicQuestionType, 
+      index: number):BasicQuestionType[][]=>{
+        if((index) % (fullQuestions.length/(fullQuestions.length/max)) < 1){
+          if(index){total = [...total, [...currentSubQuestions]]}
+          currentSubQuestions = []
+        }
+        currentSubQuestions = [...currentSubQuestions, value]
+        if(index === fullQuestions.length -1){
+          total = [...total, [...currentSubQuestions]]
+        }
+      return total
+    }, [])
+  return splitQuestions;
+}
+
 function BasicQuestionsPage() {
-  const [answers, setAnswers] = useState<string[]>([]) //for the answers of all questions collected
-  const givenAnswers: string = answers.join(", ") 
+  const [answers, setAnswers] = useState<AnswerRecord>({}) //for the answers of all questions collected
+  const givenAnswers: string = 
+      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
+      const viewableQuestions: BasicQuestionType[][] = splitQuestions(QUESTIONS, 8)
+  const [viewedQuestionsCount, setViewedQuestionsCount] = useState<number>(0)
+  const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
 
-  
+
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -66,10 +89,12 @@ function NavigationButton(){
           }
         return total
       }, [])
-
     return cols;
   };
-  console.log(questionCol(QUESTIONS,2))
+
+  
+
+
   return (
     <div className="Basic">
       <header className="Basic-header">
@@ -83,7 +108,9 @@ function NavigationButton(){
       {questionCol([...QUESTIONS], QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
         <Row key={i}>
           {row.map((col, j) => (
-              <Col key={j}>
+            /** All the questions ARE rendered so that they remain 
+             * persistant between movement between visibility */
+              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)}>
                 <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
                   key={col.id}></BasicQuestion>
               </Col>
@@ -92,7 +119,25 @@ function NavigationButton(){
       ))}
       </Container>
       </div>
-      <div><Button onClick={()=>{setClickedResults(!clickedResults)}}>
+      {/* <div>test: {viewedQuestionsCount+" " +  viewedQuestions.map((x)=>{return x.id}) + ""
+      //viewableQuestions.map((x)=>{return "["+x.map((y)=>{return y.id})+"]"})
+      }
+      </div> */}
+      <div><Button disabled={viewedQuestionsCount === 0} onClick={()=>
+        {
+          // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
+          // properly. This is because everything renders AFTER the entire function has finished
+          setViewedQuestions([...viewableQuestions[viewedQuestionsCount-1]])
+          setViewedQuestionsCount(viewedQuestionsCount-1)
+        }}>
+      prev</Button> 
+      <Button disabled={viewedQuestionsCount === viewableQuestions.length-1} onClick={()=>
+      {
+        setViewedQuestions([...viewableQuestions[viewedQuestionsCount+1]])
+        setViewedQuestionsCount(viewedQuestionsCount+1)
+      }}>
+      next</Button> 
+      <Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}</div>
       <footer>
