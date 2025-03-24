@@ -4,94 +4,24 @@
 
 PASS src/App.test.tsx
 PASS src/pages/BasicQuestionsPage.test.tsx
-  ● Console
-
-    console.log
-      [
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
-        ],
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
-        ]
-      ]
-
-      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
-
-    console.log
-      [
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
-        ],
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
-        ]
-      ]
-
-      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
-
-    console.log
-      [
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
-        ],
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
-        ]
-      ]
-
-      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
-
-    console.log
-      [
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 0 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 1 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 2 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 3 }
-        ],
-        [
-          { instruction: 'This is a plaeholder', answers: [Array], id: 4 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 5 },
-          { instruction: 'This is a plaeholder', answers: [Array], id: 6 }
-        ]
-      ]
-
-      at BasicQuestionsPage (src/pages/BasicQuestionsPage.tsx:72:11)
-
 A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
--------------------------|---------|----------|---------|---------|-------------------
-File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
--------------------------|---------|----------|---------|---------|-------------------
-All files                |   65.75 |    56.25 |      50 |   65.27 |                   
- src                     |    8.33 |        0 |   33.33 |    8.33 |                   
-  App.tsx                |     100 |      100 |     100 |     100 |                   
-  index.tsx              |       0 |      100 |     100 |       0 | 7-19              
-  reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10              
- src/pages               |   77.04 |       75 |   52.63 |   76.66 |                   
-  BasicQuestion.tsx      |      50 |      100 |      50 |      50 | 19-24             
-  BasicQuestionsList.tsx |     100 |      100 |     100 |     100 |                   
-  BasicQuestionsPage.tsx |   82.35 |       80 |      60 |   81.81 | 15,28-34,43,95    
-  Home.tsx               |   61.53 |       50 |      40 |   61.53 | 12,19,30-36       
--------------------------|---------|----------|---------|---------|-------------------
+-------------------------|---------|----------|---------|---------|---------------------
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s   
+-------------------------|---------|----------|---------|---------|---------------------
+All files                |   72.47 |    68.18 |   51.85 |   72.38 |                     
+ src                     |    8.33 |        0 |   33.33 |    8.33 |                     
+  App.tsx                |     100 |      100 |     100 |     100 |                     
+  index.tsx              |       0 |      100 |     100 |       0 | 7-19                
+  reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10                
+ src/pages               |   80.41 |    83.33 |   54.16 |   80.64 |                     
+  BasicQuestion.tsx      |      50 |      100 |   66.66 |      50 | 19-24               
+  BasicQuestionsList.tsx |     100 |      100 |     100 |     100 |                     
+  BasicQuestionsPage.tsx |   80.35 |     87.5 |   56.25 |   80.76 | 15,51-57,66,130-140 
+  Home.tsx               |   61.53 |       50 |      40 |   61.53 | 12,19,30-36         
+-------------------------|---------|----------|---------|---------|---------------------
 
 Test Suites: 2 passed, 2 total
 Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        3.921 s
+Time:        4.11 s
 Ran all test suites.
