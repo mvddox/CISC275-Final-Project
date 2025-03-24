@@ -1,18 +1,23 @@
-// this exists so that every else looks nice and slick
+// this file exists so that every else looks nice and slick
 
 export interface BasicQuestionType {
     instruction: string;
     answers: string[];
     id: number
 } 
+
+// note: every key is a string, apparently even if defined otherwise
+export type AnswerRecord = Record<number, string>
+export type actualMeaning = Record<number, string>
+
+
 //placeholder example
 //const QUESTION_ZERO: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
-
 
 //QUESTIONS
 const QUESTION_1: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
 const QUESTION_2: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 1}
-const QUESTION_3: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 2}
+const QUESTION_3: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2", "placeholder 3"], id: 2}
 const QUESTION_4: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 3}
 const QUESTION_5: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 4}
 const QUESTION_6: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 5}
