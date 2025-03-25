@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
+import './Home.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 
@@ -13,59 +12,93 @@ if (prevKey !== null) {
 }
 
 // for navigating between pages
-function NavigationButton(){
+function NavigationBasicButton() {
   const navigate = useNavigate();
-  return (<div>
-    <Button onClick={() => navigate("/Basic")}>
-        Click Here
-    </Button>
-  </div>)
-}
-
-function HomePage() {
-  const [key, setKey] = useState<string>(keyData); //for api key input
-  
-  //sets the local storage item to the api key the user inputed
-  function handleSubmit() {
-    localStorage.setItem(saveKeyData, JSON.stringify(key));
-    window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
-  }
-
-  //whenever there's a change it'll store the api key in a local state called key but it won't be set in the local storage until the user clicks the submit button
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload. 
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-      <NavigationButton/>
-
-
-      <footer>
-      <Form>
-        <Form.Label>API Key:</Form.Label>
-        <Form.Control type="password" placeholder="Insert API Key Here" onChange={changeKey}></Form.Control>
-        <br></br>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-      </Form>
-      Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+    <div>
+      <Button onClick={() => navigate("/Basic")}>
+        Basic Question Page
+      </Button>
     </div>
   );
 }
 
-export default HomePage;
+function NavigationDetailedButton() {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Button onClick={() => navigate("/Detail")}>
+        Detailed Question Page
+      </Button>
+    </div>
+  );
+}
+
+
+function HomePage() {
+
+  const [key, setKey] = useState<string>(keyData); //for api key input
+  
+  
+  //sets the local storage item to the api key the user inputed
+  
+  function handleSubmit() {
+  
+  localStorage.setItem(saveKeyData, JSON.stringify(key));
+  
+  window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
+  
+  }
+  
+  
+  
+  //whenever there's a change it'll store the api key in a local state called key but it won't be set in the local storage until the user clicks the submit button
+  
+  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+  
+  setKey(event.target.value);
+  
+  }
+  
+  
+  
+  return (
+  
+    <div className="App-header">
+      <div className="header-content"> 
+      <h1>Welcome Cisc275 Group Project</h1>
+      </div>
+      <div className="PagesButtons"> 
+      <NavigationBasicButton />
+      <NavigationDetailedButton />
+      </div>
+    
+    <footer>
+  
+  <Form>
+  
+  <Form.Label>API Key:</Form.Label>
+  
+  <Form.Control type="password" placeholder="Insert API Key Here" onChange={changeKey} />
+  
+  <br />
+  
+  <Button className="Submit-Button" onClick={handleSubmit}>
+  
+  Submit
+  
+  </Button>
+  
+  </Form>
+  
+  Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+  
+  </footer>
+  
+  </div>)
+  
+  }
+  
+  
+  
+  export default HomePage;

@@ -64,7 +64,7 @@ function NavigationButton(){
     return (<div>
       Return home? {" "}
       <Button onClick={() => navigate("/Home")}>
-          Click Here
+          Home Page
       </Button>
     </div>)
   }
