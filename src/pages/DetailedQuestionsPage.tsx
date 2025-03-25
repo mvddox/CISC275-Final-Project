@@ -3,6 +3,7 @@ import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from './DetailedQuestionsList';
 import DetailedQuestion from './DetailedQuestion';
+import "./DetailedQuestionsPage.css"
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -47,8 +48,8 @@ function NavigationButton(){
 
   
   return (
-    <div className="Detai">
-      <header className="Detail">
+    <div className="Detail">
+      <header className="Detailed-header">
         Detailed 
         <NavigationButton/>
       </header>
