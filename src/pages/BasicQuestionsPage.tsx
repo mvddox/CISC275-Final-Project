@@ -39,7 +39,7 @@ function BasicQuestionsPage() {
   const [answers, setAnswers] = useState<BasicAnswerRecord>({}) //for the answers of all questions collected
   const givenAnswers: string = 
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
-      const viewableQuestions: BasicQuestionType[][] = splitQuestions(BASIC_QUESTIONS, 8)
+  const viewableQuestions: BasicQuestionType[][] = splitQuestions(BASIC_QUESTIONS, 8)
   const [viewedQuestionsCount, setViewedQuestionsCount] = useState<number>(0)
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click

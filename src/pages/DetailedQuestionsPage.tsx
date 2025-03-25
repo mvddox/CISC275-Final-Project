@@ -16,6 +16,9 @@ if (prevKey !== null) {
 function DetailedQuestionsPage() {
   const [viewedQuestion, setViewedQuestion] = useState<number>(0)
   const [answers, setAnswers] = useState<DetailedQuestionRecord>({})
+  const givenAnswers: string = 
+      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
+  const [clickedResults, setClickedResults] = useState<boolean>(false)
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   
@@ -56,10 +59,13 @@ function NavigationButton(){
             <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
       </div>
       <div>
-        <Button onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
+        <Button disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
         Prev</Button>
-        <Button onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
+        <Button disabled={DETAILED_QUESTIONS.length - 1 === 
+          viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
+        <Button onClick={()=>setClickedResults(!clickedResults)}>Results:</Button> {clickedResults && <span>Your results are 
+          {" " + givenAnswers}</span>}
       </div>
       <footer>
       <Form>
