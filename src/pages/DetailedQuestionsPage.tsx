@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
+import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from './DetailedQuestionsList';
+import DetailedQuestion from './DetailedQuestion';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -12,7 +14,8 @@ if (prevKey !== null) {
 
 
 function DetailedQuestionsPage() {
-  
+  const [viewedQuestion, setViewedQuestion] = useState<number>(0)
+  const [answers, setAnswers] = useState<DetailedQuestionRecord>({})
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   
@@ -46,6 +49,18 @@ function NavigationButton(){
         Detailed 
         <NavigationButton/>
       </header>
+      <div>
+        {DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
+          <div hidden={question.id !== viewedQuestion}>
+            {/* NOTE: cannot pass anything in between the html elements or it compiles wrong */}
+            <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
+      </div>
+      <div>
+        <Button onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
+        Prev</Button>
+        <Button onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
+        Next</Button>
+      </div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

@@ -5,7 +5,7 @@ import './BasicQuestionsPage.css';
 import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
-import { BasicQuestionType, AnswerRecord, QUESTIONS } from './BasicQuestionsList'
+import { BasicQuestionType, BasicAnswerRecord, BASIC_QUESTIONS } from './BasicQuestionsList'
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -36,10 +36,10 @@ const splitQuestions = (questions: BasicQuestionType[], max: number): BasicQuest
 }
 
 function BasicQuestionsPage() {
-  const [answers, setAnswers] = useState<AnswerRecord>({}) //for the answers of all questions collected
+  const [answers, setAnswers] = useState<BasicAnswerRecord>({}) //for the answers of all questions collected
   const givenAnswers: string = 
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
-      const viewableQuestions: BasicQuestionType[][] = splitQuestions(QUESTIONS, 8)
+      const viewableQuestions: BasicQuestionType[][] = splitQuestions(BASIC_QUESTIONS, 8)
   const [viewedQuestionsCount, setViewedQuestionsCount] = useState<number>(0)
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
@@ -105,7 +105,7 @@ function NavigationButton(){
         <Container>
           {/*Important to make a grid structure of the questions.
           Second argument of questionCol gives height of each col*/}
-      {questionCol([...QUESTIONS], QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
+      {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
         <Row key={i}>
           {row.map((col, j) => (
             /** All the questions ARE rendered so that they remain 
