@@ -15,11 +15,11 @@ if (prevKey !== null) {
 
 
 function DetailedQuestionsPage() {
-  const [viewedQuestion, setViewedQuestion] = useState<number>(0)
-  const [answers, setAnswers] = useState<DetailedQuestionRecord>({})
+  const [viewedQuestion, setViewedQuestion] = useState<number>(0) //index of which question to view
+  const [answers, setAnswers] = useState<DetailedQuestionRecord>({}) //collects all the user inputed answers into a record based on id
   const givenAnswers: string = 
-      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
-  const [clickedResults, setClickedResults] = useState<boolean>(false)
+      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
+  const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   
@@ -54,9 +54,10 @@ function NavigationButton(){
         <NavigationButton/>
       </header>
       <div>
+        {/* maps every question into the document but hides the undesirable ones */}
         {DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
-          <div hidden={question.id !== viewedQuestion}>
-            {/* NOTE: cannot pass anything in between the html elements or it compiles wrong */}
+          <div hidden={question.id !== viewedQuestion} key={question.id}>
+            {/* NOTE: cannot pass anything in between the html elements or it gives an error */}
             <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
       </div>
       <div>
