@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './BasicQuestionsPage.css';
 import { Form } from 'react-bootstrap';
-import { BasicQuestionType, AnswerRecord } from './BasicQuestionsList';
+import { BasicQuestionType, BasicAnswerRecord } from './BasicQuestionsList';
 
 
 function BasicQuestion({question, allAnswers, setAnswers}: 
-    {      question : BasicQuestionType, allAnswers:AnswerRecord, setAnswers: (newAnswers: AnswerRecord)=> void}) {
+    { question : BasicQuestionType, allAnswers:BasicAnswerRecord, setAnswers: (newAnswers: BasicAnswerRecord)=> void}) {
     const [chosenAnswer, setChosenAnswer] = useState<string>("");
   return (
     <Form className="" data-testid={"question"}>
@@ -17,10 +17,7 @@ function BasicQuestion({question, allAnswers, setAnswers}:
                 name="answers"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>)=>
                     {setChosenAnswer(event.target.value)
-                    /* Collects selected answer to a list of all the answers
-                     tracks each question by adding a label to the first part
-                     example 0_PlaceholderAnswer1*/
-                     const newAllAnswers:AnswerRecord = {...allAnswers, [question.id]: event.target.value}
+                     const newAllAnswers:BasicAnswerRecord = {...allAnswers, [question.id]: event.target.value}
                      setAnswers(newAllAnswers)
                     }}
                 id={"Basic_" + question.id + "_" + index}

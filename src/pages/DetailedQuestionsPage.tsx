@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
+import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from './DetailedQuestionsList';
+import DetailedQuestion from './DetailedQuestion';
+import "./DetailedQuestionsPage.css"
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -12,7 +15,11 @@ if (prevKey !== null) {
 
 
 function DetailedQuestionsPage() {
-  
+  const [viewedQuestion, setViewedQuestion] = useState<number>(0) //index of which question to view
+  const [answers, setAnswers] = useState<DetailedQuestionRecord>({}) //collects all the user inputed answers into a record based on id
+  const givenAnswers: string = 
+      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
+  const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   
@@ -41,11 +48,27 @@ function NavigationButton(){
 
   
   return (
-    <div className="Detai">
-      <header className="Detail">
+    <div className="Detail">
+      <header className="Detailed-header">
         Detailed 
         <NavigationButton/>
       </header>
+      <div>
+        {/* maps every question into the document but hides the undesirable ones */}
+        {DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
+          <div hidden={question.id !== viewedQuestion} key={question.id}>
+            {/* NOTE: cannot pass anything in between the html elements or it gives an error */}
+            <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
+      </div>
+      <div>
+        <Button disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
+        Prev</Button>
+        <Button disabled={DETAILED_QUESTIONS.length - 1 === 
+          viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
+        Next</Button>
+        <Button onClick={()=>setClickedResults(!clickedResults)}>Results:</Button> {clickedResults && <span>Your results are 
+          {" " + givenAnswers}</span>}
+      </div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

@@ -18,5 +18,5 @@ test('renders learn react link', () => {
   render(<App />);
   //const user = userEvent.setup()
   // at homepage
-  expect(screen.getByText(/Learn React/i)).toBeInTheDocument()
+  expect(screen.getByText(/Basic Question/i)).toBeInTheDocument()
 });

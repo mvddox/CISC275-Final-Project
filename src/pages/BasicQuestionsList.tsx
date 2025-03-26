@@ -7,7 +7,7 @@ export interface BasicQuestionType {
 } 
 
 // note: every key is a string, apparently even if defined otherwise
-export type AnswerRecord = Record<number, string>
+export type BasicAnswerRecord = Record<number, string>
 export type actualMeaning = Record<number, string>
 
 
@@ -40,7 +40,7 @@ const QUESTION_21: BasicQuestionType = {instruction: "This is a plaeholder", ans
 
 
 //list of all basic questions
-export const QUESTIONS: BasicQuestionType[] = 
+export const BASIC_QUESTIONS: BasicQuestionType[] = 
 [QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_4, QUESTION_5, QUESTION_6, QUESTION_7, QUESTION_8,
     QUESTION_9, QUESTION_10, QUESTION_11, QUESTION_12, QUESTION_13, QUESTION_14, QUESTION_15, QUESTION_16,
     QUESTION_17, QUESTION_18, QUESTION_19, QUESTION_20, QUESTION_21, 
