@@ -21,8 +21,8 @@ function DetailedQuestionsPage() {
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
-
   
+
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -52,6 +52,7 @@ function NavigationButton(){
       <header className="Detailed-header">
         Detailed 
         <NavigationButton/>
+        
       </header>
       <div>
         {/* maps every question into the document but hides the undesirable ones */}
@@ -81,4 +82,4 @@ function NavigationButton(){
   );
 }
 
-export default DetailedQuestionsPage;
+export default DetailedQuestionsPage

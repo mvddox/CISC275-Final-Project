@@ -44,7 +44,27 @@ function BasicQuestionsPage() {
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
+  const answeredQuestionCount = Object.keys(answers).length;
+  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100;
 
+    const containerStyle = {
+      width: '100%',
+      backgroundColor: 'red',
+      borderRadius: '10px',
+    };
+    const progressBarStyles = {
+      width: `${progress}%`,
+      backgroundColor: '#4CAF50',
+      height: '20px',
+      borderRadius: '10px',
+    };
+    function ProgressBar({ progress }: { progress: number }) {
+      return (
+        <div style={containerStyle}>
+          <div style={progressBarStyles}></div>
+        </div>
+      );
+    }
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -148,6 +168,9 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+      
+            <ProgressBar progress={progress} />
+          
     </div>
   );
 }
