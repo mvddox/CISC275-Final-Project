@@ -44,24 +44,32 @@ function BasicQuestionsPage() {
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
-  const answeredQuestionCount = Object.keys(answers).length;
-  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100;
-
+  const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
+  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
+    // outside red bar
     const containerStyle = {
-      width: '100%',
-      backgroundColor: 'red',
-      borderRadius: '10px',
+      width: "100%",
+      backgroundColor: "red",
+      borderRadius: "20px",
+      height: "5vh"
     };
+    //green bar that covers up red bar
     const progressBarStyles = {
       width: `${progress}%`,
-      backgroundColor: '#4CAF50',
-      height: '20px',
-      borderRadius: '10px',
+      backgroundColor: "green",
+      height: "5vh",
+      borderRadius: "20px",
+      justifyContent: "center",
+      fontWeight: 'bold',
+      alignItems: 'center',
+      display: 'flex',
+      
     };
+    // function that created the progess bar
     function ProgressBar({ progress }: { progress: number }) {
       return (
         <div style={containerStyle}>
-          <div style={progressBarStyles}></div>
+          <div style={progressBarStyles}>{Math.round(progress)}%</div>
         </div>
       );
     }
@@ -168,7 +176,6 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
-      
             <ProgressBar progress={progress} />
           
     </div>
