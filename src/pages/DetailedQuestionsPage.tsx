@@ -22,8 +22,8 @@ function DetailedQuestionsPage() {
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
 
-  const answeredQuestionsCount = Object.keys(answers).length;
-  const progress: number = (answeredQuestionsCount / DETAILED_QUESTIONS.length) * 100;
+  const answeredQuestionsCount = Object.keys(answers).length; // count amount of answer user inputed
+  const progress: number = (answeredQuestionsCount / DETAILED_QUESTIONS.length) * 100; // progress out of11
 
       // outside red bar
       const containerStyle = {
