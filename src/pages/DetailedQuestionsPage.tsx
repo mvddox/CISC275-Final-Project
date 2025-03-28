@@ -21,7 +21,37 @@ function DetailedQuestionsPage() {
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
-  
+
+  const answeredQuestionsCount = Object.keys(answers).length;
+  const progress: number = (answeredQuestionsCount / DETAILED_QUESTIONS.length) * 100;
+
+      // outside red bar
+      const containerStyle = {
+        width: "100%",
+        backgroundColor: "red",
+        borderRadius: "20px",
+        height: "5vh"
+      };
+      //green bar that covers up red bar
+      const progressBarStyles = {
+        width: `${progress}%`,
+        backgroundColor: "green",
+        height: "5vh",
+        borderRadius: "20px",
+        justifyContent: "center",
+        fontWeight: 'bold',
+        alignItems: 'center',
+        display: 'flex',
+        
+      };
+      // function that created the progess bar
+      function ProgressBar({ progress }: { progress: number }) {
+        return (
+          <div style={containerStyle}>
+            <div style={progressBarStyles}>{Math.round(progress)}%</div>
+          </div>
+        );
+      }
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -78,6 +108,7 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+      <ProgressBar progress={progress} />
     </div>
   );
 }
