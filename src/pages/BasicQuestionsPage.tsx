@@ -168,6 +168,7 @@ function NavigationButton(){
       <Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}</div>
+          <ProgressBar progress={progress} />
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
@@ -176,7 +177,7 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
-            <ProgressBar progress={progress} />
+           
           
     </div>
   );
