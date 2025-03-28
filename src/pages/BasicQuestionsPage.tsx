@@ -44,7 +44,35 @@ function BasicQuestionsPage() {
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
-
+  const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
+  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
+    // outside red bar
+    const containerStyle = {
+      width: "100%",
+      backgroundColor: "red",
+      borderRadius: "20px",
+      height: "5vh"
+    };
+    //green bar that covers up red bar
+    const progressBarStyles = {
+      width: `${progress}%`,
+      backgroundColor: "green",
+      height: "5vh",
+      borderRadius: "20px",
+      justifyContent: "center",
+      fontWeight: 'bold',
+      alignItems: 'center',
+      display: 'flex',
+      
+    };
+    // function that created the progess bar
+    function ProgressBar({ progress }: { progress: number }) {
+      return (
+        <div style={containerStyle}>
+          <div style={progressBarStyles}>{Math.round(progress)}%</div>
+        </div>
+      );
+    }
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -140,6 +168,7 @@ function NavigationButton(){
       <Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}</div>
+          <ProgressBar progress={progress} />
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
@@ -148,6 +177,8 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+           
+          
     </div>
   );
 }
