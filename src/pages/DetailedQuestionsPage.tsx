@@ -65,6 +65,17 @@ function DetailedQuestionsPage() {
   }
 
 
+  // Navigates to the basic questions page
+  function NavigationToBasic(){
+    const navigate = useNavigate();
+    return (<div>
+      Go to Basic Question Page {" "}
+      <Button onClick={() => navigate("/Basic")}>
+          Basic Question Page
+      </Button>
+    </div>)
+  }
+
   // Navigates Back to Home Page
 function NavigationButton(){
     const navigate = useNavigate();
@@ -80,9 +91,11 @@ function NavigationButton(){
   return (
     <div className="Detail">
       <header className="Detailed-header">
-        Detailed 
-        <NavigationButton/>
-        
+        Detailed Questions
+        <div className="Header-Buttons-Detailed">
+          <NavigationToBasic/>
+          <NavigationButton/>
+        </div>
       </header>
       <div>
         {/* maps every question into the document but hides the undesirable ones */}
