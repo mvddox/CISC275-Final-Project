@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+import './Home.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 
@@ -69,8 +70,12 @@ function HomePage() {
       <h1>Welcome Cisc275 Group Project</h1>
       </div>
       <div className="PagesButtons"> 
-      <NavigationButton />
-      <NavigationDetailedButton />
+        <div><NavigationButton /> 
+          <div className="ButtonDescription">Takes you to the "Basic Question Page" that includes multiple choice questions. Quicker than the "Detailed Question Page" but gives more general responses.</div>
+        </div>
+        <div><NavigationDetailedButton />
+          <div className="ButtonDescription">Takes you to the "Detailed Question Page" that includes open-ended questions. Longer than the "Basic Question Page" but allows you to get more precise responses. </div>
+        </div>
       </div>
     
     <footer>
