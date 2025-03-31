@@ -44,7 +44,7 @@ FAIL src/App.test.tsx
             [33mclass[39m=[32m"header-content"[39m
           [36m>[39m
             [36m<h1>[39m
-              [0mWelcome Cisc275 Group Project[0m
+              [0mDiscover Your Perfect Career Path: Take the Quiz![0m
             [36m</h1>[39m
           [36m</div>[39m
           [36m<div[39m
@@ -83,7 +83,7 @@ FAIL src/App.test.tsx
           [36m</div>[39m
           [36m<footer>[39m
             [36m<form[39m
-              [33mclass[39m=[32m""[39m
+              [33mclass[39m=[32m"API"[39m
             [36m>[39m
               [36m<label[39m
                 [33mclass[39m=[32m"form-label"[39m
@@ -103,7 +103,11 @@ FAIL src/App.test.tsx
                 [0mSubmit[0m
               [36m</button>[39m
             [36m</form>[39m
-            [0mAuthors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez[0m
+            [36m<div[39m
+              [33mclass[39m=[32m"AuthorText"[39m
+            [36m>[39m
+              [0mAuthors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez[0m
+            [36m</div>[39m
           [36m</footer>[39m
         [36m</div>[39m
       [36m</div>[39m
@@ -135,15 +139,15 @@ All files                   |   71.69 |    60.71 |   51.06 |   72.07 |
  src/pages                  |   76.87 |    70.83 |   52.27 |   77.46 |                         
   BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                   
   BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                         
-  BasicQuestionsPage.tsx    |   81.25 |     87.5 |   57.89 |   81.66 | 15,79-85,93,104,171-181 
+  BasicQuestionsPage.tsx    |   81.25 |     87.5 |   57.89 |   81.66 | 15,82-88,96,107,174-184 
   DetailedQuestion.tsx      |   33.33 |        0 |      50 |   33.33 | 19-22                   
   DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                         
-  DetailedQuestionsPage.tsx |      70 |       50 |   46.15 |   72.41 | 13,58-64,73,84,108,113  
+  DetailedQuestionsPage.tsx |      70 |       50 |   46.15 |   72.41 | 13,58-64,73,84,109,114  
   Home.tsx                  |    62.5 |       50 |   42.85 |    62.5 | 12,20,31,48-60          
 ----------------------------|---------|----------|---------|---------|-------------------------
 
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       1 failed, 8 passed, 9 total
 Snapshots:   0 total
-Time:        4.984 s
+Time:        4.817 s
 Ran all test suites.
