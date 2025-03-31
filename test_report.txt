@@ -124,26 +124,26 @@ FAIL src/App.test.tsx
 
 PASS src/pages/BasicQuestionsPage.test.tsx
 A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
-----------------------------|---------|----------|---------|---------|---------------------
-File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s   
-----------------------------|---------|----------|---------|---------|---------------------
-All files                   |   71.89 |    60.71 |   51.16 |   72.29 |                     
- src                        |    8.33 |        0 |   33.33 |    8.33 |                     
-  App.tsx                   |     100 |      100 |     100 |     100 |                     
-  index.tsx                 |       0 |      100 |     100 |       0 | 7-19                
-  reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                
- src/pages                  |    77.3 |    70.83 |    52.5 |   77.94 |                     
-  BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21               
-  BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                     
-  BasicQuestionsPage.tsx    |   81.96 |     87.5 |   58.82 |   82.45 | 15,79-85,94,158-168 
-  DetailedQuestion.tsx      |   33.33 |        0 |      50 |   33.33 | 19-22               
-  DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                     
-  DetailedQuestionsPage.tsx |   70.37 |       50 |   45.45 |   73.07 | 13,58-64,73,95,100  
-  Home.tsx                  |    62.5 |       50 |   42.85 |    62.5 | 12,20,31,48-60      
-----------------------------|---------|----------|---------|---------|---------------------
+----------------------------|---------|----------|---------|---------|-------------------------
+File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
+----------------------------|---------|----------|---------|---------|-------------------------
+All files                   |   71.69 |    60.71 |   51.06 |   72.07 |                         
+ src                        |    8.33 |        0 |   33.33 |    8.33 |                         
+  App.tsx                   |     100 |      100 |     100 |     100 |                         
+  index.tsx                 |       0 |      100 |     100 |       0 | 7-19                    
+  reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                    
+ src/pages                  |   76.87 |    70.83 |   52.27 |   77.46 |                         
+  BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                   
+  BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                         
+  BasicQuestionsPage.tsx    |   81.25 |     87.5 |   57.89 |   81.66 | 15,79-85,93,104,171-181 
+  DetailedQuestion.tsx      |   33.33 |        0 |      50 |   33.33 | 19-22                   
+  DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                         
+  DetailedQuestionsPage.tsx |      70 |       50 |   46.15 |   72.41 | 13,58-64,73,84,108,113  
+  Home.tsx                  |    62.5 |       50 |   42.85 |    62.5 | 12,20,31,48-60          
+----------------------------|---------|----------|---------|---------|-------------------------
 
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       1 failed, 8 passed, 9 total
 Snapshots:   0 total
-Time:        4.932 s
+Time:        4.984 s
 Ran all test suites.
