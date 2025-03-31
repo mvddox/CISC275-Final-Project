@@ -25,7 +25,8 @@ function DetailedQuestionsPage() {
 
   const answeredQuestionsCount = Object.values(answers).reduce(
         (total: number, current: string): number=>{
-          return current.length < 10 ? current.length / 10 : 1; 
+          total += current.length < 10 ? current.length / 10 : 1
+          return total; 
         }, 0
       ); // count amount of complete answers based of the length of the answer. Maxes each amount of progress a question
       // could give by the fraction of the question against all questions
