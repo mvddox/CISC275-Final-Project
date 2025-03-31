@@ -143,15 +143,15 @@ function NavigationButton(){
         </div>
       </header>
       <div className="Basic-Body">
-        <Container>
+      <Container>
           {/*Important to make a grid structure of the questions.
           Second argument of questionCol gives height of each col*/}
       {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
-        <Row key={i}>
+        <Row key={i} className='Basic-Question-Row'>
           {row.map((col, j) => (
             /** All the questions ARE rendered so that they remain 
              * persistant between movement between visibility */
-              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)}>
+              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)} className="Basic-Question">
                 <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
                   key={col.id}></BasicQuestion>
               </Col>
@@ -159,12 +159,14 @@ function NavigationButton(){
         </Row>
       ))}
       </Container>
-      </div>
-      {/* <div>test: {viewedQuestionsCount+" " +  viewedQuestions.map((x)=>{return x.id}) + ""
+      {/* </div>
+      {<div>test: {viewedQuestionsCount+" " +  viewedQuestions.map((x)=>{return x.id}) + ""
       //viewableQuestions.map((x)=>{return "["+x.map((y)=>{return y.id})+"]"})
       }
-      </div> */}
-      <div><Button disabled={viewedQuestionsCount === 0} onClick={()=>
+      </div>}
+      <div> */}
+        
+        <Button disabled={viewedQuestionsCount === 0} onClick={()=>
         {
           // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
           // properly. This is because everything renders AFTER the entire function has finished
@@ -180,8 +182,9 @@ function NavigationButton(){
       next</Button> 
       <Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
-          {" " +givenAnswers}</span>}</div>
+          {" " +givenAnswers}</span>}
           <ProgressBar progress={progress} />
+      </div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

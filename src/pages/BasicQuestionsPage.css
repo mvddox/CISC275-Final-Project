@@ -7,6 +7,7 @@ align-items: center;
 justify-content: center;
 font-size: calc(20px + 2vmin);
 color: white;
+justify-content: flex-start;
 }
 
 .Header-Buttons-Basic{
@@ -16,6 +17,7 @@ color: white;
 .App-link {
 color: #61dafb;
 }
+ 
 
 footer {
 text-align: center;

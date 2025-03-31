@@ -23,7 +23,6 @@
     padding: 12px;
     background-color: paleturquoise;
     color: black;
-    position: fixed; /* If you can scroll on page, don't make this fixed */
     bottom: 0;
     width: 100%
   }
