@@ -6,6 +6,7 @@ import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
 import { BasicQuestionType, BasicAnswerRecord, BASIC_QUESTIONS } from './BasicQuestionsList'
+import QuestionProgressBar from './components/ProgressBar';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -46,34 +47,7 @@ function BasicQuestionsPage() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
   const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
-    // outside red bar
-    const containerStyle = {
-      width: "100%",
-      backgroundColor: "red",
-      borderRadius: "20px",
-      height: "5vh"
-    };
-    //green bar that covers up red bar
-    const progressBarStyles = {
-      width: `${progress}%`,
-      backgroundColor: "green",
-      height: "5vh",
-      borderRadius: "20px",
-      justifyContent: "center",
-      fontWeight: 'bold',
-      alignItems: 'center',
-      display: 'flex',
-      
-    };
-    // function that created the progess bar
-    function ProgressBar({ progress }: { progress: number }) {
-      return (
-        <div style={containerStyle}>
-          <div style={progressBarStyles}>{Math.round(progress)}%</div>
-        </div>
-      );
-    }
-
+  
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -183,7 +157,7 @@ function NavigationButton(){
       <Button onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}
-          <ProgressBar progress={progress} />
+          <QuestionProgressBar progress={progress} />
       </div>
       <footer>
       <Form>
