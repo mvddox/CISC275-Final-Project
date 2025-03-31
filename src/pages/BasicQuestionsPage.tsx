@@ -85,8 +85,18 @@ function BasicQuestionsPage() {
     setKey(event.target.value);
   }
 
+  // for navigating from the basic question page to the detailed question page
+  function NavigateToDetailedButton(){
+    const navigate = useNavigate();
+    return (<div>
+      Go to Detailed Question Page {" "}
+      <Button onClick={() => navigate("/Detail")}>
+          Detailed Question Page
+      </Button>
+    </div>)
+  }
 
-  // for navigating between pages
+  // for navigating from the basic question page to the home page
 function NavigationButton(){
     const navigate = useNavigate();
     return (<div>
@@ -126,8 +136,11 @@ function NavigationButton(){
   return (
     <div className="Basic">
       <header className="Basic-header">
-        Basic 
-        <NavigationButton/>
+      Basic Questions
+        <div className="Header-Buttons-Basic">
+          <NavigateToDetailedButton/>
+          <NavigationButton/>
+        </div>
       </header>
       <div className="Basic-Body">
         <Container>
