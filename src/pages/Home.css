@@ -23,6 +23,8 @@
     padding: 12px;
     background-color: paleturquoise;
     color: black;
+    position: fixed; /* If you can scroll on page, don't make this fixed */
+    bottom: 0;
     width: 100%
   }
   
@@ -34,11 +36,21 @@
     align-items: center; 
     width: 100%; 
     margin: 0 auto;
-    background-color: rgb(57, 241, 241);
+    background-color: paleturquoise;
     height: 30vh;
     gap:10vh
   }
   
+  .ButtonDescription {
+    width: 400px;
+    color: rgba(37, 37, 37, 0.829);
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(250, 236, 226);
+    margin-top: 5px;
+    font-size: 18px;
+    text-wrap: balance;
+  }
+
     .PagesButtons button {
       background-color: rgb(0, 49, 65);
     width: 30vh;
