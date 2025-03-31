@@ -8,9 +8,9 @@ function DetailedQuestion({question, allAnswers, setAnswers}:
     {question: DetailedQuestionType, allAnswers: DetailedQuestionRecord, setAnswers: (newAnswers: DetailedQuestionRecord) => void}){
     const [answer, setAnswer] = useState<string>("")
     return <div data-testid={"question"}>
-    <Form.Group>
+    <Form.Group className='form'>
         <Form.Label> Question {question.id+1}: {question.instruction}</Form.Label>
-        <Form.Control placeholder="Input Stuff Here!"
+        <Form.Control className='Input-Box' placeholder="Input Stuff Here!"
         as="textarea"
         rows={3}
         value={answer}

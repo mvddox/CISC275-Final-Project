@@ -38,7 +38,7 @@ function DetailedQuestionsPage() {
         backgroundColor: "green",
         height: "5vh",
         borderRadius: "20px",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         fontWeight: 'bold',
         alignItems: 'center',
         display: 'flex',
@@ -48,7 +48,7 @@ function DetailedQuestionsPage() {
       function ProgressBar({ progress }: { progress: number }) {
         return (
           <div style={containerStyle}>
-            <div style={progressBarStyles}>{Math.round(progress)}%</div>
+            <div style={progressBarStyles}>{Math.round(progress)}% &nbsp;</div>
           </div>
         );
       }
@@ -69,8 +69,8 @@ function DetailedQuestionsPage() {
   function NavigationToBasic(){
     const navigate = useNavigate();
     return (<div>
-      Go to Basic Question Page {" "}
-      <Button onClick={() => navigate("/Basic")}>
+      Go to Basic Question Page: {" "}
+      <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Basic")}>
           Basic Question Page
       </Button>
     </div>)
@@ -80,8 +80,8 @@ function DetailedQuestionsPage() {
 function NavigationButton(){
     const navigate = useNavigate();
     return (<div>
-      Return home? {" "}
-      <Button onClick={() => navigate("/Home")}>
+      Return home: {" "}
+      <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Home")}>
           Home Page
       </Button>
     </div>)
@@ -91,29 +91,32 @@ function NavigationButton(){
   return (
     <div className="Detail">
       <header className="Detailed-header">
-        Detailed Questions
+
+        <div className='Detailed-header-title'>Detailed Questions</div>
         <div className="Header-Buttons-Detailed">
           <NavigationToBasic/>
           <NavigationButton/>
         </div>
       </header>
-      <div>
+      <div className='Detailed-Body'>
         {/* maps every question into the document but hides the undesirable ones */}
         {DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
           <div hidden={question.id !== viewedQuestion} key={question.id}>
             {/* NOTE: cannot pass anything in between the html elements or it gives an error */}
             <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
       </div>
-      <div>
-        <Button disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
-        Prev</Button>
-        <Button disabled={DETAILED_QUESTIONS.length - 1 === 
+      <div className='button-row'>
+        <Button className='Header-Buttons-Detailed-button' disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
+        Previous</Button>
+        <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 === 
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
-        <Button onClick={()=>setClickedResults(!clickedResults)}>Results:</Button> {clickedResults && <span>Your results are 
+        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
           {" " + givenAnswers}</span>}
       </div>
+      <div className ='Detailed-Body'> 
       <ProgressBar progress={progress} />
+      </div>
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

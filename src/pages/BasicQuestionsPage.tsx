@@ -51,25 +51,28 @@ function BasicQuestionsPage() {
       width: "100%",
       backgroundColor: "red",
       borderRadius: "20px",
-      height: "5vh"
+      height: "5vh",
+      overflow: "hidden",  
     };
     //green bar that covers up red bar
     const progressBarStyles = {
       width: `${progress}%`,
       backgroundColor: "green",
       height: "5vh",
-      borderRadius: "20px",
-      justifyContent: "center",
+      borderRadius: "20px", 
+      justifyContent: "flex-end",
       fontWeight: 'bold',
       alignItems: 'center',
       display: 'flex',
+      transition: "width 0.5s ease-in-out",
+      overflow: "hidden",
       
     };
     // function that created the progess bar
     function ProgressBar({ progress }: { progress: number }) {
       return (
         <div style={containerStyle}>
-          <div style={progressBarStyles}>{Math.round(progress)}%</div>
+          <div style={progressBarStyles}>{Math.round(progress)}% &nbsp;</div>
         </div>
       );
     }
@@ -88,9 +91,9 @@ function BasicQuestionsPage() {
   // for navigating from the basic question page to the detailed question page
   function NavigateToDetailedButton(){
     const navigate = useNavigate();
-    return (<div>
-      Go to Detailed Question Page {" "}
-      <Button onClick={() => navigate("/Detail")}>
+    return (<div >
+      Go to Detailed Question Page: {" "}
+      <Button className="Button" onClick={() => navigate("/Detail")}>
           Detailed Question Page
       </Button>
     </div>)
@@ -99,9 +102,9 @@ function BasicQuestionsPage() {
   // for navigating from the basic question page to the home page
 function NavigationButton(){
     const navigate = useNavigate();
-    return (<div>
-      Return home? {" "}
-      <Button onClick={() => navigate("/Home")}>
+    return (<div >
+      Return home: {" "}
+      <Button  className="Button" onClick={() => navigate("/Home")}>
           Home Page
       </Button>
     </div>)
@@ -136,7 +139,7 @@ function NavigationButton(){
   return (
     <div className="Basic">
       <header className="Basic-header">
-      Basic Questions
+         <div className="Basic-header-title">Basic Questions</div>
         <div className="Header-Buttons-Basic">
           <NavigateToDetailedButton/>
           <NavigationButton/>
@@ -164,24 +167,25 @@ function NavigationButton(){
       //viewableQuestions.map((x)=>{return "["+x.map((y)=>{return y.id})+"]"})
       }
       </div> */}
-      <div><Button disabled={viewedQuestionsCount === 0} onClick={()=>
+      <div className='button-row'><Button className="Button" disabled={viewedQuestionsCount === 0} onClick={()=>
         {
           // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
           // properly. This is because everything renders AFTER the entire function has finished
           setViewedQuestions([...viewableQuestions[viewedQuestionsCount-1]])
           setViewedQuestionsCount(viewedQuestionsCount-1)
         }}>
-      prev</Button> 
-      <Button disabled={viewedQuestionsCount === viewableQuestions.length-1} onClick={()=>
+      Previous</Button> 
+      <Button className="Button" disabled={viewedQuestionsCount === viewableQuestions.length-1} onClick={()=>
       {
         setViewedQuestions([...viewableQuestions[viewedQuestionsCount+1]])
         setViewedQuestionsCount(viewedQuestionsCount+1)
       }}>
-      next</Button> 
-      <Button onClick={()=>{setClickedResults(!clickedResults)}}>
+      Next</Button> 
+      <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}</div>
-          <ProgressBar progress={progress} />
+
+          <div className='Basic-Body'><ProgressBar  progress={progress} /></div> 
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

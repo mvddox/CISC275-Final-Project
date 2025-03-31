@@ -1,5 +1,5 @@
 .Basic-header {
-background-color: #282c34;
+background-color: rgb(52, 33, 160);
 min-height: 12vh;
 display: flex;
 flex-direction: column;
@@ -8,11 +8,28 @@ justify-content: center;
 font-size: calc(20px + 2vmin);
 color: white;
 }
+.Button{
+    background-color: rgb(108, 92, 195);
+    border: 1px solid black; 
+    text-align: center;
+}
+.button-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(187, 178, 237);
+}
+.Basic-header-title{
+font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
+font-size: calc(30px + 2vmin);
 
+}
 .Header-Buttons-Basic{
     font-size: calc(1px + 2vmin);
 }
-
+.Basic-Body{
+    background-color: rgb(187, 178, 237);
+}
 .App-link {
 color: #61dafb;
 }
