@@ -67,7 +67,7 @@ function HomePage() {
   
     <div className="App-header">
       <div className="header-content"> 
-      <h1>Welcome Cisc275 Group Project</h1>
+      <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
       </div>
       <div className="PagesButtons"> 
         <div><NavigationButton /> 
@@ -80,7 +80,7 @@ function HomePage() {
     
     <footer>
   
-  <Form>
+  <Form className='API'>
   
   <Form.Label>API Key:</Form.Label>
   
@@ -95,8 +95,8 @@ function HomePage() {
   </Button>
   
   </Form>
-  
-  Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+  <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+  </div>
   
   </footer>
   

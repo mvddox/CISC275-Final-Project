@@ -1,59 +1,114 @@
-.App-header {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* aligns items to the top, so footer is at the bottom*/
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .header-content { 
-    background-color: #282c34;
-    width: 100%; 
-    padding-bottom: 20px; 
-  }
-  
-  .header-content h1 {
-    font-size: 2em;
-  }
-  
-  footer {
-    text-align: center;
-    padding: 12px;
-    background-color: paleturquoise;
-    color: black;
-    bottom: 0;
-    width: 100%
-  }
-  
-  
-  .PagesButtons {
-    display: flex;
-    flex-direction: row; 
-    justify-content: center; 
-    align-items: center; 
-    width: 100%; 
-    margin: 0 auto;
-    background-color: paleturquoise;
-    height: 30vh;
-    gap:10vh
-  }
-  
-  .ButtonDescription {
-    width: 400px;
-    color: rgba(37, 37, 37, 0.829);
-    border: 1px solid rgb(0, 0, 0);
-    background-color: rgb(250, 236, 226);
-    margin-top: 5px;
-    font-size: 18px;
-    text-wrap: balance;
-  }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    .PagesButtons button {
-      background-color: rgb(0, 49, 65);
-    width: 30vh;
-    border: 1px solid black; 
-    text-align: center;
-    padding: center; 
-    height: 15vh;}
+.App-header {
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the top */
+  font-size: calc(10px + 2vmin);
+  color: white;
+  flex-grow: 1; /* Allows it to expand and fill space */
+  width: 100%;
+}
+
+.header-content { 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(52, 33, 160);
+  width: 100%; 
+  padding-bottom: 20px; 
+}
+
+.header-content h1 {
+  font-size: 2em;
+}
+
+footer {
+  text-align: center;
+  padding: 12px;
+  background-color: rgb(187, 178, 237);
+  color: black;
+  bottom: 0;
+  width: 100%;
+}
+
+.PagesButtons {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+  margin: 0 auto;
+  background-color: rgb(187, 178, 237);
+  height: 30vh;
+  gap: 10vh;
+  flex-grow: 1; /* Ensures content expands inside the header */
+
+}
+
+.ButtonDescription {
+  width: 75vh;
+  color: rgba(37, 37, 37, 0.829);
+  border: 1px solid rgb(122, 115, 110);
+  background-color: rgb(187, 178, 237);
+  margin-top: 5px;
+  font-size: 18px;
+  text-wrap: balance;
+}
+
+.Submit-Button {
+  background-color: rgb(108, 92, 195);
+  width: 15vh;
+  border: 1px solid black; 
+  text-align: center;
+  height: 7vh;
+}
+.API {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers everything inside the form */
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgb(143, 130, 217);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.API input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.PagesButtons button {
+  background-color: rgb(108, 92, 195);
+  width: 30vh;
+  border: 1px solid black; 
+  text-align: center;
+  height: 10vh;
+}
+.AuthorText{
+  color: rgba(0, 0, 0, 0.829);
+  background-color: rgb(187, 178, 237);
+  margin-top: 5px;
+  font-size: 15px;
+  text-wrap: balance;
+} 
+
