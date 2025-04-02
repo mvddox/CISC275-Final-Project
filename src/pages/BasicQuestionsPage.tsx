@@ -6,6 +6,7 @@ import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
 import { BasicQuestionType, BasicAnswerRecord, BASIC_QUESTIONS } from './BasicQuestionsList'
+import QuestionProgressBar from './components/ProgressBar';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -46,36 +47,6 @@ function BasicQuestionsPage() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
   const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
-    // outside red bar
-    const containerStyle = {
-      width: "100%",
-      backgroundColor: "red",
-      borderRadius: "20px",
-      height: "5vh",
-      overflow: "hidden",  
-    };
-    //green bar that covers up red bar
-    const progressBarStyles = {
-      width: `${progress}%`,
-      backgroundColor: "green",
-      height: "5vh",
-      borderRadius: "20px", 
-      justifyContent: "flex-end",
-      fontWeight: 'bold',
-      alignItems: 'center',
-      display: 'flex',
-      transition: "width 0.5s ease-in-out",
-      overflow: "hidden",
-      
-    };
-    // function that created the progess bar
-    function ProgressBar({ progress }: { progress: number }) {
-      return (
-        <div style={containerStyle}>
-          <div style={progressBarStyles}>{Math.round(progress)}% &nbsp;</div>
-        </div>
-      );
-    }
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -146,15 +117,15 @@ function NavigationButton(){
         </div>
       </header>
       <div className="Basic-Body">
-        <Container>
+      <Container>
           {/*Important to make a grid structure of the questions.
           Second argument of questionCol gives height of each col*/}
       {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
-        <Row key={i}>
+        <Row key={i} className='Basic-Question-Row'>
           {row.map((col, j) => (
             /** All the questions ARE rendered so that they remain 
              * persistant between movement between visibility */
-              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)}>
+              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)} className="Basic-Question">
                 <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
                   key={col.id}></BasicQuestion>
               </Col>
@@ -162,11 +133,7 @@ function NavigationButton(){
         </Row>
       ))}
       </Container>
-      </div>
-      {/* <div>test: {viewedQuestionsCount+" " +  viewedQuestions.map((x)=>{return x.id}) + ""
-      //viewableQuestions.map((x)=>{return "["+x.map((y)=>{return y.id})+"]"})
-      }
-      </div> */}
+      
       <div className='button-row'><Button className="Button" disabled={viewedQuestionsCount === 0} onClick={()=>
         {
           // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
@@ -183,9 +150,10 @@ function NavigationButton(){
       Next</Button> 
       <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
-          {" " +givenAnswers}</span>}</div>
-
-          <div className='Basic-Body'><ProgressBar  progress={progress} /></div> 
+          {" " +givenAnswers}</span>}
+          </div>
+          <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
+      
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
@@ -196,6 +164,7 @@ function NavigationButton(){
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
            
           
+      </div>
     </div>
   );
 }

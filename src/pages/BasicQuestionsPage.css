@@ -7,6 +7,7 @@ align-items: center;
 justify-content: center;
 font-size: calc(20px + 2vmin);
 color: white;
+justify-content: flex-start;
 }
 .Button{
     background-color: rgb(108, 92, 195);
@@ -33,6 +34,8 @@ font-size: calc(30px + 2vmin);
 .App-link {
 color: #61dafb;
 }
+ 
+
 
 footer {
 text-align: center;

@@ -15,27 +15,27 @@ export type actualMeaning = Record<number, string>
 //const QUESTION_ZERO: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
 
 //QUESTIONS
-const QUESTION_1: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
-const QUESTION_2: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 1}
-const QUESTION_3: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2", "placeholder 3"], id: 2}
-const QUESTION_4: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 3}
-const QUESTION_5: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 4}
-const QUESTION_6: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 5}
-const QUESTION_7: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 6}
-const QUESTION_8: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 7}
-const QUESTION_9: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 8}
-const QUESTION_10: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 9}
-const QUESTION_11: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 10}
-const QUESTION_12: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 11}
-const QUESTION_13: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 12}
-const QUESTION_14: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 13}
-const QUESTION_15: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 14}
-const QUESTION_16: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 15}
-const QUESTION_17: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 16}
-const QUESTION_18: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 17}
-const QUESTION_19: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 18}
-const QUESTION_20: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 19}
-const QUESTION_21: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 20}
+const QUESTION_1: BasicQuestionType = {instruction: "Are you an extroverted person?", answers:["Yes", "Mayhaps", "No"], id: 0}
+const QUESTION_2: BasicQuestionType = {instruction: "Are people are of any value to you?", answers:["Yes", "Mayhaps", "No"], id: 1}
+const QUESTION_3: BasicQuestionType = {instruction: "Do you want to make the world a better place?", answers:["Yes", "Mayhaps", "No"], id: 2}
+const QUESTION_4: BasicQuestionType = {instruction: "Can you work in a team?", answers:["Yes", "Mayhaps", "No"], id: 3}
+const QUESTION_5: BasicQuestionType = {instruction: "Are you your own boss?", answers:["Yes", "Mayhaps", "No"], id: 4}
+const QUESTION_6: BasicQuestionType = {instruction: "Do you want to fix and make the world more perfect?", answers:["Yes", "Mayhaps", "No"], id: 5}
+const QUESTION_7: BasicQuestionType = {instruction: "Are you good with technology?", answers:["Yes", "Mayhaps", "No"], id: 6}
+const QUESTION_8: BasicQuestionType = {instruction: "Is there no cost too great?", answers:["Yes", "Mayhaps", "No"], id: 7}
+const QUESTION_9: BasicQuestionType = {instruction: "How much work experience do you have?", answers:["None", "A few months", "A year", "Years"], id: 8}
+const QUESTION_10: BasicQuestionType = {instruction: "Do you know what you are doing?", answers:["No clue", "A grasp", "Somewhat", "My actions are utterly unclouded"], id: 9}
+const QUESTION_11: BasicQuestionType = {instruction: "How much autonomy do you desire?", answers:["Give me orders and I follow", "Some guidance" ,"I'll do my own thing", "I give the orders"], id: 10}
+const QUESTION_12: BasicQuestionType = {instruction: "What is your favorite subject?", answers:["Math", "Science", "English", "PE"], id: 11}
+const QUESTION_13: BasicQuestionType = {instruction: "How do you like learning?", answers:["By reading", "By image", "By action", "By listening"], id: 12}
+const QUESTION_14: BasicQuestionType = {instruction: "Is it important to have fun at work?", answers:["Work exists for money only", "So long as it isn't boring", "It's important to have fun" ,"There would be no reason otherwise"], id: 13}
+const QUESTION_15: BasicQuestionType = {instruction: "Is free time from work an incentive?", answers:["I need time to live my life", "There needs to be a balance", "Work is more important", "Life is only proven by work"], id: 14}
+const QUESTION_16: BasicQuestionType = {instruction: "Does it matter if your career holds prestige?", answers:["So long it pays the bills", "There are things i'd rather not be seen as", "Something I would flex", "Only the most"], id: 15}
+const QUESTION_17: BasicQuestionType = {instruction: "Is there always a mountain to climb higher, a peak to reach?", answers:["Nah, I'm content", "There are limits", "One could always achieve more", "Among the hierarchy, I alone will take precedence"], id: 16}
+const QUESTION_18: BasicQuestionType = {instruction: "How do you want to spend your workday?", answers:["Contributing to large-scale projects in a team","Helping clients on the phone", "Finishing tasks with a partner", "Working busy work remotely"], id: 17}
+const QUESTION_19: BasicQuestionType = {instruction: "How should work be scheduled?", answers:["Whenever work demands it", "However the client schedules it", "Every week is scheduled by me", "Only during a routine schedule"], id: 18}
+const QUESTION_20: BasicQuestionType = {instruction: "How flexible are you in emergancies?", answers:["It does not matter if an emergancy happens, not my problem", "My safety takes priority", "It has to be really dire", "It is my duty to help no in spite of the circumstances"], id: 19}
+const QUESTION_21: BasicQuestionType = {instruction: "Why do you exist?", answers:["To live life as I see it", "To create value for the world", "To serve humanity", "I don't need a reason"], id: 20}
 
 
 

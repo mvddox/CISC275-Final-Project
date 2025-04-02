@@ -9,7 +9,7 @@ function BasicQuestion({question, allAnswers, setAnswers}:
     const [chosenAnswer, setChosenAnswer] = useState<string>("");
   return (
     <Form className="" data-testid={"question"}>
-      Question {question.id+1}:
+      Question {question.id+1}: {" "}
         <Form.Label>{question.instruction}</Form.Label>
         {question.answers.map( (answer: string, index: number)=>
         (<Form.Check

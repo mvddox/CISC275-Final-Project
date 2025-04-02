@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from './DetailedQuestionsList';
 import DetailedQuestion from './DetailedQuestion';
 import "./DetailedQuestionsPage.css"
+import QuestionProgressBar from './components/ProgressBar';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -22,36 +23,14 @@ function DetailedQuestionsPage() {
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
 
-  const answeredQuestionsCount = Object.keys(answers).length; // count amount of answer user inputed
+  const answeredQuestionsCount = Object.values(answers).reduce(
+        (total: number, current: string): number=>{
+          total += current.length < 10 ? current.length / 10 : 1
+          return total; 
+        }, 0
+      ); // count amount of complete answers based of the length of the answer. Maxes each amount of progress a question
+      // could give by the fraction of the question against all questions
   const progress: number = (answeredQuestionsCount / DETAILED_QUESTIONS.length) * 100; // progress out of11
-
-      // outside red bar
-      const containerStyle = {
-        width: "100%",
-        backgroundColor: "red",
-        borderRadius: "20px",
-        height: "5vh"
-      };
-      //green bar that covers up red bar
-      const progressBarStyles = {
-        width: `${progress}%`,
-        backgroundColor: "green",
-        height: "5vh",
-        borderRadius: "20px",
-        justifyContent: "flex-end",
-        fontWeight: 'bold',
-        alignItems: 'center',
-        display: 'flex',
-        
-      };
-      // function that created the progess bar
-      function ProgressBar({ progress }: { progress: number }) {
-        return (
-          <div style={containerStyle}>
-            <div style={progressBarStyles}>{Math.round(progress)}% &nbsp;</div>
-          </div>
-        );
-      }
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -114,9 +93,10 @@ function NavigationButton(){
         <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
           {" " + givenAnswers}</span>}
       </div>
-      <div className ='Detailed-Body'> 
-      <ProgressBar progress={progress} />
+      <div className ='Detailed-Body'>
+      <QuestionProgressBar progress={progress} />
       </div>
+
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
