@@ -154,6 +154,9 @@ function NavigationButton(){
           </div>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
       
+          {"here " + saveKeyData + "/" + keyData}
+
+
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>
