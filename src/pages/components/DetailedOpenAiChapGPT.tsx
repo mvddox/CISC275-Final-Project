@@ -6,8 +6,8 @@ import { keyData } from '../DetailedQuestionsPage';
 
 function OpenAiComponent({DetailedResults}:
     {DetailedResults: DetailedQuestionRecord}){
-    const [aiError, setAiError] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
+    const [aiError, setAiError] = useState<string>("") // errors; when it catches an error, display error
+    const [loading, setLoading] = useState<boolean>(false) //loading
     const [results, setResults] = useState<string[]>([]) // collection of all the results
     const [finalResult, setFinalResult] = useState<string>("") // used for final determination of future
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
@@ -64,7 +64,7 @@ function OpenAiComponent({DetailedResults}:
             setAiError("It seems that there was an error.....")
             console.error(e);
             }
-        // final sentence for the 
+        // final sentence for the final arbitration of the person's future
         try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
@@ -80,7 +80,7 @@ function OpenAiComponent({DetailedResults}:
         setLoading(false)
     }
         
-                
+                // needs cleaning
     return <div>
         <div hidden={!loading}>loading</div>
         {!(!loading && !finalResult) && (!aiError ? (<div ><div>results: {results}</div>
