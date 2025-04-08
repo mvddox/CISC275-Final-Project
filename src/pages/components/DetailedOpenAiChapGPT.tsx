@@ -8,8 +8,8 @@ function OpenAiComponent({DetailedResults}:
     {DetailedResults: DetailedQuestionRecord}){
     const [aiError, setAiError] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
-    const [results, setResults] = useState<string[]>([])
-    const [finalResult, setFinalResult] = useState<string>("")
+    const [results, setResults] = useState<string[]>([]) // collection of all the results
+    const [finalResult, setFinalResult] = useState<string>("") // used for final determination of future
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
     
 
@@ -22,6 +22,7 @@ function OpenAiComponent({DetailedResults}:
     async function accumResults(): Promise<string[]>{
         setLoading(true)
         let newResults:string[] = []
+        // maps every question with every user answer to a gpt input
         let resultPromises: Promise<string>[] = Object.entries(DetailedResults).map(
             async ([instruction,answer]: [string ,string]): Promise<string> => 
             {
@@ -48,7 +49,8 @@ function OpenAiComponent({DetailedResults}:
 
 
     async function startAI(){
-        
+        setResults([])
+        setFinalResult("") // clean ups display
         const newResults:string[] = await accumResults() // the entire thing has to wait for the results to be accumulated
         
         try{
@@ -79,7 +81,6 @@ function OpenAiComponent({DetailedResults}:
     }
         
                 
-
     return <div>
         <div hidden={!loading}>loading</div>
         {!(!loading && !finalResult) && (!aiError ? (<div ><div>results: {results}</div>
