@@ -4,19 +4,17 @@ import { DetailedQuestionRecord } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 
-function OpenAiComponent({key, DetailedResults}:
-    {key: string, DetailedResults: DetailedQuestionRecord}){
+function OpenAiComponent({DetailedResults}:
+    {DetailedResults: DetailedQuestionRecord}){
     const [result, setResult] = useState<string>("") 
-    //const [openai, setOpenai] = useState("")
-    const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true})
-    if(key)
-    {}
-
+    const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
+    
     async function startAI(){
-        try{
+        Object.entries(DetailedResults).map(async ([instruction,answer]: [string ,string]) => 
+        {try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
-                input: "Write me a short story about a tomato."
+                input: "Based on the question: '" + instruction +  "' How would you define a person who said " + answer +"?"
             });
             
             setResult(response.output_text)
@@ -25,6 +23,7 @@ function OpenAiComponent({key, DetailedResults}:
                 setResult("fails")
                 console.error(e);
             }
+        })
         }
         
                 

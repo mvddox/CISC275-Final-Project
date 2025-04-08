@@ -97,8 +97,7 @@ function NavigationButton(){
       <div className ='Detailed-Body'>
       <QuestionProgressBar progress={progress} />
       </div>
-      {"here " + saveKeyData + "/" + keyData}
-      {(keyData) && <OpenAiComponent key={keyData} DetailedResults={answers}></OpenAiComponent>}
+      {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>}
 
 
 

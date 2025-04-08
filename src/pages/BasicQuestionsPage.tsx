@@ -153,8 +153,7 @@ function NavigationButton(){
           {" " +givenAnswers}</span>}
           </div>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
-      
-          {"here " + saveKeyData + "/" + keyData}
+  
 
 
       <footer>
