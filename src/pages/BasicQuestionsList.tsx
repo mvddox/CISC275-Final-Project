@@ -7,7 +7,7 @@ export interface BasicQuestionType {
 } 
 
 // note: every key is a string, apparently even if defined otherwise
-export type BasicAnswerRecord = Record<number, string>
+export type BasicAnswerRecord = Record<string, string>
 export type actualMeaning = Record<number, string>
 
 
