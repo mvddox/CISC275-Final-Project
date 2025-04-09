@@ -127,24 +127,49 @@ FAIL src/App.test.tsx
 
 PASS src/pages/DetailedQuestionsPage.test.tsx
 PASS src/pages/BasicQuestionsPage.test.tsx
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
 A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
 ----------------------------|---------|----------|---------|---------|----------------------------
 File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
 ----------------------------|---------|----------|---------|---------|----------------------------
-All files                   |   59.48 |       50 |   45.09 |   59.47 |                            
+All files                   |    51.1 |    43.75 |   41.81 |    50.9 |                            
  src                        |    8.33 |        0 |   33.33 |    8.33 |                            
   App.tsx                   |     100 |      100 |     100 |     100 |                            
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19                       
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                       
- src/pages                  |   75.67 |    66.66 |   48.83 |   76.22 |                            
+ src/pages                  |   75.67 |    65.62 |   48.83 |   76.22 |                            
   BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                      
   BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                            
-  BasicQuestionsPage.tsx    |   80.32 |     87.5 |   55.55 |    80.7 | 16,53-59,67,78,141-151     
+  BasicQuestionsPage.tsx    |   80.32 |    83.33 |   55.55 |    80.7 | 17,54-60,68,79,142-152     
   DetailedQuestion.tsx      |   33.33 |       50 |      50 |   33.33 | 19-22                      
   DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                            
   DetailedQuestionsPage.tsx |   62.06 |     37.5 |   38.46 |   64.28 | 15,29-30,38-44,53,64,89,94 
   Home.tsx                  |    62.5 |       50 |   42.85 |    62.5 | 12,20,31,48-60             
- src/pages/components       |    8.57 |        0 |      20 |    8.57 |                            
+ src/pages/components       |    4.47 |        0 |   11.11 |    4.47 |                            
+  BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 9-84                       
   DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 9-84                       
   ProgressBar.tsx           |     100 |      100 |     100 |     100 |                            
 ----------------------------|---------|----------|---------|---------|----------------------------
@@ -152,5 +177,5 @@ All files                   |   59.48 |       50 |   45.09 |   59.47 |
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       1 failed, 8 passed, 9 total
 Snapshots:   0 total
-Time:        4.965 s
+Time:        5.165 s
 Ran all test suites.
