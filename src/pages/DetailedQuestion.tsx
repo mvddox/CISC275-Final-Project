@@ -18,7 +18,7 @@ function DetailedQuestion({question, allAnswers, setAnswers}:
             {
                 if(event.target.value.length <= 250){
                     setAnswer(event.target.value)
-                    const newAllAnswers:DetailedQuestionRecord = {...allAnswers, [question.id]: event.target.value}
+                    const newAllAnswers:DetailedQuestionRecord = {...allAnswers, [question.instruction]: event.target.value}
                     setAnswers(newAllAnswers)
                 }
             }} />

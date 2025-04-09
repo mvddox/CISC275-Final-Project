@@ -5,7 +5,7 @@ export interface DetailedQuestionType {
 }
 
 
-export type DetailedQuestionRecord = Record<number, string>
+export type DetailedQuestionRecord = Record<string, string>
 
 //plqholder example 
 // const QUESTION_ZERO: DetailedQuestionType = {instruction: 

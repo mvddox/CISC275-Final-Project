@@ -153,7 +153,9 @@ function NavigationButton(){
           {" " +givenAnswers}</span>}
           </div>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
-      
+  
+
+
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

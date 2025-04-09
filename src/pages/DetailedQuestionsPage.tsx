@@ -5,9 +5,10 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from 
 import DetailedQuestion from './DetailedQuestion';
 import "./DetailedQuestionsPage.css"
 import QuestionProgressBar from './components/ProgressBar';
+import OpenAiComponent from './components/DetailedOpenAiChapGPT';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
-let keyData = "";
+export let keyData = "";
 const saveKeyData = "MYKEY";
 const prevKey = localStorage.getItem(saveKeyData); //so it'll look like: MYKEY: <api_key_value here> in the local storage when you inspect
 if (prevKey !== null) {
@@ -96,6 +97,9 @@ function NavigationButton(){
       <div className ='Detailed-Body'>
       <QuestionProgressBar progress={progress} />
       </div>
+      {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>}
+
+
 
       <footer>
       <Form>
