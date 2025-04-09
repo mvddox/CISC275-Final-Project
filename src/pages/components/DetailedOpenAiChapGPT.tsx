@@ -9,7 +9,8 @@ function OpenAiComponent({DetailedResults}:
     const [aiError, setAiError] = useState<string>("") // errors; when it catches an error, display error
     const [loading, setLoading] = useState<boolean>(false) //loading
     const [results, setResults] = useState<string[]>([]) // collection of all the results
-    const [finalResult, setFinalResult] = useState<string>("") // used for final determination of future
+    const [finalResult, setFinalResult] = useState<string>("") // used for final analysis
+    const [finalSentence, setFinalSentence] = useState<string>("") // used for their final sentence
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
     
 
@@ -64,13 +65,13 @@ function OpenAiComponent({DetailedResults}:
             setAiError("It seems that there was an error.....")
             console.error(e);
             }
-        // final sentence for the final arbitration of the person's future
+        // final sentence for the ultimate arbitration of the person's future
         try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
                 input: "Based on the results: '" + newResults +  "'In one sentence what would their future career be?"
             });
-            setFinalResult(finalResult + "Final arbitration:" + response.output_text)
+            setFinalSentence("Final arbitration:" + response.output_text)
             }
         catch (e){
             setAiError("It seems that there was an error.....")
@@ -84,7 +85,9 @@ function OpenAiComponent({DetailedResults}:
     return <div>
         <div hidden={!loading}>loading</div>
         {!(!loading && !finalResult) && (!aiError ? (<div ><div>results: {results}</div>
-        <div>final results: {finalResult}</div></div>) : <div>{aiError}</div>)}
+        <div>final results: {finalResult}</div>
+        <div>final sentencing: {finalSentence}</div>
+        </div>) : <div>{aiError}</div>)}
         <Button onClick={startAI}>
             generate response
         </Button>
