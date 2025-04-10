@@ -5,7 +5,6 @@ import { render, screen, within } from '@testing-library/react';
 import BasicQuestionsPage from './BasicQuestionsPage';
 import "react-router";
 import { HashRouter } from 'react-router';
-import userEvent from '@testing-library/user-event';
 
 describe('Header', () => {
     // beforeEach(() => render(<BasicQuestion/>))
