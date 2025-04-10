@@ -29,7 +29,7 @@ function OpenAiComponentB({BasicResults}:
                 try{
                 const response = await openai.responses.create({
                     model: "gpt-4o",
-                    input: "Based on the question: '" + instruction +  "' How would you define a person who said " + answer +"?"
+                    input: "Based on the question: '" + instruction +  "' What job do you think a person would best be suited for based on there answer " + answer +" do it in one sentence? "
                 });
                 newResults = [...newResults, response.output_text]
                 setResults([...newResults])
@@ -56,7 +56,7 @@ function OpenAiComponentB({BasicResults}:
         try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
-                input: "Based on the results: '" + newResults +  "' How would you define the person as a whole?"
+                input: "Based on the results: '" + newResults +  "' What job do you think a person would best be suited for based on there answer do it in one sentence"
             });
             setFinalResult(response.output_text)
             }

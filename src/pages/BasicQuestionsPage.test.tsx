@@ -5,6 +5,7 @@ import { render, screen, within } from '@testing-library/react';
 import BasicQuestionsPage from './BasicQuestionsPage';
 import "react-router";
 import { HashRouter } from 'react-router';
+import userEvent from '@testing-library/user-event';
 
 describe('Header', () => {
     // beforeEach(() => render(<BasicQuestion/>))
@@ -46,3 +47,77 @@ describe('Questions', () => {
 
 //     // TO DO!!!!!
 // })
+
+// Mock the OpenAiComponentB component to avoid side effects
+
+// Mock the BasicQuestionsList
+
+describe('BasicQuestionsPage', () => {
+    test('renders the API key input', () => {
+      render(
+        <HashRouter>
+          <BasicQuestionsPage />
+        </HashRouter>
+      );
+      expect(screen.getByPlaceholderText('Insert API Key Here')).toBeInTheDocument();
+    });
+    test('renders the progress bar', () => {
+        render(
+          <HashRouter>
+            <BasicQuestionsPage />
+          </HashRouter>
+        );
+        const progressBar = screen.getByRole('progressbar');
+        expect(progressBar).toBeInTheDocument();
+    
+  
+});
+test('renders the header title', () => {
+    render(
+      <HashRouter>
+        <BasicQuestionsPage />
+      </HashRouter>
+    );
+    const headerTitle = screen.getByText(/Basic Questions/i);
+    expect(headerTitle).toBeInTheDocument();
+  });
+  test('renders the return home button', () => {
+    render(
+      <HashRouter>
+        <BasicQuestionsPage />
+      </HashRouter>
+    );
+    const returnButton = screen.getByText(/Return Home?/i);
+    expect(returnButton).toBeInTheDocument();
+});
+test('renders the go to detailed page button', () => {
+    render(
+      <HashRouter>
+        <BasicQuestionsPage />
+      </HashRouter>
+    );
+    const detailedButton = screen.getByText(/Go to Detailed Question Page/i);
+    expect(detailedButton).toBeInTheDocument();
+  });
+  test('renders the footer with author information', () => {
+    render(
+      <HashRouter>
+        <BasicQuestionsPage />
+      </HashRouter>
+    );
+    const footerText = screen.getByText(/Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez/i);
+    expect(footerText).toBeInTheDocument();
+  });
+  test('renders the "Previous" and "Next" buttons initially', () => {
+    render(
+      <HashRouter>
+        <BasicQuestionsPage />
+      </HashRouter>
+    );
+    expect(screen.getByText(/Previous/i)).toBeInTheDocument();
+    expect(screen.getByText(/Next/i)).toBeInTheDocument();
+  });
+});
+  
+   
+

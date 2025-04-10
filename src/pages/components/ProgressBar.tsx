@@ -19,7 +19,7 @@
     
   };
     return (
-      <div style={containerStyle}>
+      <div style={containerStyle} role = "progressbar">
         <div style={progressBarStyles}>{Math.round(progress)}%</div>
       </div>
     );
