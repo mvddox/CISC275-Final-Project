@@ -12,35 +12,12 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
-// for navigating between pages
-function NavigationButton() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <Button onClick={() => navigate("/Basic")}>
-        Basic Question Page
-      </Button>
-    </div>
-  );
-}
-//navigates to the detailed page button
-function NavigationDetailedButton() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <Button onClick={() => navigate("/Detail")}>
-        Detailed Question Page
-      </Button>
-    </div>
-  );
-}
-
 
 function HomePage() {
 
   const [key, setKey] = useState<string>(keyData); //for api key input
-  
-  
+  const [loggedIn, setLoggedIn] = useState<boolean>(false); //keeps track if a user is logged in or not
+
   //sets the local storage item to the api key the user inputed
   
   function handleSubmit() {
@@ -61,13 +38,40 @@ function HomePage() {
   
   }
   
+  function setLoginStatus(){
+    setLoggedIn(!loggedIn);
+  }
   
+  // for navigating between pages
+  function NavigationButton() {
+    const navigate = useNavigate();
+    return (
+      <div>
+        <Button onClick={() => navigate("/Basic",{ state: { isLoggedIn: loggedIn }})}>
+          Basic Question Page
+        </Button>
+      </div>
+    );
+  }
+  //navigates to the detailed page button
+  function NavigationDetailedButton() {
+    const navigate = useNavigate();
+    return (
+      <div>
+        <Button onClick={() => navigate("/Detail",{ state: { isLoggedIn: loggedIn }})}>
+          Detailed Question Page
+        </Button>
+      </div>
+    );
+  }
   
   return (
   
     <div className="App-header">
       <div className="header-content"> 
       <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
+      {loggedIn && <Button onClick={setLoginStatus}>Logout</Button>}
+      {!loggedIn && <Button onClick={setLoginStatus}>Login</Button>}
       </div>
       <div className="PagesButtons"> 
         <div><NavigationButton /> 
@@ -77,6 +81,10 @@ function HomePage() {
           <div className="ButtonDescription">Takes you to the "Detailed Question Page" that includes open-ended questions. Longer than the "Basic Question Page" but allows you to get more precise responses. </div>
         </div>
       </div>
+      {loggedIn && <div className="LoggedButtons">
+        <div><Button>Previous Results</Button></div>
+        <div><Button>My Profile</Button></div>
+      </div>} {/* Makes buttons disappear when not logged in */}
     
     <footer>
   
