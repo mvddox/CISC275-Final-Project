@@ -13,14 +13,17 @@ const AuthContext = createContext<AuthProps>({
 })
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
+    const storedLoginStatus = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('isLoggedIn') || 'false' ) : false
+    const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(storedLoginStatus);
 
     const login = () => {
         setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', 'true');
     }
 
     const logout = () => {
         setIsLoggedIn(false);
+        localStorage.setItem('isLoggedIn', 'false');
     }
 
     return (
