@@ -81,15 +81,24 @@ function OpenAiComponent({DetailedResults}:
     }
         
                 // needs cleaning
-    return <div>
-        <div hidden={!loading}>loading</div>
-        {!(!loading && !finalResult) && (!aiError ? (<div ><div>results: {results}</div>
-        <div>final results: {finalResult}</div></div>) : <div>{aiError}</div>)}
-        <Button onClick={startAI}>
-            generate response
-        </Button>
-    </div>
-}
+    return (
+        <div className="ai-container">
+          <div className={loading ? "loading" : ""}>
+            {loading && "Loading..."}
+          </div>
+          <div className="results" hidden={loading || !results.length}>
+            {results.join(", ")}
+          </div>
+          <div className="final-result" hidden={loading || !finalResult}>
+            {finalResult}
+          </div>
+          {aiError && <div className="ai-error">{aiError}</div>}
+          <Button className="ai-button" onClick={startAI}>
+            Generate Response
+          </Button>
+        </div>
+      );
+    }
 //sample for copy paste
 //A man with everything on the line would win because a man with nothing to lose already lost their will to fight.
 //I would not pull the switch, but not in spite of myself. Although I would never know the strangers' lives, from one to a hundred, nor understand how they feel or experience their life stories, my life would be more fulfilled should I let them live. 
