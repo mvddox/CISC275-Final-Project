@@ -7,6 +7,7 @@ import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestionsPage';
 import DetailedQuestionPage from './pages/DetailedQuestionsPage'
+import AuthProvider from './Auth';
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
@@ -36,26 +37,28 @@ function App() {
   return (
     <>
             <Router>
-                <Routes>
-                    <Route
-                        path="/Home"
-                      
-                        element={<HomePage />}
-                    />
-                    <Route
-                        path="/"
-                      
-                        element={<HomePage />}
-                    />
-                    <Route
-                        path="/Basic"
-                        element={<BasicQuestionPage />}
-                    />
-                    <Route
-                        path="/Detail"
-                        element={<DetailedQuestionPage />}
-                    />
-                </Routes>
+                <AuthProvider>
+                    <Routes>
+                        <Route
+                            path="/Home"
+                        
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path="/"
+                        
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path="/Basic"
+                            element={<BasicQuestionPage />}
+                        />
+                        <Route
+                            path="/Detail"
+                            element={<DetailedQuestionPage />}
+                        />
+                    </Routes>
+                </AuthProvider>
             </Router>
         </>
   );
