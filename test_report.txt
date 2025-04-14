@@ -26,6 +26,48 @@ FAIL src/App.test.tsx
       at Object.<anonymous> (src/App.test.tsx:5:1)
 
 PASS src/pages/DetailedQuestionsPage.test.tsx
+  ● Console
+
+    console.error
+      Warning: Each child in a list should have a unique "key" prop.
+      
+      Check the render method of `DebugDetailed`. See https://reactjs.org/link/warning-keys for more information.
+          at option
+          at DebugDetailed (/home/runner/work/CISC275-Final-Project/CISC275-Final-Project/src/pages/components/debugDetailed.tsx:22:25)
+          at div
+          at DetailedQuestionsPage (/home/runner/work/CISC275-Final-Project/CISC275-Final-Project/src/pages/DetailedQuestionsPage.tsx:21:55)
+          at Router (/home/runner/work/CISC275-Final-Project/CISC275-Final-Project/node_modules/react-router/dist/development/index.js:5487:13)
+          at HashRouter (/home/runner/work/CISC275-Final-Project/CISC275-Final-Project/node_modules/react-router/dist/development/index.js:7777:23)
+
+      31 |         <div><Form.Group controlId="debugDropDown">
+      32 |             <Form.Label>DEBUG SELECT</Form.Label>
+    > 33 |             <Form.Select value={select} onChange={handleChange}>
+         |             ^
+      34 |                 <option></option>
+      35 |                 {Object.keys(CHOICES).map((key)=>(<option value={key}>{key}</option>))}
+      36 |                 </Form.Select>
+
+      at printWarning (node_modules/react/cjs/react-jsx-dev-runtime.development.js:87:30)
+      at error (node_modules/react/cjs/react-jsx-dev-runtime.development.js:61:7)
+      at validateExplicitKey (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1078:5)
+      at validateChildKeys (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1105:11)
+      at jsxWithValidation (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1266:15)
+      at DebugDetailed (src/pages/components/debugDetailed.tsx:33:13)
+      at renderWithHooks (node_modules/react-dom/cjs/react-dom.development.js:16305:18)
+      at mountIndeterminateComponent (node_modules/react-dom/cjs/react-dom.development.js:20074:13)
+      at beginWork (node_modules/react-dom/cjs/react-dom.development.js:21587:16)
+      at beginWork$1 (node_modules/react-dom/cjs/react-dom.development.js:27426:14)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26560:12)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:26466:5)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:26434:7)
+      at performConcurrentWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:25738:74)
+      at flushActQueue (node_modules/react/cjs/react.development.js:2667:24)
+      at act (node_modules/react/cjs/react.development.js:2582:11)
+      at node_modules/@testing-library/react/dist/act-compat.js:63:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:159:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:246:10)
+      at Object.<anonymous> (src/pages/DetailedQuestionsPage.test.tsx:13:11)
+
 [0;33mOne of your dependencies, babel-preset-react-app, is importing the
 "@babel/plugin-proposal-private-property-in-object" package without
 declaring it in its dependencies. This is currently working because
@@ -66,30 +108,31 @@ go away.[0m
 ----------------------------|---------|----------|---------|---------|-------------------------
 File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
 ----------------------------|---------|----------|---------|---------|-------------------------
-All files                   |   39.55 |       30 |   27.39 |   39.16 |                         
+All files                   |   40.47 |    31.08 |   30.12 |   39.93 |                         
  src                        |       0 |        0 |       0 |       0 |                         
   App.tsx                   |       0 |      100 |       0 |       0 | 40                      
   Auth.tsx                  |       0 |        0 |       0 |       0 | 9-39                    
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19                    
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                    
- src/pages                  |   58.52 |       50 |   34.54 |   58.47 |                         
+ src/pages                  |    58.1 |    47.91 |   34.54 |   58.04 |                         
   BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                   
   BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                         
   BasicQuestionsPage.tsx    |   80.32 |    83.33 |   55.55 |    80.7 | 17,54-60,68,79,142-152  
-  DetailedQuestion.tsx      |   33.33 |       50 |      50 |   33.33 | 19-22                   
+  DetailedQuestion.tsx      |   33.33 |       40 |      50 |   33.33 | 22-30                   
   DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                         
-  DetailedQuestionsPage.tsx |   65.51 |       50 |   46.15 |   67.85 | 15,29-30,38-44,53,64,89 
+  DetailedQuestionsPage.tsx |   65.51 |       50 |   46.15 |   67.85 | 16,30-31,39-45,54,65,90 
   Home.tsx                  |       0 |        0 |       0 |       0 | 9-82                    
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 6-35                    
   PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35                    
- src/pages/components       |    4.47 |        0 |   11.11 |    4.47 |                         
+ src/pages/components       |   16.66 |        0 |   31.57 |   15.73 |                         
   BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 10-85                   
-  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 9-84                    
+  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 10-108                  
   ProgressBar.tsx           |     100 |      100 |     100 |     100 |                         
+  debugDetailed.tsx         |   85.71 |      100 |   71.42 |   84.61 | 25,39                   
 ----------------------------|---------|----------|---------|---------|-------------------------
 
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       25 passed, 25 total
 Snapshots:   0 total
-Time:        5.665 s
+Time:        5.871 s
 Ran all test suites.
