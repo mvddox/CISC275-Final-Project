@@ -3,8 +3,6 @@ import OpenAI from "openai";
 import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
-//import { ResponseCreateParamsBase, ResponseInput, ResponseInputItem } from 'openai/resources/responses/responses';
-
 
 
 function OpenAiComponent({DetailedResults}:
@@ -15,7 +13,6 @@ function OpenAiComponent({DetailedResults}:
     const [results, setResults] = useState<string[]>([]) // collection of all the results
     const [finalResult, setFinalResult] = useState<string>("") // used for final analysis
     const [finalSentence, setFinalSentence] = useState<string>("") // used for their final sentence
-    //const [responseId, setResponseId] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     async function startAi(){
@@ -64,18 +61,17 @@ function OpenAiComponent({DetailedResults}:
         let finalResult:    Promise<string> = new Promise<string>((resolve, reject) => {
         });
         try{
-            await Promise.all(responses).then(async ()=>{
+            
                 
                 const response = await openai.responses.create({
                 model: "gpt-4o",
-                //previous_response_id: await responseId,
                 instructions: "refer to the person in the second tense",
                 input: [
                     {   role: "developer",
                         content: "The questions are: " + Object.entries(DETAILED_QUESTIONS).map(([key,value]:[string,DetailedQuestionType], index)=> ""+ index +": " + value.instruction)
                     },
                     {   role: "developer",
-                        content: "The user gave answers to those questions which you determined a result based on each respective question; these responses are:" + responses.map((value)=>value)
+                        content: "The user gave answers to those questions which you determined a result based on each respective question; these responses are:" + await responses.map((value)=>value)
                     },
                     {   role: "developer",
                         content: "Based on the results: How would you define the person as a whole?"
@@ -85,7 +81,7 @@ function OpenAiComponent({DetailedResults}:
                 });
                 setFinalResult(response.output_text)
                 finalResult = Promise.resolve(response.output_text)
-            })
+            
         }
         catch (e){
             setAiError("It seems that there was an error.....")
@@ -95,7 +91,6 @@ function OpenAiComponent({DetailedResults}:
         try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
-                //previous_response_id: await responseId,
                 store: true,
                 input: [{role: "developer", content: "Based on the results' "+ await finalResult + " 'in one sentence what would their future career be?"}],
                 temperature: 1.65
