@@ -1,66 +1,92 @@
 import React, { useState } from 'react';
 import OpenAI from "openai";
-import { DetailedQuestionRecord } from '../DetailedQuestionsList';
+import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
+//import { ResponseCreateParamsBase, ResponseInput, ResponseInputItem } from 'openai/resources/responses/responses';
+
+
 
 function OpenAiComponent({DetailedResults}:
     {DetailedResults: DetailedQuestionRecord}){
     const [aiError, setAiError] = useState<string>("") // errors; when it catches an error, display error
     const [loading, setLoading] = useState<boolean>(false) //loading
+    const [progress, setProgress] = useState<number>(0) //loading
     const [results, setResults] = useState<string[]>([]) // collection of all the results
     const [finalResult, setFinalResult] = useState<string>("") // used for final analysis
     const [finalSentence, setFinalSentence] = useState<string>("") // used for their final sentence
+    //const [responseId, setResponseId] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-    
 
-
-    /**
-     * 
-     * @returns a string of promises based on the result of the openai api
-     * Note: when maping a list of promises to an array, you have to wait for all of them with Promise.all
-     */
-    async function accumResults(): Promise<string[]>{
+    async function startAi(){
         setLoading(true)
-        let newResults:string[] = []
-        // maps every question with every user answer to a gpt input
-        let resultPromises: Promise<string>[] = Object.entries(DetailedResults).map(
-            async ([instruction,answer]: [string ,string]): Promise<string> => 
+        let progress: number = 0;
+        let responses: Promise<string>[] = Object.entries(DetailedResults).map(
+            async ([instruction,answer]: [string ,string], index): Promise<string> => 
             {
                 try{
-                const response = await openai.responses.create({
-                    model: "gpt-4o",
-                    input: "Based on the question: '" + instruction +  "' How would you define a person who said " + answer +"?"
-                });
-                newResults = [...newResults, response.output_text]
-                setResults([...newResults])
-            
-                return response.output_text
+                    if (index === 0){
+                        const response = await openai.responses.create({
+                            model: "gpt-4o",
+                            input: [
+                                {role: "system", content: instruction},
+                                {role: "user", content: answer},
+                                {role: "developer", content: "Based on the question, how would you define the user who answered?"}
+                            ]
+                        });
+                        progress += 1
+                        setProgress(progress)
+                        return index + ": " + response.output_text
+                        }
+                    else{
+                        const response = await openai.responses.create({
+                            model: "gpt-4o",
+                            input: [
+                                {role: "system", content: instruction},
+                                {role: "user", content: answer},
+                                {role: "developer", content: "Based on the question, how would you define the user who answered?"}
+                            ]
+                        });
+                        progress += 1
+                        setProgress(progress)
+                        return index + ": " + response.output_text
+                    }
+            }
+                catch (e){
+                    setAiError("It seems that there was an error.....")
+                    console.error(e);
+                    throw(e)
                 }
-            catch (e){
-                setAiError("It seems that there was an error.....")
-                console.error(e);
-                throw(e)
-               }
-               
             }
         )
-        return Promise.all(resultPromises) // holy crap took me an hour to understand this promise stuff
-    }
-
-
-    async function startAI(){
-        setResults([])
-        setFinalResult("") // clean ups display
-        const newResults:string[] = await accumResults() // the entire thing has to wait for the results to be accumulated
+        setResults([...await Promise.all(responses)]) 
         
+        let finalResult:    Promise<string> = new Promise<string>((resolve, reject) => {
+        });
         try{
-            const response = await openai.responses.create({
+            await Promise.all(responses).then(async ()=>{
+                
+                const response = await openai.responses.create({
                 model: "gpt-4o",
-                input: "Based on the results: '" + newResults +  "' How would you define the person as a whole?"
-            });
-            setFinalResult(response.output_text)
-            }
+                //previous_response_id: await responseId,
+                instructions: "refer to the person in the second tense",
+                input: [
+                    {   role: "developer",
+                        content: "The questions are: " + Object.entries(DETAILED_QUESTIONS).map(([key,value]:[string,DetailedQuestionType], index)=> ""+ index +": " + value.instruction)
+                    },
+                    {   role: "developer",
+                        content: "The user gave answers to those questions which you determined a result based on each respective question; these responses are:" + responses.map((value)=>value)
+                    },
+                    {   role: "developer",
+                        content: "Based on the results: How would you define the person as a whole?"
+                    },
+                ],
+                temperature: 1.4 //1.5 and above breaks it to random characters
+                });
+                setFinalResult(response.output_text)
+                finalResult = Promise.resolve(response.output_text)
+            })
+        }
         catch (e){
             setAiError("It seems that there was an error.....")
             console.error(e);
@@ -69,30 +95,31 @@ function OpenAiComponent({DetailedResults}:
         try{
             const response = await openai.responses.create({
                 model: "gpt-4o",
-                input: "Based on the results: '" + newResults +  "'In one sentence what would their future career be?"
+                //previous_response_id: await responseId,
+                store: true,
+                input: [{role: "developer", content: "Based on the results' "+ await finalResult + " 'in one sentence what would their future career be?"}],
+                temperature: 1.65
             });
-            setFinalSentence("Final arbitration:" + response.output_text)
+            setFinalSentence(response.output_text)
             }
         catch (e){
             setAiError("It seems that there was an error.....")
             console.error(e);
-            }
-    
+        }
         setLoading(false)
     }
-        
-                // needs cleaning
     return <div>
-        <div hidden={!loading}>loading</div>
-        {!(!loading && !finalResult) && (!aiError ? (<div ><div>results: {results}</div>
+        <div hidden={!loading}>loading {progress}/{DETAILED_QUESTIONS.length}</div>
+        {(!loading)  && (!aiError ? (<div ><div>results: {results.map((val)=><div>{val}</div>)}</div>
         <div>final results: {finalResult}</div>
         <div>final sentencing: {finalSentence}</div>
         </div>) : <div>{aiError}</div>)}
-        <Button onClick={startAI}>
+        <Button onClick={startAi}>
             generate response
         </Button>
     </div>
 }
+
 /**
 *sample for copy paste
 * user: empathy
