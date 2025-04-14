@@ -3,6 +3,7 @@ import '../App.css';
 import './Home.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router";
+import { useAuth } from '../Auth';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -12,35 +13,11 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
-// for navigating between pages
-function NavigationButton() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <Button onClick={() => navigate("/Basic")}>
-        Basic Question Page
-      </Button>
-    </div>
-  );
-}
-//navigates to the detailed page button
-function NavigationDetailedButton() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <Button onClick={() => navigate("/Detail")}>
-        Detailed Question Page
-      </Button>
-    </div>
-  );
-}
-
 
 function HomePage() {
 
   const [key, setKey] = useState<string>(keyData); //for api key input
-  
-  
+
   //sets the local storage item to the api key the user inputed
   
   function handleSubmit() {
@@ -51,7 +28,7 @@ function HomePage() {
   
   }
   
-  
+  const authContext = useAuth();
   
   //whenever there's a change it'll store the api key in a local state called key but it won't be set in the local storage until the user clicks the submit button
   
@@ -61,13 +38,36 @@ function HomePage() {
   
   }
   
-  
+  const navigate = useNavigate();
+
+  // for navigating between pages
+  function NavigationButton() {
+    return (
+      <div>
+        <Button onClick={() => navigate("/Basic")}>
+          Basic Question Page
+        </Button>
+      </div>
+    );
+  }
+  //navigates to the detailed page button
+  function NavigationDetailedButton() {
+    return (
+      <div>
+        <Button onClick={() => navigate("/Detail")}>
+          Detailed Question Page
+        </Button>
+      </div>
+    );
+  }
   
   return (
   
     <div className="App-header">
       <div className="header-content"> 
       <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
+      {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
+      {!authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>}
       </div>
       <div className="PagesButtons"> 
         <div><NavigationButton /> 
@@ -77,6 +77,10 @@ function HomePage() {
           <div className="ButtonDescription">Takes you to the "Detailed Question Page" that includes open-ended questions. Longer than the "Basic Question Page" but allows you to get more precise responses. </div>
         </div>
       </div>
+      {authContext.isLoggedIn && <div className="LoggedButtons">
+        <div><Button onClick={() => navigate("/PreviousResults")}>Previous Results</Button></div>
+        <div><Button onClick={() => navigate("/MyProfile")}>My Profile</Button></div>
+      </div>} {/* Makes buttons disappear when not logged in */}
     
     <footer>
   
