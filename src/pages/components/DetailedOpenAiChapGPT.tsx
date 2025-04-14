@@ -114,12 +114,5 @@ function OpenAiComponent({DetailedResults}:
         </Button>
     </div>
 }
-
-/**
-*sample for copy paste
-* user: empathy
-*A man with everything on the line would win because a man with nothing to lose already lost their will to fight.
-*I would not pull the switch, but not in spite of myself. Although I would never know the strangers' lives, from one to a hundred, nor understand how they feel or experience their life stories, my life would be more fulfilled should I let them live. 
-*/
 export default OpenAiComponent
 
