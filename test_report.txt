@@ -80,6 +80,7 @@ ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
 your devDependencies to work around this error. This will make this message
 go away.[0m
   
+PASS src/pages/BasicQuestionsPage.test.tsx
 [0;33mOne of your dependencies, babel-preset-react-app, is importing the
 "@babel/plugin-proposal-private-property-in-object" package without
 declaring it in its dependencies. This is currently working because
@@ -92,7 +93,6 @@ ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
 your devDependencies to work around this error. This will make this message
 go away.[0m
   
-PASS src/pages/BasicQuestionsPage.test.tsx
 [0;33mOne of your dependencies, babel-preset-react-app, is importing the
 "@babel/plugin-proposal-private-property-in-object" package without
 declaring it in its dependencies. This is currently working because
@@ -108,7 +108,7 @@ go away.[0m
 ----------------------------|---------|----------|---------|---------|-------------------------
 File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
 ----------------------------|---------|----------|---------|---------|-------------------------
-All files                   |   40.47 |    31.08 |   30.12 |   39.93 |                         
+All files                   |   40.61 |    29.48 |   30.48 |   40.06 |                         
  src                        |       0 |        0 |       0 |       0 |                         
   App.tsx                   |       0 |      100 |       0 |       0 | 40                      
   Auth.tsx                  |       0 |        0 |       0 |       0 | 9-39                    
@@ -124,9 +124,9 @@ All files                   |   40.47 |    31.08 |   30.12 |   39.93 |
   Home.tsx                  |       0 |        0 |       0 |       0 | 9-82                    
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 6-35                    
   PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35                    
- src/pages/components       |   16.66 |        0 |   31.57 |   15.73 |                         
+ src/pages/components       |   16.85 |        0 |   33.33 |    15.9 |                         
   BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 10-85                   
-  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 10-108                  
+  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 11-107                  
   ProgressBar.tsx           |     100 |      100 |     100 |     100 |                         
   debugDetailed.tsx         |   85.71 |      100 |   71.42 |   84.61 | 25,39                   
 ----------------------------|---------|----------|---------|---------|-------------------------
@@ -134,5 +134,5 @@ All files                   |   40.47 |    31.08 |   30.12 |   39.93 |
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       25 passed, 25 total
 Snapshots:   0 total
-Time:        5.871 s
+Time:        5.596 s
 Ran all test suites.
