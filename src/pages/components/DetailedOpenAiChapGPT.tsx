@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
+import './DetailedOpenAiChatGPT.css';
 
 
 function OpenAiComponent({DetailedResults}:
@@ -104,15 +105,28 @@ function OpenAiComponent({DetailedResults}:
         setLoading(false)
     }
     return <div>
-        {loading && <span>Loading: {progress}/{DETAILED_QUESTIONS.length + 1} Questions Resolving </span>}        
-        {(!loading)  && (!aiError ? (<div ><div>results: {results.map((val)=><div>{val}</div>)}</div>
-        <div>final results: {finalResult}</div>
-        <div>final sentencing: {finalSentence}</div>
-        </div>) : <div>{aiError}</div>)}
-        <Button onClick={startAi}>
-            generate response
+        {loading && <span className={loading ? "loading" : ""}>Loading: {progress}/{DETAILED_QUESTIONS.length + 1} Questions Resolving </span>}        
+        <div className="results" hidden={true}>
+        {results.join(", ")}
+        </div>  
+        <div className="final-result" hidden={loading || !finalResult}>
+        {finalResult}
+        </div>
+        <div className="final-sentence" hidden={loading || !finalSentence}>
+        {finalSentence}
+        </div>
+        {aiError && <div className="ai-error">{aiError}</div>}
+        <Button className="ai-button" onClick={startAi}>
+        Generate Response
         </Button>
     </div>
 }
 export default OpenAiComponent
 
+/* 
+<div className="results" hidden={loading || !results.length}>
+        {results.join(", ")}
+        </div> 
+        TO UNHIDE RESULTS
+        But we already have the final reuslt and Final sentence so I though it should be hidden.
+*/
