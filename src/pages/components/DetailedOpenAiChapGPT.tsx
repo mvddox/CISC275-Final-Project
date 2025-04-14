@@ -104,7 +104,7 @@ function OpenAiComponent({DetailedResults}:
         setLoading(false)
     }
     return <div>
-        <div hidden={!loading}>loading {progress}/{DETAILED_QUESTIONS.length}</div>
+        {loading && <span>Loading: {progress}/{DETAILED_QUESTIONS.length + 1} Questions Resolving </span>}        
         {(!loading)  && (!aiError ? (<div ><div>results: {results.map((val)=><div>{val}</div>)}</div>
         <div>final results: {finalResult}</div>
         <div>final sentencing: {finalSentence}</div>
