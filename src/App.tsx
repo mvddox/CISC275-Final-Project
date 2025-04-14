@@ -3,11 +3,14 @@ import './App.css';
 import './pages/BasicQuestionsPage'
 import './pages/DetailedQuestionsPage'
 import './pages/Home'
+import './pages/PreviousResultsPage'
 import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestionsPage';
 import DetailedQuestionPage from './pages/DetailedQuestionsPage'
 import AuthProvider from './Auth';
+import PreviousResultsPage from './pages/PreviousResultsPage';
+import MyProfilePage from './pages/MyProfilePage';
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
@@ -56,6 +59,14 @@ function App() {
                         <Route
                             path="/Detail"
                             element={<DetailedQuestionPage />}
+                        />
+                        <Route
+                            path="/PreviousResults"
+                            element={<PreviousResultsPage />}
+                        />
+                        <Route
+                            path="/MyProfile"
+                            element={<MyProfilePage />}
                         />
                     </Routes>
                 </AuthProvider>

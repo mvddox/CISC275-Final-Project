@@ -38,9 +38,10 @@ function HomePage() {
   
   }
   
+  const navigate = useNavigate();
+
   // for navigating between pages
   function NavigationButton() {
-    const navigate = useNavigate();
     return (
       <div>
         <Button onClick={() => navigate("/Basic")}>
@@ -51,7 +52,6 @@ function HomePage() {
   }
   //navigates to the detailed page button
   function NavigationDetailedButton() {
-    const navigate = useNavigate();
     return (
       <div>
         <Button onClick={() => navigate("/Detail")}>
@@ -78,8 +78,8 @@ function HomePage() {
         </div>
       </div>
       {authContext.isLoggedIn && <div className="LoggedButtons">
-        <div><Button>Previous Results</Button></div>
-        <div><Button>My Profile</Button></div>
+        <div><Button onClick={() => navigate("/PreviousResults")}>Previous Results</Button></div>
+        <div><Button onClick={() => navigate("/MyProfile")}>My Profile</Button></div>
       </div>} {/* Makes buttons disappear when not logged in */}
     
     <footer>

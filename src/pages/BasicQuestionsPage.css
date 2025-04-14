@@ -34,12 +34,3 @@ font-size: calc(30px + 2vmin);
 .App-link {
 color: #61dafb;
 }
- 
-
-
-footer {
-text-align: center;
-padding: 12px;
-background-color: paleturquoise;
-color: black;
-}
