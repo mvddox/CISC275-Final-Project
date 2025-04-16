@@ -17,7 +17,7 @@ function BasicQuestion({question, allAnswers, setAnswers}:
                 name="answers"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>)=>
                     {setChosenAnswer(event.target.value)
-                     const newAllAnswers:BasicAnswerRecord = {...allAnswers, [question.id]: event.target.value}
+                     const newAllAnswers:BasicAnswerRecord = {...allAnswers, [question.instruction]: event.target.value}
                      setAnswers(newAllAnswers)
                     }}
                 id={"Basic_" + question.id + "_" + index}

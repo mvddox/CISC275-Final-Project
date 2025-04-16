@@ -7,9 +7,10 @@ import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
 import { BasicQuestionType, BasicAnswerRecord, BASIC_QUESTIONS } from './BasicQuestionsList'
 import QuestionProgressBar from './components/ProgressBar';
+import OpenAiComponentB from './components/BasicOpenAiChapGPT';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
-let keyData = "";
+export let keyData = "";
 const saveKeyData = "MYKEY";
 const prevKey = localStorage.getItem(saveKeyData); //so it'll look like: MYKEY: <api_key_value here> in the local storage when you inspect
 if (prevKey !== null) {
@@ -153,7 +154,9 @@ function NavigationButton(){
           {" " +givenAnswers}</span>}
           </div>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
-      
+          {(keyData) && <OpenAiComponentB BasicResults={answers}></OpenAiComponentB>}
+
+
       <footer>
       <Form>
         <Form.Label>API Key:</Form.Label>

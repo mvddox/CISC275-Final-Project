@@ -57,6 +57,20 @@ footer {
 
 }
 
+.LoggedButtons {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+  margin: 0 auto;
+  background-color: rgb(187, 178, 237);
+  height: 1vh;
+  gap: 10vh;
+  flex-grow: 1; /* Ensures content expands inside the header */
+
+}
+
 .ButtonDescription {
   width: 75vh;
   color: rgba(37, 37, 37, 0.829);
@@ -104,6 +118,15 @@ footer {
   text-align: center;
   height: 10vh;
 }
+
+.LoggedButtons button {
+  background-color: rgb(108, 92, 195);
+  width: 30vh;
+  border: 1px solid black; 
+  text-align: center;
+  height: 10vh;
+}
+
 .AuthorText{
   color: rgba(0, 0, 0, 0.829);
   background-color: rgb(187, 178, 237);
