@@ -14,6 +14,7 @@ if (prevKey !== null) {
 }
 
 
+
 function HomePage() {
 
   const [key, setKey] = useState<string>(keyData); //for api key input
@@ -60,12 +61,21 @@ function HomePage() {
       </div>
     );
   }
-  
+
+  const [showVideo, setShowVideo] = useState<boolean>(false)
+
   return (
   
     <div className="App-header">
       <div className="header-content"> 
-      <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
+        
+      <h1>Discover Your Perfect Career Path: Take the Quiz! 
+      <Button className={"VideoButton"}onClick={() => setShowVideo(!showVideo)}>
+          Stimulate Me
+        </Button>
+
+      </h1>
+      
       {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
       {!authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>}
       </div>
@@ -101,7 +111,23 @@ function HomePage() {
   </Form>
   <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
   </div>
+  <video
+  src="/Subway_Surfers.mp4"
+  loop={true}
+  autoPlay ={true}
+  hidden={!showVideo}
+  muted={true}
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "180px",
+    zIndex: 9999,
+  }}
+/>
   
+
+
   </footer>
   
   </div>)
