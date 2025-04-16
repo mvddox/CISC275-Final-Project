@@ -62,7 +62,6 @@ function HomePage() {
     );
   }
 
-  const [showVideo, setShowVideo] = useState<boolean>(false)
 
   return (
   
@@ -70,9 +69,7 @@ function HomePage() {
       <div className="header-content"> 
         
       <h1>Discover Your Perfect Career Path: Take the Quiz! 
-      <Button className={"VideoButton"}onClick={() => setShowVideo(!showVideo)}>
-          Stimulate Me
-        </Button>
+      
 
       </h1>
       
@@ -111,21 +108,7 @@ function HomePage() {
   </Form>
   <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
   </div>
-  <video
-  src="/Subway_Surfers.mp4"
-  loop={true}
-  autoPlay ={true}
-  hidden={!showVideo}
-  muted={true}
-  style={{
-    position: "fixed",
-    bottom: "20px",
-    right: "20px",
-    width: "180px",
-    zIndex: 9999,
-  }}
-/>
-  
+ 
 
 
   </footer>
