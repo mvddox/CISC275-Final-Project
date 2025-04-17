@@ -149,7 +149,7 @@ function NavigationButton(){
         setViewedQuestionsCount(viewedQuestionsCount+1)
       }}>
       Next</Button> 
-      <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
+      <Button className="Button" hidden={true} onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are 
           {" " +givenAnswers}</span>}
           </div>
