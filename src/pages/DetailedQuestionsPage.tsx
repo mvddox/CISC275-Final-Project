@@ -24,6 +24,7 @@ function DetailedQuestionsPage() {
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
+  const [debugMode, setDebugMode] = useState<boolean>(false)
 
   const answeredQuestionsCount = Object.values(answers).reduce(
         (total: number, current: string): number=>{
@@ -97,14 +98,16 @@ function NavigationButton(){
       </div>
       <div className ='Detailed-Body'>
         <QuestionProgressBar progress={progress} />
-        <DebugDetailed setAnswers={setAnswers}></DebugDetailed>
+        <Form.Check
+          id="is-debug-check"
+          label="DEBUG MODE?"
+          checked={debugMode}
+          onChange={(e)=>{setDebugMode(e.target.checked)}}
+        />
+        {debugMode && <DebugDetailed setAnswers={setAnswers}></DebugDetailed>}
 
         {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>} 
       </div>
-
-
-
-
       <footer>
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
