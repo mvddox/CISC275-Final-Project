@@ -21,6 +21,11 @@
     .Detailed-Body{       
         background-color: rgb(187, 178, 237);
     }
+
+    .Detailed{
+        background-color: rgb(187, 178, 237);
+    }
+
     .Header-Buttons-Detailed{
         font-size: calc(1px + 2vmin);
     }

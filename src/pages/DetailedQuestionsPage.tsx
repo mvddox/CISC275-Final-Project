@@ -71,7 +71,7 @@ function NavigationButton(){
 
   
   return (
-    <div className="Detail">
+    <div className="Detailed">
       <header className="Detailed-header">
 
         <div className='Detailed-header-title'>Detailed Questions</div>
