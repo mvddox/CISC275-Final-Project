@@ -111,7 +111,7 @@ function OpenAiComponent({DetailedResults}:
         }
         setLoading(false)
     }
-    return <div>
+    return <div className="ai-container">
         {loading && <span className={loading ? "loading" : ""}>Loading: {progressMessage}</span>}        
         <div className="results" hidden={true}>
         {results.join(", ")}

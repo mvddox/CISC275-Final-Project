@@ -96,11 +96,12 @@ function NavigationButton(){
           {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
-      <QuestionProgressBar progress={progress} />
-      </div>
-          <DebugDetailed setAnswers={setAnswers}></DebugDetailed>
+        <QuestionProgressBar progress={progress} />
+        <DebugDetailed setAnswers={setAnswers}></DebugDetailed>
 
-      {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>}
+        {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>} 
+      </div>
+
 
 
 
