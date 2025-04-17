@@ -92,7 +92,7 @@ function NavigationButton(){
         <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 === 
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
-        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
+        <Button className='Header-Buttons-Detailed-button' hidden={true} onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
           {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
