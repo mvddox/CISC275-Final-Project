@@ -14,6 +14,7 @@ if (prevKey !== null) {
 }
 
 
+
 function HomePage() {
 
   const [key, setKey] = useState<string>(keyData); //for api key input
@@ -60,14 +61,31 @@ function HomePage() {
       </div>
     );
   }
-  
+
+  function NavigateToLoginButton() {
+    return (
+      <div>
+        <Button onClick={() => navigate("/Login")}>
+          Login/Create Account
+        </Button>
+      </div>
+    );
+  }
+
   return (
   
     <div className="App-header">
       <div className="header-content"> 
-      <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
-      {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
-      {!authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>}
+        
+      <h1>Discover Your Perfect Career Path: Take the Quiz! 
+      {authContext.isLoggedIn && <div>Welcome {authContext.username}!</div>}
+
+      </h1>
+      
+      <div className='LoginCreateButton'>
+        {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
+        {!authContext.isLoggedIn && <NavigateToLoginButton/>}
+      </div>
       </div>
       <div className="PagesButtons"> 
         <div><NavigationButton /> 
@@ -80,7 +98,7 @@ function HomePage() {
       {authContext.isLoggedIn && <div className="LoggedButtons">
         <div><Button onClick={() => navigate("/PreviousResults")}>Previous Results</Button></div>
         <div><Button onClick={() => navigate("/MyProfile")}>My Profile</Button></div>
-      </div>} {/* Makes buttons disappear when not logged in */}
+      </div>}
     
     <footer>
   
@@ -101,7 +119,9 @@ function HomePage() {
   </Form>
   <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
   </div>
-  
+ 
+
+
   </footer>
   
   </div>)

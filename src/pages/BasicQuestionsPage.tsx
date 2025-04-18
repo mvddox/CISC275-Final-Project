@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // note change to respective comps
 // import logo from './logo.svg';
 import './BasicQuestionsPage.css';
@@ -22,7 +22,7 @@ const splitQuestions = (questions: BasicQuestionType[], max: number): BasicQuest
   const fullQuestions: BasicQuestionType[] = [...questions]
   let currentSubQuestions: BasicQuestionType[] = []
   let splitQuestions: BasicQuestionType[][] = []
-  splitQuestions = fullQuestions.reduce((total:BasicQuestionType[][], value:BasicQuestionType, 
+  splitQuestions = fullQuestions.reduce((total:BasicQuestionType[][], value:BasicQuestionType,
       index: number):BasicQuestionType[][]=>{
         if((index) % (fullQuestions.length/(fullQuestions.length/max)) < 1){
           if(index){total = [...total, [...currentSubQuestions]]}
@@ -39,7 +39,7 @@ const splitQuestions = (questions: BasicQuestionType[], max: number): BasicQuest
 
 function BasicQuestionsPage() {
   const [answers, setAnswers] = useState<BasicAnswerRecord>({}) //for the answers of all questions collected
-  const givenAnswers: string = 
+  const givenAnswers: string =
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
   const viewableQuestions: BasicQuestionType[][] = splitQuestions(BASIC_QUESTIONS, 8)
   const [viewedQuestionsCount, setViewedQuestionsCount] = useState<number>(0)
@@ -48,6 +48,15 @@ function BasicQuestionsPage() {
   const [key, setKey] = useState<string>(keyData); //for api key input
   const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
   const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
+  const [canGenerate, setCanGenerate] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (progress === 100) {
+      setCanGenerate(true);
+    } else {
+      setCanGenerate(false);
+    }
+  }, [progress]);
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -85,12 +94,12 @@ function NavigationButton(){
  *@param {BasicQuestionType[]} questions : the BasicQuestionType array to be split up
  *@param {number} n: the height of each column
  *@returns an array of array of questions, that is the collection of split arrays
- */ 
+ */
   const questionCol = (questions: BasicQuestionType[], n: number) => {
     const col: BasicQuestionType[] = [...questions]
     let currCol: BasicQuestionType[] = []
     let cols: BasicQuestionType[][] = []
-    cols = col.reduce((total:BasicQuestionType[][], value:BasicQuestionType, 
+    cols = col.reduce((total:BasicQuestionType[][], value:BasicQuestionType,
         index: number):BasicQuestionType[][]=>{
           if((index) % (col.length/n) < 1){
             if(index){total = [...total, [...currCol]]}
@@ -104,8 +113,6 @@ function NavigationButton(){
       }, [])
     return cols;
   };
-
-  
 
 
   return (
@@ -124,7 +131,7 @@ function NavigationButton(){
       {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
         <Row key={i} className='Basic-Question-Row'>
           {row.map((col, j) => (
-            /** All the questions ARE rendered so that they remain 
+            /** All the questions ARE rendered so that they remain
              * persistant between movement between visibility */
               <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)} className="Basic-Question">
                 <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
@@ -134,7 +141,7 @@ function NavigationButton(){
         </Row>
       ))}
       </Container>
-      
+
       <div className='button-row'><Button className="Button" disabled={viewedQuestionsCount === 0} onClick={()=>
         {
           // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
@@ -142,19 +149,20 @@ function NavigationButton(){
           setViewedQuestions([...viewableQuestions[viewedQuestionsCount-1]])
           setViewedQuestionsCount(viewedQuestionsCount-1)
         }}>
-      Previous</Button> 
+      Previous</Button>
       <Button className="Button" disabled={viewedQuestionsCount === viewableQuestions.length-1} onClick={()=>
       {
         setViewedQuestions([...viewableQuestions[viewedQuestionsCount+1]])
         setViewedQuestionsCount(viewedQuestionsCount+1)
       }}>
-      Next</Button> 
+      Next</Button>
       <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
-        Show results</Button>{clickedResults && <span>Your results are 
+        Show results</Button>{clickedResults && <span>Your results are
+      
           {" " +givenAnswers}</span>}
           </div>
-          <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div> 
-          {(keyData) && <OpenAiComponentB BasicResults={answers}></OpenAiComponentB>}
+          <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div>
+          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
 
 
       <footer>
@@ -165,8 +173,8 @@ function NavigationButton(){
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
-           
-          
+
+
       </div>
     </div>
   );

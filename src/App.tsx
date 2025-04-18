@@ -1,9 +1,10 @@
-//import React, { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import './pages/BasicQuestionsPage'
 import './pages/DetailedQuestionsPage'
 import './pages/Home'
 import './pages/PreviousResultsPage'
+import { Button } from 'react-bootstrap';
 import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestionsPage';
@@ -11,6 +12,7 @@ import DetailedQuestionPage from './pages/DetailedQuestionsPage'
 import AuthProvider from './Auth';
 import PreviousResultsPage from './pages/PreviousResultsPage';
 import MyProfilePage from './pages/MyProfilePage';
+import LoginPage from './pages/LoginPage';
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
@@ -36,11 +38,30 @@ function App() {
   // function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
   //   setKey(event.target.value);
   // }
+  const [showVideo, setShowVideo] = useState<boolean>(false)
 
   return (
     <>
             <Router>
                 <AuthProvider>
+                <video
+  src="/Subway_Surfers.mp4"
+  loop={true}
+  autoPlay ={true}
+  hidden={!showVideo}
+  muted={true}
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "180px",
+    zIndex: 9999,
+  }}
+/>
+<Button className={"VideoButton"}onClick={() => setShowVideo(!showVideo)}>
+          Subway Surfers
+        </Button>
+  
                     <Routes>
                         <Route
                             path="/Home"
@@ -67,6 +88,10 @@ function App() {
                         <Route
                             path="/MyProfile"
                             element={<MyProfilePage />}
+                        />
+                        <Route
+                            path="/Login"
+                            element={<LoginPage />}
                         />
                     </Routes>
                 </AuthProvider>
