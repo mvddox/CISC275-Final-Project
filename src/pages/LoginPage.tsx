@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css"
-import sqlite3 from 'sqlite3'
-import { open } from 'sqlite'
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -16,13 +14,6 @@ function LoginPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-
-    (async () => {
-        const database = await open({
-          filename: './userDatabase.db',
-          driver: sqlite3.Database
-        })
-    })()
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
