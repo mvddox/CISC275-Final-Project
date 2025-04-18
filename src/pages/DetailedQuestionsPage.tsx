@@ -23,7 +23,11 @@ function DetailedQuestionsPage() {
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
+
+  const [debugMode, setDebugMode] = useState<boolean>(false) // for debug mode
+
   const [canGenerate, setCanGenerate] = useState<boolean>(false);
+
 
   const answeredQuestionsCount = Object.values(answers).reduce(
         (total: number, current: string): number=>{
@@ -78,7 +82,7 @@ function NavigationButton(){
 
 
   return (
-    <div className="Detail">
+    <div className="Detailed">
       <header className="Detailed-header">
 
         <div className='Detailed-header-title'>Detailed Questions</div>
@@ -104,11 +108,18 @@ function NavigationButton(){
           {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
-      <QuestionProgressBar progress={progress} />
+        <QuestionProgressBar progress={progress} />
+        <Form.Check
+          id="is-debug-check"
+          label="DEBUG MODE?"
+          checked={debugMode}
+          onChange={(e)=>{setDebugMode(e.target.checked)}}
+        />
+        {debugMode && <DebugDetailed setAnswers={setAnswers}></DebugDetailed>}
+
+        {(keyData) && <OpenAiComponent DetailedResults={answers} disabled={!canGenerate}></OpenAiComponent>}
       </div>
-      {(keyData) && <OpenAiComponent DetailedResults={answers} disabled={!canGenerate}></OpenAiComponent>}
-
-
+      
 
       <footer>
       <Form>
