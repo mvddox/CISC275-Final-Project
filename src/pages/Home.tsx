@@ -78,14 +78,13 @@ function HomePage() {
       <div className="header-content"> 
         
       <h1>Discover Your Perfect Career Path: Take the Quiz! 
-      
+      {authContext.isLoggedIn && <div>Welcome {authContext.username}!</div>}
 
       </h1>
       
-      {/* authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button> */}
-      {/* !authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>*/}
       <div className='LoginCreateButton'>
-        <NavigateToLoginButton/>
+        {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
+        {!authContext.isLoggedIn && <NavigateToLoginButton/>}
       </div>
       </div>
       <div className="PagesButtons"> 
@@ -99,7 +98,7 @@ function HomePage() {
       {authContext.isLoggedIn && <div className="LoggedButtons">
         <div><Button onClick={() => navigate("/PreviousResults")}>Previous Results</Button></div>
         <div><Button onClick={() => navigate("/MyProfile")}>My Profile</Button></div>
-      </div>} {/* Makes buttons disappear when not logged in */}
+      </div>}
     
     <footer>
   

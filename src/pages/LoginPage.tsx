@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css"
+import { useAuth } from "../Auth";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -14,11 +15,25 @@ function LoginPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [createAccFail, setCreateAccFail] = useState<boolean>(false);
+    const [loginFail, setLoginFail] = useState<boolean>(false);
+    
+    const authContext = useAuth();
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
         window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
       }
+
+    function storeNewUser(username: string, password: string): boolean {
+        const existingPassword = localStorage.getItem(username);
+        if (existingPassword === null){
+            localStorage.setItem(username, password)
+            authContext.login({username, password});
+            return true;
+        }
+        return false;
+    }
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
@@ -34,24 +49,32 @@ function LoginPage(){
     </div>)
   }
 
+  function updateLoginFail(bool: boolean){
+    setLoginFail(bool);
+    setCreateAccFail(false);
+  }
+
   function LoginButton(){
     const navigate = useNavigate();
     return (<div >
-      <Button  className="LoginButton" onClick={() => navigate("/Home")}>
+      <Button  className="LoginButton" onClick={() => authContext.login({username, password}) ? navigate("/Home") : updateLoginFail(true)}>
           Login
       </Button>
     </div>)
-    //TODO: set login state if correct username and password
+  }
+
+  function updateCreateAccStat(bool: boolean){
+    setCreateAccFail(bool);
+    setLoginFail(false);
   }
 
   function CreateAccountButton(){
     const navigate = useNavigate();
     return (<div >
-      <Button  className="Button" onClick={() => navigate("/Home")}>
+      <Button  className="Button" onClick={() => storeNewUser(username, password) ? navigate("/Home") : updateCreateAccStat(true)}>
           Create Account
       </Button>
     </div>)
-    //TODO: set login state if account doesn't already exist (with username)
   }
 
   function updateUsername(event: React.ChangeEvent<HTMLInputElement>) {
@@ -88,6 +111,9 @@ function LoginPage(){
                             onChange={updatePassword} />
                     </Form.Group>
                 </Form>
+                <div className="accFailText">
+                    {(createAccFail && "Account Already Exists") || (loginFail && "Account Not Found")}
+                </div>
                 <div className="accountButtons">
                     <LoginButton/>
                     <CreateAccountButton/>

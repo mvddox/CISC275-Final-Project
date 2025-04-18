@@ -44,7 +44,7 @@
 
     .accountButtons {
         display: flex;
-        padding-top: 2vh;
+        padding-top: 1vh;
     }
 
     .accountInfo {
@@ -60,4 +60,8 @@
         justify-content: flex-start;
         padding-bottom: 20px; 
         font-size: calc(10px + 2vmin)
+    }
+
+    .accFailText {
+      color: red
     }
