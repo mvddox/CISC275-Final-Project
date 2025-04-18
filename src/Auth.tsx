@@ -1,5 +1,9 @@
 import { createContext, useContext, useState } from "react";
 
+/*
+    Most of this code is from: https://medium.com/@kimtai.developer/react-typescript-authentication-guide-using-context-api-5c82f2530eb1
+*/
+
 interface AuthProps {
     isLoggedIn: boolean,
     login (): void, //will add inputs later for username and password

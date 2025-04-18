@@ -1,0 +1,63 @@
+
+.Login {
+  
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligns items to the top */
+    font-size: calc(10px + 2vmin);
+    color: white;
+    flex-grow: 1; /* Allows it to expand and fill space */
+    width: 100%;
+    background-color: rgb(187, 178, 237);
+  }
+  
+  .header-content { 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(52, 33, 160);
+    width: 100%; 
+    padding-bottom: 20px; 
+  }
+  
+  .header-content h1 {
+    font-size: 2em;
+  }
+
+  .Button{
+    background-color: rgb(108, 92, 195);
+    border: 1px solid black; 
+    text-align: center;
+}
+
+    .LoginButton {
+        background-color: rgb(108, 92, 195);
+        border: 1px solid black; 
+        text-align: center;
+        width: 100px;
+        display: inline-block;
+    }
+
+    .accountButtons {
+        display: flex;
+        padding-top: 2vh;
+    }
+
+    .accountInfo {
+        width: 75vh;
+        color: black;
+        background-color: rgb(187, 178, 237);
+        margin-top: 5px;
+        font-size: 18px;
+        text-wrap: balance;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 20px; 
+        font-size: calc(10px + 2vmin)
+    }

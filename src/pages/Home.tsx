@@ -62,6 +62,15 @@ function HomePage() {
     );
   }
 
+  function NavigateToLoginButton() {
+    return (
+      <div>
+        <Button onClick={() => navigate("/Login")}>
+          Login/Create Account
+        </Button>
+      </div>
+    );
+  }
 
   return (
   
@@ -73,8 +82,11 @@ function HomePage() {
 
       </h1>
       
-      {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
-      {!authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>}
+      {/* authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button> */}
+      {/* !authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>*/}
+      <div className='LoginCreateButton'>
+        <NavigateToLoginButton/>
+      </div>
       </div>
       <div className="PagesButtons"> 
         <div><NavigationButton /> 
