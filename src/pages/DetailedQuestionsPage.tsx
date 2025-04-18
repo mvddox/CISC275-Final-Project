@@ -6,7 +6,6 @@ import DetailedQuestion from './DetailedQuestion';
 import "./DetailedQuestionsPage.css"
 import QuestionProgressBar from './components/ProgressBar';
 import OpenAiComponent from './components/DetailedOpenAiChapGPT';
-import DebugDetailed from './components/debugDetailed';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 export let keyData = "";
@@ -101,13 +100,13 @@ function NavigationButton(){
         <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 ===
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
-        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
+        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are
           {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
       <QuestionProgressBar progress={progress} />
       </div>
-      {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>}
+      {(keyData) && <OpenAiComponent DetailedResults={answers} disabled={!canGenerate}></OpenAiComponent>}
 
 
 
