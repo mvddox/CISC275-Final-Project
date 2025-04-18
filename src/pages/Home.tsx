@@ -14,6 +14,7 @@ if (prevKey !== null) {
 }
 
 
+
 function HomePage() {
 
   const [key, setKey] = useState<string>(keyData); //for api key input
@@ -60,12 +61,18 @@ function HomePage() {
       </div>
     );
   }
-  
+
+
   return (
   
     <div className="App-header">
       <div className="header-content"> 
-      <h1>Discover Your Perfect Career Path: Take the Quiz!</h1>
+        
+      <h1>Discover Your Perfect Career Path: Take the Quiz! 
+      
+
+      </h1>
+      
       {authContext.isLoggedIn && <Button onClick={authContext.logout}>Logout</Button>}
       {!authContext.isLoggedIn && <Button onClick={authContext.login}>Login</Button>}
       </div>
@@ -101,7 +108,9 @@ function HomePage() {
   </Form>
   <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
   </div>
-  
+ 
+
+
   </footer>
   
   </div>)

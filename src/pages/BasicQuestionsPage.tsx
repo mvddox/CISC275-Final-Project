@@ -158,6 +158,7 @@ function NavigationButton(){
       Next</Button>
       <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
         Show results</Button>{clickedResults && <span>Your results are
+      
           {" " +givenAnswers}</span>}
           </div>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div>
