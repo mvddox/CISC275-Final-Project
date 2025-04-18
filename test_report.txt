@@ -80,7 +80,6 @@ ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
 your devDependencies to work around this error. This will make this message
 go away.[0m
   
-PASS src/pages/BasicQuestionsPage.test.tsx
 [0;33mOne of your dependencies, babel-preset-react-app, is importing the
 "@babel/plugin-proposal-private-property-in-object" package without
 declaring it in its dependencies. This is currently working because
@@ -93,6 +92,7 @@ ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
 your devDependencies to work around this error. This will make this message
 go away.[0m
   
+PASS src/pages/BasicQuestionsPage.test.tsx
 [0;33mOne of your dependencies, babel-preset-react-app, is importing the
 "@babel/plugin-proposal-private-property-in-object" package without
 declaring it in its dependencies. This is currently working because
@@ -108,20 +108,21 @@ go away.[0m
 ----------------------------|---------|----------|---------|---------|-------------------------
 File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
 ----------------------------|---------|----------|---------|---------|-------------------------
-All files                   |   40.33 |    29.48 |   30.12 |   39.79 |                         
+All files                   |   34.89 |    23.95 |   25.25 |   34.32 |                         
  src                        |       0 |        0 |       0 |       0 |                         
-  App.tsx                   |       0 |      100 |       0 |       0 | 40-60                   
-  Auth.tsx                  |       0 |        0 |       0 |       0 | 9-39                    
+  App.tsx                   |       0 |      100 |       0 |       0 | 41-61                   
+  Auth.tsx                  |       0 |        0 |       0 |       0 | 19-58                   
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19                    
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                    
- src/pages                  |    58.1 |    47.91 |   34.54 |   58.04 |                         
+ src/pages                  |   47.92 |    37.09 |   26.76 |   47.64 |                         
   BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                   
   BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                         
   BasicQuestionsPage.tsx    |   80.32 |    83.33 |   55.55 |    80.7 | 17,54-60,68,79,142-152  
   DetailedQuestion.tsx      |   33.33 |       40 |      50 |   33.33 | 22-30                   
   DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                         
   DetailedQuestionsPage.tsx |   65.51 |       50 |   46.15 |   67.85 | 16,30-31,39-45,54,65,90 
-  Home.tsx                  |       0 |        0 |       0 |       0 | 9-89                    
+  Home.tsx                  |       0 |        0 |       0 |       0 | 9-100                   
+  LoginPage.tsx             |       0 |        0 |       0 |       0 | 7-89                    
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 6-35                    
   PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35                    
  src/pages/components       |   16.85 |        0 |   33.33 |    15.9 |                         
@@ -134,5 +135,5 @@ All files                   |   40.33 |    29.48 |   30.12 |   39.79 |
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       25 passed, 25 total
 Snapshots:   0 total
-Time:        5.642 s
+Time:        5.914 s
 Ran all test suites.
