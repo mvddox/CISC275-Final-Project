@@ -12,6 +12,7 @@ import DetailedQuestionPage from './pages/DetailedQuestionsPage'
 import AuthProvider from './Auth';
 import PreviousResultsPage from './pages/PreviousResultsPage';
 import MyProfilePage from './pages/MyProfilePage';
+import LoginPage from './pages/LoginPage';
 
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
@@ -87,6 +88,10 @@ function App() {
                         <Route
                             path="/MyProfile"
                             element={<MyProfilePage />}
+                        />
+                        <Route
+                            path="/Login"
+                            element={<LoginPage />}
                         />
                     </Routes>
                 </AuthProvider>
