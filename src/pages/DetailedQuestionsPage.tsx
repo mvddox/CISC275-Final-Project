@@ -6,7 +6,7 @@ import DetailedQuestion from './DetailedQuestion';
 import "./DetailedQuestionsPage.css"
 import QuestionProgressBar from './components/ProgressBar';
 import OpenAiComponent from './components/DetailedOpenAiChapGPT';
-
+import DebugDetailed from "./components/debugDetailed";
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 export let keyData = "";
 const saveKeyData = "MYKEY";
