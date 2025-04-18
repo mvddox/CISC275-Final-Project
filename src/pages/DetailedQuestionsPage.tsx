@@ -24,7 +24,7 @@ function DetailedQuestionsPage() {
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
-  const [debugMode, setDebugMode] = useState<boolean>(false)
+  const [debugMode, setDebugMode] = useState<boolean>(false) // for debug mode
 
   const answeredQuestionsCount = Object.values(answers).reduce(
         (total: number, current: string): number=>{
