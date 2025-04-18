@@ -45,7 +45,7 @@ function App() {
             <Router>
                 <AuthProvider>
                 <video
-  src="/Subway_Surfers.mp4"
+  src="src\Subway_Surfers.mp4"
   loop={true}
   autoPlay ={true}
   hidden={!showVideo}
