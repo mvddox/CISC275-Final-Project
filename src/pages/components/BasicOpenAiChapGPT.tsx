@@ -88,7 +88,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
             <Button className="ai-button" onClick={startAI} disabled={disabled}>
                 Generate Response
             </Button>
-            {disabled && <p className="disabled-message">Please answer all basic questions to enable generation.</p>}
+            {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
         </div>
     );
 }
