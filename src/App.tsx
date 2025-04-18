@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import { Dropdown } from 'react-bootstrap';
 import { AIResultsProvider } from './AIResultsContext';
 import BasicResultsPage from './pages/BasicResultsPage';
+import DetailedResultsPage from './pages/DetailedResultsPage';
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
@@ -152,7 +153,7 @@ function App() {
                         />
                         <Route
                             path="/DetailedResultsPage"
-                            element={<LoginPage />} //FIX LATER -----------------------------
+                            element={<DetailedResultsPage />} 
                         />
                     </Routes>
                     </AIResultsProvider>

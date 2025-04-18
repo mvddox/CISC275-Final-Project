@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./BasicResultsPage.css";
+import "./DetailedResultsPage.css";
 import { useAIResults } from '../AIResultsContext';
 
 export let keyData = "";
@@ -23,9 +23,9 @@ function NavigationButton() {
   );
 }
 
-function BasicResultsPage() {
+function DetailedResultsPage() {
   const [key, setKey] = useState<string>(keyData);
-  const { results, finalResult } = useAIResults();
+  const { results, finalResult,finalSentence } = useAIResults();
 
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -44,16 +44,19 @@ function BasicResultsPage() {
       </div>
 
       <div className="results-list">
-        <ol>
+        <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
           {results.map((res, i) => (
             <li key={i}>{res}</li>
-           ))}
-        </ol>
+          ))}
+        </ul>
       </div>
-
-      <div className="final-suggestion">
-        <h3>Overall Suggestion:</h3>
+      <div className="final-results">
+        <h3>Character Analysis:</h3>
         <p>{finalResult}</p>
+      </div>
+      <div className="final-sentence">
+        <h3>Overall Suggestion:</h3>
+        <p>{finalSentence}</p>
       </div>
 
       <footer>
@@ -77,4 +80,4 @@ function BasicResultsPage() {
   );
 }
 
-export default BasicResultsPage;
+export default DetailedResultsPage;

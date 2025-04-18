@@ -3,8 +3,10 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface AIResultsContextType {
   results: string[];
   finalResult: string;
+  finalSentence: string;
   setResults: (results: string[]) => void;
   setFinalResult: (finalResult: string) => void;
+  setFinalSentence: (finalSentence: string) => void;
 }   
 
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
@@ -12,9 +14,11 @@ const AIResultsContext = createContext<AIResultsContextType | undefined>(undefin
 export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [results, setResults] = useState<string[]>([]);
   const [finalResult, setFinalResult] = useState<string>("");
+  const [finalSentence, setFinalSentence] = useState<string>("");
+
 
   return (
-    <AIResultsContext.Provider value={{ results, finalResult, setResults, setFinalResult }}>
+    <AIResultsContext.Provider value={{ results, finalResult, finalSentence, setResults, setFinalResult, setFinalSentence }}>
       {children}
     </AIResultsContext.Provider>
   );
