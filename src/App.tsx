@@ -43,8 +43,10 @@ function App() {
   // }
   const [videoStates, setVideoStates] = useState({
     subway: false,
-    family: false, 
-  });
+    family: false,  
+  }); 
+
+
   
   const toggleVideo = (videoKey: keyof typeof videoStates) => {
     setVideoStates(prev => ({ ...prev, [videoKey]: !prev[videoKey] }));
