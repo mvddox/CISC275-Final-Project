@@ -78,9 +78,9 @@ function OpenAiComponent({DetailedResults}:
                         content: "The user gave answers to those questions which you determined a result based on each corresponding question; these results are:" + userResponses.map((val)=>val)
                     },
                     {   role: "developer",
-                        content: "Based on the results: in a many sentences how would you define the person as a whole?"
-                        + "In one sentence, how would you report their future?"
-                        + "In one phrase, what is their future?"
+                        content: "Based on the results: in a many sentences how would you define the person as a whole? "
+                        + "In one sentence, how would you report their future? "
+                        + "In one 'Touhou song name'-esque phrase, what is their future? "
                         + "what is their future job?"
                     },
                 ],
@@ -130,7 +130,7 @@ function OpenAiComponent({DetailedResults}:
         {results.join(", ")}
         </div>  
         <div className="final-career" hidden={loading || !finalResult}>
-        {finalDeclaredFuture +"—"+ finalCareer}
+        {finalDeclaredFuture +"~~"+ finalCareer}
         </div>
         <div className="final-result" hidden={loading || !finalResult}>
         {finalResult}
