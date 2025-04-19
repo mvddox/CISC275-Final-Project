@@ -1,34 +1,32 @@
+.Profile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the top */
+  font-size: calc(10px + 2vmin);
+  color: white;
+  flex-grow: 1; /* Allows it to expand and fill space */
+  width: 100%;
+}
 
-  .Profile {
-  
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Aligns items to the top */
-    font-size: calc(10px + 2vmin);
-    color: white;
-    flex-grow: 1; /* Allows it to expand and fill space */
-    width: 100%;
-  }
-  
-  .header-content { 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: rgb(52, 33, 160);
-    width: 100%; 
-    padding-bottom: 20px; 
-  }
-  
-  .header-content h1 {
-    font-size: 2em;
-  }
+.header-content { 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(52, 33, 160);
+  width: 100%; 
+  padding-bottom: 20px; 
+}
 
-  .Button{
-    background-color: rgb(108, 92, 195);
-    border: 1px solid black; 
-    text-align: center;
+.header-content h1 {
+  font-size: 2em;
+}
+
+.Button {
+  background-color: rgb(108, 92, 195);
+  border: 1px solid black; 
+  text-align: center;
 }

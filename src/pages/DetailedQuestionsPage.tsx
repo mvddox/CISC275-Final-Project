@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from './DetailedQuestionsList';
@@ -20,20 +20,32 @@ if (prevKey !== null) {
 function DetailedQuestionsPage() {
   const [viewedQuestion, setViewedQuestion] = useState<number>(0) //index of which question to view
   const [answers, setAnswers] = useState<DetailedQuestionRecord>({}) //collects all the user inputed answers into a record based on id
-  const givenAnswers: string = 
+  const givenAnswers: string =
       Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
   const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
+
   const [debugMode, setDebugMode] = useState<boolean>(false) // for debug mode
+
+  const [canGenerate, setCanGenerate] = useState<boolean>(false);
+
 
   const answeredQuestionsCount = Object.values(answers).reduce(
         (total: number, current: string): number=>{
           total += current.length < 10 ? current.length / 10 : 1
-          return total; 
+          return total;
         }, 0
       ); // count amount of complete answers based of the length of the answer. Maxes each amount of progress a question
       // could give by the fraction of the question against all questions
   const progress: number = (answeredQuestionsCount / DETAILED_QUESTIONS.length) * 100; // progress out of11
+
+  useEffect(() => {
+    if (progress === 100) {
+      setCanGenerate(true);
+    } else {
+      setCanGenerate(false);
+    }
+  }, [progress]);
 
   //sets the local storage item to the api key the user inputed
   function handleSubmit() {
@@ -69,7 +81,7 @@ function NavigationButton(){
     </div>)
   }
 
-  
+
   return (
     <div className="Detailed">
       <header className="Detailed-header">
@@ -90,10 +102,10 @@ function NavigationButton(){
       <div className='button-row'>
         <Button className='Header-Buttons-Detailed-button' disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
         Previous</Button>
-        <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 === 
+        <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 ===
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
-        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are 
+        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are
           {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
@@ -106,20 +118,22 @@ function NavigationButton(){
         />
         {debugMode && <DebugDetailed setAnswers={setAnswers}></DebugDetailed>}
 
-        {(keyData) && <OpenAiComponent DetailedResults={answers}></OpenAiComponent>} 
+        {(keyData) && <OpenAiComponent DetailedResults={answers} disabled={!canGenerate}></OpenAiComponent>}
       </div>
+      
+
       <footer>
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
-        <Form.Control 
+        <Form.Control
          id="api-key-input" type="password" placeholder="Insert API Key Here" onChange={changeKey} ></Form.Control>
         <br></br>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
       Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
-      
+
     </div>
   );
 }
 
-export default DetailedQuestionsPage
+export default DetailedQuestionsPage;
