@@ -5,104 +5,92 @@ import { Button } from 'react-bootstrap';
 import { keyData } from '../BasicQuestionsPage';
 import './BasicOpenAiChatGPT.css';
 
-function OpenAiComponentB({BasicResults}:
-    {BasicResults: BasicAnswerRecord}){
-    const [aiError, setAiError] = useState<string>("") // errors; when it catches an error, display error
-    const [loading, setLoading] = useState<boolean>(false) //loading
-    const [results, setResults] = useState<string[]>([]) // collection of all the results
-    const [finalResult, setFinalResult] = useState<string>("") // used for final determination of future
-    const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-    
+interface OpenAiComponentBProps {
+    BasicResults: BasicAnswerRecord;
+    disabled?: boolean; // Add the disabled prop here (optional)
+}
 
+function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
+    const [aiError, setAiError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const [results, setResults] = useState<string[]>([]);
+    const [finalResult, setFinalResult] = useState<string>("");
+    const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
 
-    /**
-     * 
-     * @returns a string of promises based on the result of the openai api
-     * Note: when maping a list of promises to an array, you have to wait for all of them with Promise.all
-     */
-    async function accumResults(): Promise<string[]>{
-        setLoading(true)
-        let newResults:string[] = []
-        // maps every question with every user answer to a gpt input
+    async function accumResults(): Promise<string[]> {
+        setLoading(true);
+        let newResults: string[] = [];
         let resultPromises: Promise<string>[] = Object.entries(BasicResults).map(
-            async ([instruction,answer]: [string ,string]): Promise<string> => 
-            {
-                try{
-                const response = await openai.responses.create({
-                    model: "gpt-4o",
-                    input: "Based on the question: '" + instruction +  "' What job do you think a person would best be suited for based on there answer " + answer +" do it in one sentence? "
-                });
-                newResults = [...newResults, response.output_text]
-                setResults([...newResults])
-            
-                return response.output_text
+            async ([instruction, answer]: [string, string]): Promise<string> => {
+                try {
+                    const response = await openai.chat.completions.create({
+                        model: "gpt-4o",
+                        messages: [{ role: "user", content: `Based on the question: '${instruction}' What job do you think a person would be best suited for based on their answer "${answer}"? Answer in one sentence.` }]
+                    });
+                    const content = response.choices[0]?.message?.content || "";
+                    newResults = [...newResults, content];
+                    setResults([...newResults]);
+                    return content;
+                } catch (e: any) {
+                    setAiError("It seems that there was an error.....");
+                    console.error(e);
+                    throw (e);
                 }
-            catch (e){
-                setAiError("It seems that there was an error.....")
-                console.error(e);
-                throw(e)
-               }
-               
             }
-        )
-        return Promise.all(resultPromises) // holy crap took me an hour to understand this promise stuff
+        );
+        return Promise.all(resultPromises);
     }
 
+    async function startAI() {
+        setResults([]);
+        setFinalResult("");
+        setAiError(""); // Clear any previous errors
+        const newResults: string[] = await accumResults();
 
-    async function startAI(){
-        setResults([])
-        setFinalResult("") // clean ups display
-        const newResults:string[] = await accumResults() // the entire thing has to wait for the results to be accumulated
-        
-        try{
-            const response = await openai.responses.create({
+        try {
+            const response = await openai.chat.completions.create({
                 model: "gpt-4o",
-                input: "Based on the results: '" + newResults +  "' What job do you think a person would best be suited for based on there answer do it in one sentence"
+                messages: [{ role: "user", content: `Based on these individual insights: "${newResults.join('. ')}" What job do you think this person would be best suited for overall? Answer in one sentence.` }]
             });
-            setFinalResult(response.output_text)
-            }
-        catch (e){
-            setAiError("It seems that there was an error.....")
+            setFinalResult(response.choices[0]?.message?.content || "");
+        } catch (e: any) {
+            setAiError("It seems that there was an error generating the final result.");
             console.error(e);
-            }
-        // final sentence for the final arbitration of the person's future
-        try{
-            const response = await openai.responses.create({
+        }
+
+        try {
+            const response = await openai.chat.completions.create({
                 model: "gpt-4o",
-                input: "Based on the results: '" + newResults +  "'In one sentence what would their future career be?"
+                messages: [{ role: "user", content: `Given the following insights: "${newResults.join('. ')}" In one sentence, what would their most likely future career be?` }]
             });
-            setFinalResult(response.output_text)
-            }
-        catch (e){
-            setAiError("It seems that there was an error.....")
+            // Consider updating finalResult or creating a separate state for the future career
+            setFinalResult(response.choices[0]?.message?.content || "");
+        } catch (e: any) {
+            setAiError("It seems that there was an error determining the future career.");
             console.error(e);
-            }
-    
-        setLoading(false)
+        }
+
+        setLoading(false);
     }
-        
-                // needs cleaning
-                return (
-                    <div className="ai-container">
-                      <div className={loading ? "loading" : ""}>
-                        {loading && "Loading..."}
-                      </div>
-                      <div className="results" hidden={loading || !results.length}>
-                        {results.join(", ")}
-                      </div>
-                      <div className="final-result" hidden={loading || !finalResult}>
-                        {finalResult}
-                      </div>
-                      {aiError && <div className="ai-error">{aiError}</div>}
-                      <Button className="ai-button" onClick={startAI}>
-                        Generate Response
-                      </Button>
-                    </div>
-                  );
-                }
-//sample for copy paste
-//A man with everything on the line would win because a man with nothing to lose already lost their will to fight.
-//I would not pull the switch, but not in spite of myself. Although I would never know the strangers' lives, from one to a hundred, nor understand how they feel or experience their life stories, my life would be more fulfilled should I let them live. 
 
+    return (
+        <div className="ai-container">
+            <div className={loading ? "loading" : ""}>
+                {loading && "Loading..."}
+            </div>
+            <div className="results" hidden={loading || !results.length}>
+                {results.join(", ")}
+            </div>
+            <div className="final-result" hidden={loading || !finalResult}>
+                {finalResult}
+            </div>
+            {aiError && <div className="ai-error">{aiError}</div>}
+            <Button className="ai-button" onClick={startAI} disabled={disabled}>
+                Generate Response
+            </Button>
+            {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
+        </div>
+    );
+}
 
-export default OpenAiComponentB
+export default OpenAiComponentB;

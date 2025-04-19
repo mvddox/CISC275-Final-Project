@@ -1,132 +1,152 @@
 import React, { useState } from 'react';
 import OpenAI from "openai";
-import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from '../DetailedQuestionsList';
+import { DetailedQuestionRecord } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
 
-
-function OpenAiComponent({DetailedResults}:
-    {DetailedResults: DetailedQuestionRecord}){
-    const [aiError, setAiError] = useState<string>("") // errors; when it catches an error, display error
-    const [loading, setLoading] = useState<boolean>(false) //loading
-    const [progress, setProgress] = useState<number>(0) //loading
-    const [results, setResults] = useState<string[]>([]) // collection of all the results
-    const [finalResult, setFinalResult] = useState<string>("") // used for final analysis
-    const [finalSentence, setFinalSentence] = useState<string>("") // used for their final sentence
-    const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-
-    async function startAi(){
-        setLoading(true)
-        let progress: number = 0;
-        let responses: Promise<string>[] = Object.entries(DetailedResults).map(
-            async ([instruction,answer]: [string ,string], index): Promise<string> => 
-            {
-                try{
-                    if (index === 0){
-                        const response = await openai.responses.create({
-                            model: "gpt-4o",
-                            input: [
-                                {role: "system", content: instruction},
-                                {role: "user", content: answer},
-                                {role: "developer", content: "Based on the question, how would you define the user who answered?"}
-                            ]
-                        });
-                        progress += 1
-                        setProgress(progress)
-                        return index + ": " + response.output_text
-                        }
-                    else{
-                        const response = await openai.responses.create({
-                            model: "gpt-4o",
-                            input: [
-                                {role: "system", content: instruction},
-                                {role: "user", content: answer},
-                                {role: "developer", content: "Based on the question, how would you define the user who answered?"}
-                            ]
-                        });
-                        progress += 1
-                        setProgress(progress)
-                        return index + ": " + response.output_text
-                    }
-            }
-                catch (e){
-                    setAiError("It seems that there was an error.....")
-                    console.error(e);
-                    throw(e)
-                }
-            }
-        )
-        setResults([...await Promise.all(responses)]) 
-        
-        let finalResult:    Promise<string> = new Promise<string>((resolve, reject) => {
-        });
-        try{
-            
-                
-                const response = await openai.responses.create({
-                model: "gpt-4o",
-                instructions: "refer to the person in the second tense",
-                input: [
-                    {   role: "developer",
-                        content: "The questions are: " + Object.entries(DETAILED_QUESTIONS).map(([key,value]:[string,DetailedQuestionType], index)=> ""+ index +": " + value.instruction)
-                    },
-                    {   role: "developer",
-                        content: "The user gave answers to those questions which you determined a result based on each respective question; these responses are:" + await responses.map((value)=>value)
-                    },
-                    {   role: "developer",
-                        content: "Based on the results: How would you define the person as a whole?"
-                    },
-                ],
-                temperature: 1.4 //1.5 and above breaks it to random characters
-                });
-                setFinalResult(response.output_text)
-                finalResult = Promise.resolve(response.output_text)
-            
-        }
-        catch (e){
-            setAiError("It seems that there was an error.....")
-            console.error(e);
-            }
-        // final sentence for the ultimate arbitration of the person's future
-        try{
-            const response = await openai.responses.create({
-                model: "gpt-4o",
-                store: true,
-                input: [{role: "developer", content: "Based on the results' "+ await finalResult + " 'in one sentence what would their future career be?"}],
-                temperature: 1.65
-            });
-            setFinalSentence(response.output_text)
-            }
-        catch (e){
-            setAiError("It seems that there was an error.....")
-            console.error(e);
-        }
-        setLoading(false)
-    }
-    return <div>
-        {loading && <span className={loading ? "loading" : ""}>Loading: {progress}/{DETAILED_QUESTIONS.length + 1} Questions Resolving </span>}        
-        <div className="results" hidden={true}>
-        {results.join(", ")}
-        </div>  
-        <div className="final-result" hidden={loading || !finalResult}>
-        {finalResult}
-        </div>
-        <div className="final-sentence" hidden={loading || !finalSentence}>
-        {finalSentence}
-        </div>
-        {aiError && <div className="ai-error">{aiError}</div>}
-        <Button className="ai-button" onClick={startAi}>
-        Generate Response
-        </Button>
-    </div>
+interface OpenAiComponentProps {
+  DetailedResults: DetailedQuestionRecord;
+  disabled?: boolean; // disables the button until all questions are answered
 }
-export default OpenAiComponent
 
-/* 
-<div className="results" hidden={loading || !results.length}>
-        {results.join(", ")}
-        </div> 
-        TO UNHIDE RESULTS
-        But we already have the final reuslt and Final sentence so I though it should be hidden.
-*/
+function OpenAiComponent({ DetailedResults, disabled }: OpenAiComponentProps) {
+  const [aiError, setAiError] = useState<string>(""); // captures and displays any API or runtime errors
+  const [loading, setLoading] = useState<boolean>(false); // controls loading spinner/text
+  const [results, setResults] = useState<string[]>([]); // stores AI analysis per question
+  const [finalResult, setFinalResult] = useState<string>(""); // stores the final character analysis
+  const [finalSentence, setFinalSentence] = useState<string>(""); // stores career prediction
+  const [progressMessage, setProgressMessage] = useState<string>(""); // real-time progress updates
+
+  const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true }); // API instance for use in browser
+
+  /**
+   * Gathers AI insights for each individual question-answer pair.
+   * Each entry is mapped to a separate GPT prompt, and results are collected asynchronously.
+   */
+  async function accumResults(): Promise<string[]> {
+    setProgressMessage("");
+    let finishedQuestions = 0;
+
+    const questionEntries = Object.entries(DetailedResults);
+
+    const userResponses = questionEntries.map(async ([instruction, answer], index): Promise<string> => {
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o",
+          messages: [
+            { role: "system", content: instruction },
+            { role: "user", content: answer },
+            {
+              role: "user",
+              content: "Based on the question and answer, how would you define the person in two or fewer sentences?"
+            }
+          ]
+        });
+
+        finishedQuestions++;
+        setProgressMessage(`Understanding individual questions: ${finishedQuestions}/${questionEntries.length}`);
+        return `${index}: ${response.choices[0]?.message?.content ?? ""}`;
+      } catch (e) {
+        console.error(e);
+        setAiError("It seems that there was an error...");
+        throw e;
+      }
+    });
+
+    // Returns an array of resolved strings from all GPT completions
+    return Promise.all(userResponses);
+  }
+
+  /**
+   * Handles the complete workflow:
+   * 1. Analyzes each question individually.
+   * 2. Generates a final personality summary.
+   * 3. Predicts the user’s future career.
+   */
+  async function startAI() {
+    setResults([]);
+    setFinalResult("");
+    setFinalSentence("");
+    setAiError("");
+    setLoading(true);
+
+    try {
+      const userResponses = await accumResults(); // wait for all question-based analyses
+      setResults(userResponses);
+
+      // Now generate an overall character summary
+      setProgressMessage("Analyzing full profile...");
+      const summaryResponse = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "user",
+            content: `The user gave answers to detailed questions, and we derived: ${userResponses.join(" ")}. Based on these, summarize the person's character in one paragraph.`
+          }
+        ],
+        temperature: 1.3
+      });
+
+      const summaryText = summaryResponse.choices[0]?.message?.content ?? "";
+      setFinalResult(summaryText);
+
+      // Based on the summary, predict a future career path
+      setProgressMessage("Predicting future...");
+      const futureResponse = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "user",
+            content: `Based on this profile: "${summaryText}", what is their most likely future career? Respond in one sentence.`
+          }
+        ],
+        temperature: 1.5
+      });
+
+      setFinalSentence(futureResponse.choices[0]?.message?.content ?? "");
+    } catch (e) {
+      console.error(e);
+      setAiError("Something went wrong during generation.");
+    } finally {
+      setLoading(false);
+      setProgressMessage("");
+    }
+  }
+
+  return (
+    <div className="ai-container">
+      {/* Shows progress message if currently loading */}
+      {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
+
+      {/* Shows individual insights if finished loading */}
+      <div className="results" hidden={!results.length || loading}>
+        <strong>Individual Insights:</strong>
+        <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
+      </div>
+
+      {/* Shows character analysis */}
+      <div className="final-result" hidden={!finalResult || loading}>
+        <strong>Final Profile:</strong> {finalResult}
+      </div>
+
+      {/* Shows career prediction */}
+      <div className="final-sentence" hidden={!finalSentence || loading}>
+        <strong>Future Career Prediction:</strong> {finalSentence}
+      </div>
+
+      {/* Displays any errors that occurred */}
+      {aiError && <div className="ai-error">{aiError}</div>}
+
+      {/* Generate button; disabled until ready */}
+      <Button className="ai-button" onClick={startAI} disabled={disabled || loading}>
+        Generate Response
+      </Button>
+
+      {/* Instructional message if the button is disabled */}
+      {disabled && <p className="disabled-message">Please answer all detailed questions to enable a response.</p>}
+    </div>
+  );
+}
+
+export default OpenAiComponent;
