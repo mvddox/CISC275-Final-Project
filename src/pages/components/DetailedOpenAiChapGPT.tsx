@@ -16,6 +16,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("") // final phasse
     const [finalCareer, setFinalCareer] = useState<string>("") // final career
     const [progressMessage, setProgressMessage] = useState<string>("")
+    const [colorVibe, setColorVibe] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     async function startAi(){
@@ -81,10 +82,11 @@ function OpenAiComponent({DetailedResults, disabled}:
                         content: "Based on the results: in a many sentences how would you define the person as a whole? "
                         + "In one sentence, how would you report their future? "
                         + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little notes. "
-                        + "what is their future job?"
+                        + "In one simple phrase, what is their future job?"
+                        + "what is the hexidecimal color based on vibes?"
                     },
                 ],
-                temperature: 1.40, //1.5 and above breaks it to random characters
+                temperature: 1.2, //1.5 and above breaks it to random characters
                 text: {
                     format: {
                       type: "json_schema",
@@ -104,8 +106,11 @@ function OpenAiComponent({DetailedResults, disabled}:
                           future_career: { 
                             type: "string", 
                           },
+                          color_vibe: { 
+                            type: "string", 
+                          },
                         },
-                        required: ["user_definition", "final_sentence", "future_phrase", "future_career"],
+                        required: ["user_definition", "final_sentence", "future_phrase", "future_career", "color_vibe"],
                         additionalProperties: false,
                       },
                     }
@@ -115,6 +120,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalSentence(JSON.parse(response.output_text).final_sentence)
                 setFinalDeclaredFuture(JSON.parse(response.output_text).future_phrase)
                 setFinalCareer(JSON.parse(response.output_text).future_career)
+                setColorVibe(JSON.parse(response.output_text).color_vibe)
                 console.log(response.usage)
             })
         }
@@ -130,9 +136,9 @@ function OpenAiComponent({DetailedResults, disabled}:
       {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
 
       {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
-      <div className="final-career" hidden={loading || !finalResult}>
+      <div className="final-career" style={{"color":colorVibe}}hidden={loading || !finalResult}>
         {finalDeclaredFuture +"~~"+ finalCareer}
-        </div>
+      </div>
 
       {/* Shows individual insights if finished loading */}
       <div className="results" hidden={!results.length || loading}>
