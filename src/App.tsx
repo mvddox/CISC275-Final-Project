@@ -4,7 +4,7 @@ import './pages/BasicQuestionsPage'
 import './pages/DetailedQuestionsPage'
 import './pages/Home'
 import './pages/PreviousResultsPage'
-import { Button } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap';
 import { HashRouter as Router, Route, Routes,  } from "react-router";
 import HomePage from './pages/Home';
 import BasicQuestionPage from './pages/BasicQuestionsPage';
@@ -13,7 +13,10 @@ import AuthProvider from './Auth';
 import PreviousResultsPage from './pages/PreviousResultsPage';
 import MyProfilePage from './pages/MyProfilePage';
 import LoginPage from './pages/LoginPage';
-
+import { Dropdown } from 'react-bootstrap';
+import { AIResultsProvider } from './AIResultsContext';
+import BasicResultsPage from './pages/BasicResultsPage';
+import DetailedResultsPage from './pages/DetailedResultsPage';
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
@@ -38,30 +41,80 @@ function App() {
   // function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
   //   setKey(event.target.value);
   // }
-  const [showVideo, setShowVideo] = useState<boolean>(false)
-
+  const [videoStates, setVideoStates] = useState({
+    subway: false,
+    family: false,
+  });
+  
+  const toggleVideo = (videoKey: keyof typeof videoStates) => {
+    setVideoStates(prev => ({ ...prev, [videoKey]: !prev[videoKey] }));
+  };
+  
   return (
     <>
             <Router>
                 <AuthProvider>
-                <video
-  src="src\Subway_Surfers.mp4"
-  loop={true}
-  autoPlay ={true}
-  hidden={!showVideo}
-  muted={true}
-  style={{
-    position: "fixed",
-    bottom: "20px",
-    right: "20px",
-    width: "180px",
-    zIndex: 9999,
-  }}
-/>
-<Button className={"VideoButton"}onClick={() => setShowVideo(!showVideo)}>
-          Subway Surfers
-        </Button>
-  
+                    <AIResultsProvider>
+                
+                {videoStates.subway && (
+  <video
+    src={"src\Subway_Surfers.mp4"}
+    loop
+    autoPlay
+    muted
+    style={{
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      width: "180px",
+      zIndex: 9999,
+    }}
+  />
+)}
+
+{videoStates.family && (
+  <video 
+    src={"src\Family_Guy.mp4"}
+    loop 
+    autoPlay
+    muted
+    style={{
+      position: "fixed",
+      bottom: "20px",
+      right: videoStates.subway ? "220px" : "20px", // shift left if both shown      
+      width: "180px",
+      zIndex: 9999,
+    }}
+  />
+)}
+
+<Dropdown style={{ position: "fixed", top: "20px", right: "20px", zIndex: 9999 }}>
+  <Dropdown.Toggle variant="primary" id="dropdown-video">
+    Select Videos
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item as="button" onClick={() => toggleVideo("subway")}>
+      <input
+        type="checkbox"
+        checked={videoStates.subway}
+        readOnly
+        style={{ marginRight: "10px" }}
+      />
+      Subway Surfers
+    </Dropdown.Item>
+    <Dropdown.Item as="button" onClick={() => toggleVideo("family")}>
+      <input
+        type="checkbox"
+        checked={videoStates.family}
+        readOnly
+        style={{ marginRight: "10px" }}
+      />
+      Family Guy
+    </Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+                      
                     <Routes>
                         <Route
                             path="/Home"
@@ -93,7 +146,16 @@ function App() {
                             path="/Login"
                             element={<LoginPage />}
                         />
+                        <Route
+                            path="/BasicResultsPage"
+                            element={<BasicResultsPage />}
+                        />
+                        <Route
+                            path="/DetailedResultsPage"
+                            element={<DetailedResultsPage />} 
+                        />
                     </Routes>
+                    </AIResultsProvider>
                 </AuthProvider>
             </Router>
         </>
