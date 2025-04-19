@@ -58,7 +58,7 @@ function App() {
                 
                 {videoStates.subway && (
   <video
-    src={`${process.env.PUBLIC_URL}/Subway_Surfers.mp4`}
+    src={"src\Subway_Surfers.mp4"}
     loop
     autoPlay
     muted
@@ -73,9 +73,9 @@ function App() {
 )}
 
 {videoStates.family && (
-  <video
-    src={`${process.env.PUBLIC_URL}/Family_Guy.mp4`}
-    loop
+  <video 
+    src={"src\Family_Guy.mp4"}
+    loop 
     autoPlay
     muted
     style={{
@@ -114,8 +114,7 @@ function App() {
     </Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
-
-  
+                      
                     <Routes>
                         <Route
                             path="/Home"

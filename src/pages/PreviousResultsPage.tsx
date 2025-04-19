@@ -23,7 +23,7 @@ function PreviousResultsPage(){
   }
 
   // for navigating from the previous results page to the home page
-  function NavigationButton(){
+  function NavigateHomeButton(){
     const navigate = useNavigate();
     return (<div >
       <Button  className="Button" onClick={() => navigate("/Home")}>
@@ -37,7 +37,7 @@ function PreviousResultsPage(){
             <div className="header-content"> 
                 <h1>Previous Results</h1>
                 <div className="Header-Buttons">
-                <NavigationButton/>
+                <NavigateHomeButton/>
                 </div>
             </div>
         <footer>

@@ -42,7 +42,7 @@ function HomePage() {
   const navigate = useNavigate();
 
   // for navigating between pages
-  function NavigationButton() {
+  function NavigateToBasicButton() {
     return (
       <div>
         <Button onClick={() => navigate("/Basic")}>
@@ -88,7 +88,7 @@ function HomePage() {
       </div>
       </div>
       <div className="PagesButtons"> 
-        <div><NavigationButton /> 
+        <div><NavigateToBasicButton /> 
           <div className="ButtonDescription">Takes you to the "Basic Question Page" that includes multiple choice questions. Quicker than the "Detailed Question Page" but gives more general responses.</div>
         </div>
         <div><NavigationDetailedButton />
