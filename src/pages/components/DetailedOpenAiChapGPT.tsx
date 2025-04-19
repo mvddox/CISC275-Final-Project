@@ -81,7 +81,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                     {   role: "developer",
                         content: "Based on the results: in a many sentences how would you define the person as a whole? "
                         + "In one sentence, how would you report their future? "
-                        + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little notes. "
+                        + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters. "
                         + "In one simple phrase, what is their future job?"
                         + "what is the hexidecimal color based on vibes?"
                     },
