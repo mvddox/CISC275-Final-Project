@@ -61,7 +61,7 @@ function App() {
     src={`${process.env.PUBLIC_URL}/Subway_Surfers.mp4`}
     loop
     autoPlay
-    muted
+    muted 
     style={{
       position: "fixed",
       bottom: "20px",
