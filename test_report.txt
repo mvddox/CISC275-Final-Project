@@ -2,96 +2,109 @@
 > starter_helpi@0.1.0 test
 > react-scripts test --coverage
 
+FAIL src/pages/BasicQuestionsPage.test.tsx
+  ● Test suite failed to run
+
+    Cannot find module 'react-router-dom' from 'src/pages/components/BasicOpenAiChapGPT.tsx'
+
+    Require stack:
+      src/pages/components/BasicOpenAiChapGPT.tsx
+      src/pages/BasicQuestionsPage.tsx
+      src/pages/BasicQuestionsPage.test.tsx
+
+       5 | import { keyData } from '../BasicQuestionsPage';
+       6 | import './BasicOpenAiChatGPT.css';
+    >  7 | import { useNavigate } from "react-router-dom";
+         | ^
+       8 | import { useAIResults } from '../../AIResultsContext';
+       9 | interface OpenAiComponentBProps {
+      10 |     BasicResults: BasicAnswerRecord;
+
+      at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
+      at Object.<anonymous> (src/pages/components/BasicOpenAiChapGPT.tsx:7:1)
+      at Object.<anonymous> (src/pages/BasicQuestionsPage.tsx:10:1)
+      at Object.<anonymous> (src/pages/BasicQuestionsPage.test.tsx:5:1)
+
 FAIL src/App.test.tsx
   ● Test suite failed to run
 
-    Cannot find module 'react-router-dom' from 'src/pages/PreviousResultsPage.tsx'
+    Cannot find module 'react-router-dom' from 'src/pages/components/BasicOpenAiChapGPT.tsx'
 
     Require stack:
-      src/pages/PreviousResultsPage.tsx
+      src/pages/components/BasicOpenAiChapGPT.tsx
+      src/pages/BasicQuestionsPage.tsx
       src/App.tsx
       src/App.test.tsx
 
-      1 | import { useState } from "react";
-      2 | import { Button, Form } from "react-bootstrap";
-    > 3 | import { useNavigate } from "react-router-dom";
-        | ^
-      4 | import "./PreviousResultsPage.css"
-      5 |
-      6 | export let keyData = "";
+       5 | import { keyData } from '../BasicQuestionsPage';
+       6 | import './BasicOpenAiChatGPT.css';
+    >  7 | import { useNavigate } from "react-router-dom";
+         | ^
+       8 | import { useAIResults } from '../../AIResultsContext';
+       9 | interface OpenAiComponentBProps {
+      10 |     BasicResults: BasicAnswerRecord;
 
       at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
-      at Object.<anonymous> (src/pages/PreviousResultsPage.tsx:3:1)
-      at Object.<anonymous> (src/App.tsx:6:1)
+      at Object.<anonymous> (src/pages/components/BasicOpenAiChapGPT.tsx:7:1)
+      at Object.<anonymous> (src/pages/BasicQuestionsPage.tsx:10:1)
+      at Object.<anonymous> (src/App.tsx:3:1)
       at Object.<anonymous> (src/App.test.tsx:5:1)
 
-PASS src/pages/DetailedQuestionsPage.test.tsx
-[0;33mOne of your dependencies, babel-preset-react-app, is importing the
-"@babel/plugin-proposal-private-property-in-object" package without
-declaring it in its dependencies. This is currently working because
-"@babel/plugin-proposal-private-property-in-object" is already in your
-node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+FAIL src/pages/DetailedQuestionsPage.test.tsx
+  ● Test suite failed to run
 
-babel-preset-react-app is part of the create-react-app project, [1mwhich
-is not maintianed anymore[0;33m. It is thus unlikely that this bug will
-ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
-your devDependencies to work around this error. This will make this message
-go away.[0m
-  
-[0;33mOne of your dependencies, babel-preset-react-app, is importing the
-"@babel/plugin-proposal-private-property-in-object" package without
-declaring it in its dependencies. This is currently working because
-"@babel/plugin-proposal-private-property-in-object" is already in your
-node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+    Cannot find module 'react-router-dom' from 'src/pages/components/DetailedOpenAiChapGPT.tsx'
 
-babel-preset-react-app is part of the create-react-app project, [1mwhich
-is not maintianed anymore[0;33m. It is thus unlikely that this bug will
-ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
-your devDependencies to work around this error. This will make this message
-go away.[0m
-  
-PASS src/pages/BasicQuestionsPage.test.tsx
-[0;33mOne of your dependencies, babel-preset-react-app, is importing the
-"@babel/plugin-proposal-private-property-in-object" package without
-declaring it in its dependencies. This is currently working because
-"@babel/plugin-proposal-private-property-in-object" is already in your
-node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+    Require stack:
+      src/pages/components/DetailedOpenAiChapGPT.tsx
+      src/pages/DetailedQuestionsPage.tsx
+      src/pages/DetailedQuestionsPage.test.tsx
 
-babel-preset-react-app is part of the create-react-app project, [1mwhich
-is not maintianed anymore[0;33m. It is thus unlikely that this bug will
-ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
-your devDependencies to work around this error. This will make this message
-go away.[0m
-  
-----------------------------|---------|----------|---------|---------|---------------------------------
-File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s               
-----------------------------|---------|----------|---------|---------|---------------------------------
-All files                   |   34.61 |    21.66 |   24.03 |   34.07 |                                 
- src                        |       0 |        0 |       0 |       0 |                                 
-  App.tsx                   |       0 |      100 |       0 |       0 | 41-61                           
-  Auth.tsx                  |       0 |        0 |       0 |       0 | 19-58                           
-  index.tsx                 |       0 |      100 |     100 |       0 | 7-19                            
-  reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10                            
- src/pages                  |   47.88 |    38.23 |   27.27 |   47.61 |                                 
-  BasicQuestion.tsx         |      50 |      100 |   66.66 |      50 | 19-21                           
-  BasicQuestionsList.tsx    |     100 |      100 |     100 |     100 |                                 
-  BasicQuestionsPage.tsx    |    80.3 |       80 |   57.89 |   80.64 | 17,55,63-69,77,88,149-159       
-  DetailedQuestion.tsx      |   33.33 |       40 |      50 |   33.33 | 22-30                           
-  DetailedQuestionsList.tsx |     100 |      100 |     100 |     100 |                                 
-  DetailedQuestionsPage.tsx |   66.66 |       50 |   46.66 |   68.57 | 15,34-35,43,51-57,66,77,102,116 
-  Home.tsx                  |       0 |        0 |       0 |       0 | 9-100                           
-  LoginPage.tsx             |       0 |        0 |       0 |       0 | 7-89                            
-  MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 7-55                            
-  PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35                            
- src/pages/components       |   13.97 |        0 |   23.52 |   13.04 |                                 
-  BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 14-76                           
-  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 14-125                          
-  ProgressBar.tsx           |     100 |      100 |     100 |     100 |                                 
-  debugDetailed.tsx         |   66.66 |      100 |   42.85 |   64.28 | 27-43                           
-----------------------------|---------|----------|---------|---------|---------------------------------
+       6 | import './DetailedOpenAiChatGPT.css';
+       7 | import { useAIResults } from '../../AIResultsContext';
+    >  8 | import { useNavigate } from "react-router-dom";
+         | ^
+       9 |
+      10 | interface OpenAiComponentProps {
+      11 |   DetailedResults: DetailedQuestionRecord;
 
-Test Suites: 1 failed, 2 passed, 3 total
-Tests:       25 passed, 25 total
+      at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
+      at Object.<anonymous> (src/pages/components/DetailedOpenAiChapGPT.tsx:8:1)
+      at Object.<anonymous> (src/pages/DetailedQuestionsPage.tsx:8:1)
+      at Object.<anonymous> (src/pages/DetailedQuestionsPage.test.tsx:5:1)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+----------------------------|---------|----------|---------|---------|-------------------
+File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------------------|---------|----------|---------|---------|-------------------
+All files                   |       0 |        0 |       0 |       0 |                   
+ src                        |       0 |        0 |       0 |       0 |                   
+  AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 12-30             
+  App.tsx                   |       0 |        0 |       0 |       0 | 44-106            
+  Auth.tsx                  |       0 |        0 |       0 |       0 | 19-58             
+  index.tsx                 |       0 |      100 |     100 |       0 | 7-19              
+  reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10              
+ src/pages                  |       0 |        0 |       0 |       0 |                   
+  BasicQuestion.tsx         |       0 |      100 |       0 |       0 | 9-21              
+  BasicQuestionsList.tsx    |       0 |      100 |     100 |       0 | 18-44             
+  BasicQuestionsPage.tsx    |       0 |        0 |       0 |       0 | 13-159            
+  BasicResultsPage.tsx      |       0 |        0 |       0 |       0 | 7-49              
+  DetailedQuestion.tsx      |       0 |        0 |       0 |       0 | 10-30             
+  DetailedQuestionsList.tsx |       0 |      100 |     100 |       0 | 20-66             
+  DetailedQuestionsPage.tsx |       0 |        0 |       0 |       0 | 11-116            
+  DetailedResultsPage.tsx   |       0 |        0 |       0 |       0 | 7-49              
+  Home.tsx                  |       0 |        0 |       0 |       0 | 9-100             
+  LoginPage.tsx             |       0 |        0 |       0 |       0 | 7-89              
+  MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 7-55              
+  PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35              
+ src/pages/components       |       0 |        0 |       0 |       0 |                   
+  BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 15-78             
+  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 16-132            
+  ProgressBar.tsx           |       0 |      100 |       0 |       0 | 3-21              
+  debugDetailed.tsx         |       0 |      100 |       0 |       0 | 7-43              
+----------------------------|---------|----------|---------|---------|-------------------
+Test Suites: 3 failed, 3 total
+Tests:       0 total
 Snapshots:   0 total
-Time:        5.849 s
+Time:        6.301 s
 Ran all test suites.
