@@ -4,6 +4,8 @@ import { DetailedQuestionRecord } from '../DetailedQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
+import { useAIResults } from '../../AIResultsContext';
+import { useNavigate } from "react-router-dom";
 
 interface OpenAiComponentProps {
   DetailedResults: DetailedQuestionRecord;
@@ -19,11 +21,14 @@ function OpenAiComponent({ DetailedResults, disabled }: OpenAiComponentProps) {
   const [progressMessage, setProgressMessage] = useState<string>(""); // real-time progress updates
 
   const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true }); // API instance for use in browser
+  const { setResults: setContexResults, setFinalResult: setContexFinalResult, setFinalSentence:setContexFinalSentance} = useAIResults();
+  const navigate = useNavigate();
 
   /**
    * Gathers AI insights for each individual question-answer pair.
    * Each entry is mapped to a separate GPT prompt, and results are collected asynchronously.
    */
+  
   async function accumResults(): Promise<string[]> {
     setProgressMessage("");
     let finishedQuestions = 0;
@@ -74,7 +79,7 @@ function OpenAiComponent({ DetailedResults, disabled }: OpenAiComponentProps) {
     try {
       const userResponses = await accumResults(); // wait for all question-based analyses
       setResults(userResponses);
-
+      setContexResults(userResponses);
       // Now generate an overall character summary
       setProgressMessage("Analyzing full profile...");
       const summaryResponse = await openai.chat.completions.create({
@@ -90,7 +95,7 @@ function OpenAiComponent({ DetailedResults, disabled }: OpenAiComponentProps) {
 
       const summaryText = summaryResponse.choices[0]?.message?.content ?? "";
       setFinalResult(summaryText);
-
+      setContexFinalResult(summaryText);
       // Based on the summary, predict a future career path
       setProgressMessage("Predicting future...");
       const futureResponse = await openai.chat.completions.create({
@@ -105,12 +110,14 @@ function OpenAiComponent({ DetailedResults, disabled }: OpenAiComponentProps) {
       });
 
       setFinalSentence(futureResponse.choices[0]?.message?.content ?? "");
+      setContexFinalSentance(futureResponse.choices[0]?.message?.content ?? ""); 
     } catch (e) {
       console.error(e);
       setAiError("Something went wrong during generation.");
     } finally {
       setLoading(false);
       setProgressMessage("");
+      navigate("/DetailedResultsPage");
     }
   }
 

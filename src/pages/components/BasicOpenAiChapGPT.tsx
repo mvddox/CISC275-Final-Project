@@ -4,7 +4,8 @@ import { BasicAnswerRecord } from '../BasicQuestionsList';
 import { Button } from 'react-bootstrap';
 import { keyData } from '../BasicQuestionsPage';
 import './BasicOpenAiChatGPT.css';
-
+import { useNavigate } from "react-router-dom";
+import { useAIResults } from '../../AIResultsContext';
 interface OpenAiComponentBProps {
     BasicResults: BasicAnswerRecord;
     disabled?: boolean; // Add the disabled prop here (optional)
@@ -16,7 +17,8 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [results, setResults] = useState<string[]>([]);
     const [finalResult, setFinalResult] = useState<string>("");
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
-
+    const navigate = useNavigate();
+    const { setResults: setContexResults, setFinalResult: setContexFinalResult } = useAIResults();
     async function accumResults(): Promise<string[]> {
         setLoading(true);
         let newResults: string[] = [];
@@ -45,33 +47,33 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
         setResults([]);
         setFinalResult("");
         setAiError(""); // Clear any previous errors
+        setLoading(true);
         const newResults: string[] = await accumResults();
-
+        setContexResults(newResults);
+    
         try {
             const response = await openai.chat.completions.create({
                 model: "gpt-4o",
-                messages: [{ role: "user", content: `Based on these individual insights: "${newResults.join('. ')}" What job do you think this person would be best suited for overall? Answer in one sentence.` }]
+                messages: [{
+                    role: "user",
+                    content: `Based on these individual insights: "${newResults.join('. ')}" What job do you think this person would be best suited for overall? Answer in one sentence.`
+                }]
             });
-            setFinalResult(response.choices[0]?.message?.content || "");
+            const final = response.choices[0]?.message?.content || "";
+            setFinalResult(final);
+            setContexFinalResult(final);        
+    
+            // Navigate AFTER setting context results
+            navigate("/BasicResultsPage");
+    
         } catch (e: any) {
             setAiError("It seems that there was an error generating the final result.");
             console.error(e);
         }
-
-        try {
-            const response = await openai.chat.completions.create({
-                model: "gpt-4o",
-                messages: [{ role: "user", content: `Given the following insights: "${newResults.join('. ')}" In one sentence, what would their most likely future career be?` }]
-            });
-            // Consider updating finalResult or creating a separate state for the future career
-            setFinalResult(response.choices[0]?.message?.content || "");
-        } catch (e: any) {
-            setAiError("It seems that there was an error determining the future career.");
-            console.error(e);
-        }
-
+    
         setLoading(false);
     }
+    
 
     return (
         <div className="ai-container">
