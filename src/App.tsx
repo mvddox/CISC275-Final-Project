@@ -58,7 +58,7 @@ function App() {
                 
                 {videoStates.subway && (
   <video
-    src={"src\Subway_Surfers.mp4"}
+    src={'Subway_Surfers.mp4'}
     loop
     autoPlay
     muted
@@ -74,7 +74,7 @@ function App() {
 
 {videoStates.family && (
   <video 
-    src={"src\Family_Guy.mp4"}
+    src={"Family_Guy.mp4"}
     loop 
     autoPlay
     muted
