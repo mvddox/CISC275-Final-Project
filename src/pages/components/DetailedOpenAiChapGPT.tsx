@@ -4,7 +4,8 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
-
+import { useAIResults } from '../../AIResultsContext';
+import { useNavigate } from "react-router-dom";
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -18,10 +19,16 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-
+    const { setResults: setContexResults, setFinalResult: setContexFinalResult, setFinalSentence:setContexFinalSentance} = useAIResults();
+    const navigate = useNavigate();
     async function startAi(){
         setLoading(true)
         setProgressMessage("")
+        setResults([]);
+        setFinalResult("");
+        setFinalSentence("");
+        setAiError("");
+
         let finishedQuestions: number = 0;
         let userResponses: Promise<string>[] = Object.entries(DetailedResults).map(
             async ([instruction,answer]: [string ,string], index): Promise<string> => 
@@ -122,6 +129,9 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 console.log(response.usage)
+                setContexFinalResult(JSON.parse(response.output_text).user_definition);
+                setFinalSentence(JSON.parse(response.output_text).final_sentence);
+                setContexFinalSentance(JSON.parse(response.output_text).future_phrase); 
             })
         }
         catch (e){
@@ -129,6 +139,7 @@ function OpenAiComponent({DetailedResults, disabled}:
             console.error(e);
             }
         setLoading(false)
+        navigate("/DetailedResultsPage");
     }
     return <div className="ai-container">
 

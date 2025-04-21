@@ -81,7 +81,7 @@ function BasicQuestionsPage() {
   }
 
   // for navigating from the basic question page to the home page
-function NavigationButton(){
+function NavigateToHomeButton(){
     const navigate = useNavigate();
     return (<div >
       Return home: {" "}
@@ -121,7 +121,7 @@ function NavigationButton(){
          <div className="Basic-header-title">Basic Questions</div>
         <div className="Header-Buttons-Basic">
           <NavigateToDetailedButton/>
-          <NavigationButton/>
+          <NavigateToHomeButton/>
         </div>
       </header>
       <div className="Basic-Body">

@@ -41,7 +41,7 @@ function MyProfilePage() {
     setAbout(event.target.value);
   }
 
-  function NavigationButton() {
+  function NavigateHomeButton() {
     const navigate = useNavigate();
     return (
       <div>
@@ -57,7 +57,7 @@ function MyProfilePage() {
       <div className="header-content">
         <h1>My Profile</h1>
         <div className="Header-Buttons">
-          <NavigationButton />
+          <NavigateHomeButton />
         </div>
       </div>
       <footer>
