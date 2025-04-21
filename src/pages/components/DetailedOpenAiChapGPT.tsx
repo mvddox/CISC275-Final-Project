@@ -19,8 +19,13 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-    const { setResults: setContexResults, setFinalResult: setContexFinalResult, setFinalSentence:setContexFinalSentance} = useAIResults();
+    const { setResults: setContexResults,  setFinalSentence:setContexFinalSentance, setFinalResult: setContexFinalResult,
+      setFinalDeclaredFuture:setFinalContextDeclaredFuture, setFinalCareer: setFinalContextCareer,
+      setColorVibe: setContextColorVibe} = useAIResults();
     const navigate = useNavigate();
+
+
+
     async function startAi(){
         setLoading(true)
         setProgressMessage("")
@@ -37,6 +42,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                     if (index === 0){
                         const response = await openai.responses.create({
                             model: "gpt-4o",
+                            instructions: "use second tense",
                             input: [
                                 {role: "system", content: instruction},
                                 {role: "user", content: answer},
@@ -45,11 +51,12 @@ function OpenAiComponent({DetailedResults, disabled}:
                         });
                         finishedQuestions += 1
                         setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(DetailedResults).length)
-                        return index + ": " + response.output_text
+                        return (index +1)+ ": " + response.output_text
                         }
                     else{
                         const response = await openai.responses.create({
                             model: "gpt-4o",
+                            instructions: "use second tense",
                             input: [
                                 {role: "system", content: instruction},
                                 {role: "user", content: answer},
@@ -58,7 +65,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         });
                         finishedQuestions += 1
                         setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(DetailedResults).length)
-                        return index + ": " + response.output_text
+                        return (index + 1) + ": " + response.output_text
                     }
             }
                 catch (e){
@@ -88,7 +95,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                     {   role: "developer",
                         content: "Based on the results: in a many sentences how would you define the person as a whole? "
                         + "In one sentence, how would you report their future? "
-                        + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters. "
+                        + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                         + "In one simple phrase, what is their future job?"
                         + "what is the hexidecimal color based on vibes?"
                     },
@@ -107,7 +114,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                           final_sentence: { 
                             type: "string" 
                           },
-                          future_phrase: { 
+                          touhou_future_phrase: { 
                             type: "string", 
                           },
                           future_career: { 
@@ -117,7 +124,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                             type: "string", 
                           },
                         },
-                        required: ["user_definition", "final_sentence", "future_phrase", "future_career", "color_vibe"],
+                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe"],
                         additionalProperties: false,
                       },
                     }
@@ -125,13 +132,16 @@ function OpenAiComponent({DetailedResults, disabled}:
                 });
                 setFinalResult(JSON.parse(response.output_text).user_definition)
                 setFinalSentence(JSON.parse(response.output_text).final_sentence)
-                setFinalDeclaredFuture(JSON.parse(response.output_text).future_phrase)
+                setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 console.log(response.usage)
                 setContexFinalResult(JSON.parse(response.output_text).user_definition);
-                setFinalSentence(JSON.parse(response.output_text).final_sentence);
-                setContexFinalSentance(JSON.parse(response.output_text).future_phrase); 
+                setContexFinalSentance(JSON.parse(response.output_text).final_sentence);
+                setContexResults(userResponses)
+                setFinalContextDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
+                setFinalContextCareer(JSON.parse(response.output_text).future_career)
+                setContextColorVibe(JSON.parse(response.output_text).color_vibe)
             })
         }
         catch (e){
@@ -139,7 +149,6 @@ function OpenAiComponent({DetailedResults, disabled}:
             console.error(e);
             }
         setLoading(false)
-        navigate("/DetailedResultsPage");
     }
     return <div className="ai-container">
 
@@ -182,6 +191,11 @@ function OpenAiComponent({DetailedResults, disabled}:
 
       {/* Instructional message if the button is disabled */}
       {disabled && <p className="disabled-message">Please answer all detailed questions to enable a response.</p>}
+      
+      <Button className="ai-button" onClick={()=>navigate("/DetailedResultsPage")} disabled={disabled || loading || finalCareer === ""}>
+        More results?  
+      </Button>
+
     </div>
     
     }
