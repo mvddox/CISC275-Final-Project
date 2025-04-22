@@ -15,6 +15,7 @@ interface AIResultsContextType {
   setColorVibe: (colorVibe: string) => void;
 }   
 
+
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
 
 export const AIResultsProvider = ({ children }: { children: ReactNode }) => {

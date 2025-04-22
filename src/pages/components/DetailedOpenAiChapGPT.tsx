@@ -24,8 +24,6 @@ function OpenAiComponent({DetailedResults, disabled}:
       setColorVibe: setContextColorVibe} = useAIResults();
     const navigate = useNavigate();
 
-
-
     async function startAi(){
         setLoading(true)
         setProgressMessage("")
