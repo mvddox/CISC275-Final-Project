@@ -44,6 +44,7 @@ function App() {
   const [videoStates, setVideoStates] = useState({
     subway: false,
     family: false,  
+    minecraft: false,
   }); 
 
 
@@ -83,13 +84,27 @@ function App() {
     style={{
       position: "fixed",
       bottom: "20px",
+      right: videoStates.subway && videoStates.minecraft ? "440px" : videoStates.minecraft || videoStates.subway ? "220px" :"20px", // shift left if both shown      
+      width: "180px",
+      zIndex: 9999,
+    }}
+  />
+)}
+{videoStates.minecraft && (
+  <video 
+    src={"Minecraft_Parkour.mp4"}
+    loop 
+    autoPlay
+    muted
+    style={{
+      position: "fixed",
+      bottom: "20px",
       right: videoStates.subway ? "220px" : "20px", // shift left if both shown      
       width: "180px",
       zIndex: 9999,
     }}
   />
 )}
-
 <Dropdown style={{ position: "fixed", top: "20px", right: "20px", zIndex: 9999 }}>
   <Dropdown.Toggle variant="primary" id="dropdown-video">
     Select Videos
@@ -113,6 +128,15 @@ function App() {
         style={{ marginRight: "10px" }}
       />
       Family Guy
+    </Dropdown.Item>
+    <Dropdown.Item as="button" onClick={() => toggleVideo("minecraft")}>
+      <input
+        type="checkbox"
+        checked={videoStates.minecraft}
+        readOnly
+        style={{ marginRight: "10px" }}
+      />
+      Minecraft Parkour
     </Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
