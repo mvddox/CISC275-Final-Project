@@ -65,8 +65,8 @@ FAIL src/pages/DetailedQuestionsPage.test.tsx
     >  8 | import { useNavigate } from "react-router-dom";
          | ^
        9 |
-      10 | interface OpenAiComponentProps {
-      11 |   DetailedResults: DetailedQuestionRecord;
+      10 | function OpenAiComponent({DetailedResults, disabled}:
+      11 |     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
 
       at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
       at Object.<anonymous> (src/pages/components/DetailedOpenAiChapGPT.tsx:8:1)
@@ -79,7 +79,7 @@ File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered
 ----------------------------|---------|----------|---------|---------|-------------------
 All files                   |       0 |        0 |       0 |       0 |                   
  src                        |       0 |        0 |       0 |       0 |                   
-  AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 12-30             
+  AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 18-39             
   App.tsx                   |       0 |        0 |       0 |       0 | 44-108            
   Auth.tsx                  |       0 |        0 |       0 |       0 | 19-58             
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19              
@@ -91,20 +91,20 @@ All files                   |       0 |        0 |       0 |       0 |
   BasicResultsPage.tsx      |       0 |        0 |       0 |       0 | 7-49              
   DetailedQuestion.tsx      |       0 |        0 |       0 |       0 | 10-30             
   DetailedQuestionsList.tsx |       0 |      100 |     100 |       0 | 20-66             
-  DetailedQuestionsPage.tsx |       0 |        0 |       0 |       0 | 11-116            
-  DetailedResultsPage.tsx   |       0 |        0 |       0 |       0 | 7-49              
+  DetailedQuestionsPage.tsx |       0 |        0 |       0 |       0 | 12-117            
+  DetailedResultsPage.tsx   |       0 |        0 |       0 |       0 | 7-61              
   Home.tsx                  |       0 |        0 |       0 |       0 | 9-100             
   LoginPage.tsx             |       0 |        0 |       0 |       0 | 7-89              
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 7-55              
   PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35              
  src/pages/components       |       0 |        0 |       0 |       0 |                   
   BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 15-78             
-  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 16-132            
+  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 12-195            
   ProgressBar.tsx           |       0 |      100 |       0 |       0 | 3-21              
   debugDetailed.tsx         |       0 |      100 |       0 |       0 | 7-43              
 ----------------------------|---------|----------|---------|---------|-------------------
 Test Suites: 3 failed, 3 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        6.163 s
+Time:        6.059 s
 Ran all test suites.
