@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
-import { DetailedResultType } from "./components/DetailedResult";
+import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
+import { usePreviousAIResults } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -17,6 +18,8 @@ if (prevKey !== null) {
 
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
+    const prevResults: DetailedResultType[] = usePreviousAIResults().previousResults;
+    console.log(usePreviousAIResults().previousResults)
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -45,6 +48,10 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
+          {prevResults.map((value)=><div><DetailedResult {...value}></DetailedResult></div>)}
+          {}
+            
+
         <footer>
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>

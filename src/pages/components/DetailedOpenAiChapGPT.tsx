@@ -21,7 +21,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
-    const { previousResults: ContextPreviousResults, setPreviousResults: setContextPreviousResults} = usePreviousAIResults();
+    const prevResults = usePreviousAIResults();
     const navigate = useNavigate();
 
     async function startAi(){
@@ -78,8 +78,7 @@ function OpenAiComponent({DetailedResults, disabled}:
             
             await Promise.all(userResponses).then(async (userResponses)=>    
                 {
-                setProgressMessage("Arbitrating your final judgment")
-                console.log(userResponses)
+                setProgressMessage("Arbitrating your final judgment...")
                 const response = await openai.responses.create({
                 model: "gpt-4o",
                 instructions: "use second tense",
@@ -141,7 +140,16 @@ function OpenAiComponent({DetailedResults, disabled}:
                 result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 result.setFinalCareer(JSON.parse(response.output_text).future_career)
                 result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                setContextPreviousResults([...ContextPreviousResults, result])
+                let newResult = {...result};
+                prevResults.setPreviousResults([...prevResults.previousResults, 
+                  { ...newResult,
+                    finalResult: JSON.parse(response.output_text).user_definition,
+                    finalSentence: JSON.parse(response.output_text).final_sentence,
+                    results: userResponses,
+                    finalCareer: JSON.parse(response.output_text).future_career, 
+                    finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
+                  colorVibe:JSON.parse(response.output_text).color_vibe,}])
+                console.log(prevResults)
             })
         }
         catch (e){

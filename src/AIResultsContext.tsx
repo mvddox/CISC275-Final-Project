@@ -21,23 +21,7 @@ interface PreviousAIResultsContextType {
 
 
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
-const PreviousAIResultsContext = createContext<PreviousAIResultsContextType | undefined>(undefined);
-
-export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
-  const [results, setResults] = useState<string[]>([]);
-  const [finalResult, setFinalResult] = useState<string>("");
-  const [finalSentence, setFinalSentence] = useState<string>("");
-  const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("");
-  const [finalCareer, setFinalCareer] = useState<string>("")
-  const [colorVibe, setColorVibe] = useState<string>("")
-
-  return (
-    <AIResultsContext.Provider value={{ results, finalResult, finalSentence, finalDeclaredFuture, finalCareer, colorVibe,
-             setResults, setFinalResult, setFinalSentence, setFinalDeclaredFuture, setFinalCareer, setColorVibe }}>
-      {children}
-    </AIResultsContext.Provider>
-  );
-};
+const PreviousAIResultsContext = createContext<PreviousAIResultsContextType>({previousResults: [], setPreviousResults: (results:AIResultsContextType[])=>{}});
 
 export const PreviousAIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [previousResults, setPreviousResults] = useState<AIResultsContextType[]>([]);
@@ -48,6 +32,26 @@ export const PreviousAIResultsProvider = ({ children }: { children: ReactNode })
     </PreviousAIResultsContext.Provider>
   );
 };
+
+export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
+  const [results, setResults] = useState<string[]>([]);
+  const [finalResult, setFinalResult] = useState<string>("");
+  const [finalSentence, setFinalSentence] = useState<string>("");
+  const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("");
+  const [finalCareer, setFinalCareer] = useState<string>("")
+  const [colorVibe, setColorVibe] = useState<string>("")
+
+  return (
+    <PreviousAIResultsProvider>
+    <AIResultsContext.Provider value={{ results, finalResult, finalSentence, finalDeclaredFuture, finalCareer, colorVibe,
+             setResults, setFinalResult, setFinalSentence, setFinalDeclaredFuture, setFinalCareer, setColorVibe }}>
+      {children}
+    </AIResultsContext.Provider>
+    </PreviousAIResultsProvider>
+  );
+};
+
+
 
 export const useAIResults = ():AIResultsContextType  => {
   const context = useContext(AIResultsContext);
