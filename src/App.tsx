@@ -14,7 +14,7 @@ import PreviousResultsPage from './pages/PreviousResultsPage';
 import MyProfilePage from './pages/MyProfilePage';
 import LoginPage from './pages/LoginPage';
 import { Dropdown } from 'react-bootstrap';
-import { AIResultsProvider, PreviousAIResultsProvider } from './AIResultsContext';
+import { AIResultsProvider } from './AIResultsContext';
 import BasicResultsPage from './pages/BasicResultsPage';
 import DetailedResultsPage from './pages/DetailedResultsPage';
 //NOTE COMMENTED SO WE CAN COPY PASTE LATER IF NEEDED
