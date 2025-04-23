@@ -16,7 +16,7 @@ function MyProfilePage() {
   const [currentUsername, setCurrentUsername] = useState<string>("");
 
   // Allowed usernames for which the "About you" section will be shown
-  const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
+  //const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
 
   // Load the username and "About you" content from localStorage when the component mounts
   useEffect(() => {
@@ -38,7 +38,7 @@ function MyProfilePage() {
       }
     }
   }, []);
-
+/*
   // Update the username and localStorage on login
   function handleLogin(username: string) {
     setCurrentUsername(username);
@@ -63,7 +63,7 @@ function MyProfilePage() {
     // Optionally, clear the "About you" data from localStorage if needed
     // localStorage.removeItem(`about-${currentUsername}`);
   }
-
+*/
   // Save the API key
   function handleKeySubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
