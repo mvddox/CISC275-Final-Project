@@ -4,7 +4,7 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
-import { useAIResults } from '../../AIResultsContext';
+import { useAIResults, usePreviousAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
 
 function OpenAiComponent({DetailedResults, disabled}:
@@ -19,9 +19,9 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-    const { setResults: setContexResults,  setFinalSentence:setContexFinalSentance, setFinalResult: setContexFinalResult,
-      setFinalDeclaredFuture:setFinalContextDeclaredFuture, setFinalCareer: setFinalContextCareer,
-      setColorVibe: setContextColorVibe} = useAIResults();
+
+    const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
+    const { previousResults: ContextPreviousResults, setPreviousResults: setContextPreviousResults} = usePreviousAIResults();
     const navigate = useNavigate();
 
     async function startAi(){
@@ -134,12 +134,14 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 console.log(response.usage)
-                setContexFinalResult(JSON.parse(response.output_text).user_definition);
-                setContexFinalSentance(JSON.parse(response.output_text).final_sentence);
-                setContexResults(userResponses)
-                setFinalContextDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
-                setFinalContextCareer(JSON.parse(response.output_text).future_career)
-                setContextColorVibe(JSON.parse(response.output_text).color_vibe)
+
+                result.setFinalResult(JSON.parse(response.output_text).user_definition);
+                result.setFinalSentence(JSON.parse(response.output_text).final_sentence);
+                result.setResults(userResponses)
+                result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
+                result.setFinalCareer(JSON.parse(response.output_text).future_career)
+                result.setColorVibe(JSON.parse(response.output_text).color_vibe)
+                setContextPreviousResults([...ContextPreviousResults, result])
             })
         }
         catch (e){

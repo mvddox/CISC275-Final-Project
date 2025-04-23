@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
 import { DetailedResultType } from "./components/DetailedResult";
 
@@ -12,13 +12,11 @@ if (prevKey !== null) {
 }
 
 
-export type PreviousResultRecord = Record<string, DetailedResultType[]> // not a good idea, but its not like we have a server to hash to and from
+//type PreviousResultRecord = Record<string, DetailedResultType[]> // not a good idea, but its not like we have a server to hash to and from
 
 
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
-      const location = useLocation();
-      const data = location.state?.data
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -47,7 +45,6 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
-            {data}
         <footer>
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
