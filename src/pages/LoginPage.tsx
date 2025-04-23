@@ -56,12 +56,26 @@ function LoginPage(){
 
   function LoginButton(){
     const navigate = useNavigate();
-    return (<div >
-      <Button  className="LoginButton" onClick={() => authContext.login({username, password}) ? navigate("/Home") : updateLoginFail(true)}>
+    function handleLoginClick() {
+      const success = authContext.login({username, password});
+      if (success) {
+        localStorage.setItem("currentUsername", JSON.stringify(username));
+        navigate("/Home");
+      } else {
+        updateLoginFail(true);
+      }
+    }
+  
+    return (
+      <div>
+        <Button className="LoginButton" onClick={handleLoginClick}>
           Login
-      </Button>
-    </div>)
+        </Button>
+      </div>
+    );
   }
+  
+  
 
   function updateCreateAccStat(bool: boolean){
     setCreateAccFail(bool);
@@ -70,12 +84,26 @@ function LoginPage(){
 
   function CreateAccountButton(){
     const navigate = useNavigate();
-    return (<div >
-      <Button  className="Button" onClick={() => storeNewUser(username, password) ? navigate("/Home") : updateCreateAccStat(true)}>
+    function handleCreateClick() {
+      const success = storeNewUser(username, password);
+      if (success) {
+        localStorage.setItem("currentUsername", JSON.stringify(username));
+        navigate("/Home");
+      } else {
+        updateCreateAccStat(true);
+      }
+    }
+  
+    return (
+      <div>
+        <Button className="Button" onClick={handleCreateClick}>
           Create Account
-      </Button>
-    </div>)
+        </Button>
+      </div>
+    );
   }
+  
+  
 
   function updateUsername(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);

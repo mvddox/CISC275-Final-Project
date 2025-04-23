@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./MyProfilePage.css";
-import logo from '../logo.svg';
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -13,28 +12,76 @@ if (prevKey !== null) {
 
 function MyProfilePage() {
   const [key, setKey] = useState<string>(keyData);
-  const [name, setName] = useState<string>("");
   const [about, setAbout] = useState<string>("");
+  const [currentUsername, setCurrentUsername] = useState<string>("");
 
+  // Allowed usernames for which the "About you" section will be shown
+  const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
+
+  // Load the username and "About you" content from localStorage when the component mounts
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("currentUsername")?.replace(/"/g, "") || "";
+    setCurrentUsername(storedUsername);
+
+    // Retrieve "About you" content for the logged-in user from localStorage
+    if (storedUsername) {
+      const storedAbout = localStorage.getItem(`about-${storedUsername}`) || "";
+
+      // Set default "About you" text for known usernames
+      if (!storedAbout) {
+        const defaultAbout =
+          storedUsername === "elijah" ? "Elijah is awesome" : storedUsername === "ethan" ? "Ethan is awesome" : "";
+        setAbout(defaultAbout);
+        localStorage.setItem(`about-${storedUsername}`, defaultAbout); // Save default about info
+      } else {
+        setAbout(storedAbout);
+      }
+    }
+  }, []);
+
+  // Update the username and localStorage on login
+  function handleLogin(username: string) {
+    setCurrentUsername(username);
+    localStorage.setItem("currentUsername", JSON.stringify(username));
+
+    // When logging in, load or create default "About you" content
+    const storedAbout = localStorage.getItem(`about-${username}`);
+    if (!storedAbout) {
+      const defaultAbout = username === "elijah" ? "Elijah is awesome" : "Ethan is awesome";
+      setAbout(defaultAbout);
+      localStorage.setItem(`about-${username}`, defaultAbout);
+    } else {
+      setAbout(storedAbout);
+    }
+  }
+
+  // Handle logging out
+  function handleLogout() {
+    setCurrentUsername("");
+    localStorage.removeItem("currentUsername");
+    setAbout(""); // Clear the "About you" field on logout
+    // Optionally, clear the "About you" data from localStorage if needed
+    // localStorage.removeItem(`about-${currentUsername}`);
+  }
+
+  // Save the API key
   function handleKeySubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
     window.location.reload();
   }
 
+  // Save the "About you" section to localStorage
   function handleProfileSubmit(event: React.FormEvent) {
     event.preventDefault();
-    console.log("Name submitted:", name);
     console.log("About submitted:", about);
-    // Here you would typically handle saving the name and about information
-    // to a database or local storage.
+    // Save the "About you" data to localStorage for the logged-in user
+    if (currentUsername) {
+      localStorage.setItem(`about-${currentUsername}`, about);
+    }
   }
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
-  }
-
-  function changeName(event: React.ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
   }
 
   function changeAbout(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -60,21 +107,17 @@ function MyProfilePage() {
           <NavigateHomeButton />
         </div>
       </div>
-      <footer>
-        <Form onSubmit={handleProfileSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>
-              <img src={logo} alt="My Website Logo" className="profile-logo" />
-              Name:
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={changeName}
-            />
-          </Form.Group>
 
+      <footer>
+        {/* Username Display right above the "About You" section */}
+        {currentUsername && (
+          <div className="user-greeting">
+            <strong>Username:</strong> {currentUsername}
+          </div>
+        )}
+
+        {/* "About You" Section that is always visible */}
+        <Form onSubmit={handleProfileSubmit}>
           <Form.Group className="mb-3" controlId="formBasicAbout">
             <Form.Label>About you:</Form.Label>
             <Form.Control
@@ -89,7 +132,9 @@ function MyProfilePage() {
             Save Profile
           </Button>
         </Form>
+
         <hr className="divider" />
+
         <Form>
           <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
           <Form.Control
@@ -104,10 +149,13 @@ function MyProfilePage() {
             Save API Key
           </Button>
         </Form>
-        <div className="authors">Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez</div>
+
+        <div className="authors">
+          Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+        </div>
       </footer>
     </div>
   );
 }
 
-export default MyProfilePage; 
+export default MyProfilePage;
