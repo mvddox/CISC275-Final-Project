@@ -5,6 +5,7 @@ import "./PreviousResultsPage.css"
 import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
 import { PreviousResult, usePreviousAIResults } from "../AIResultsContext";
 import { useAuth } from "../Auth";
+import { Account } from "./LoginPage";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -21,12 +22,10 @@ function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const authContext = useAuth();
     console.log(authContext)
-    const prevResults: DetailedResultType[] = usePreviousAIResults().previousResults;
     const [previResults, setPrevResults] = useState<DetailedResultType[]>(()=>{
-      let stored:DetailedResultType[] = JSON.parse(localStorage.getItem(authContext.username) || "")
-      //console.log(stored)
-      //console.log(localStorage.getItem(authContext.username))
-      return (Array.isArray(stored) ? stored: [])
+      console.log(authContext.username)
+      let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
+      return (stored.prevResults)
     })
     //console.log(usePreviousAIResults().previousResults)
     //console.log(previResults)
@@ -36,7 +35,7 @@ function PreviousResultsPage(){
       let stored:DetailedResultType[] = JSON.parse(localStorage.getItem(authContext.username) || "")
       console.log(stored)
       console.log("here")
-      setPrevResults(Array.isArray(stored) ? stored : [])
+      setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
       
 
     }, [authContext.username, location])

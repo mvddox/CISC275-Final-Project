@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { Account } from "./pages/LoginPage";
 
 /*
     Most of this code is from: https://medium.com/@kimtai.developer/react-typescript-authentication-guide-using-context-api-5c82f2530eb1
@@ -31,8 +32,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = (info: LoginInfo): boolean => {
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
-        const password = localStorage.getItem(info.username);
-        if (password != null && password === info.password){
+        const account:Account = JSON.parse(localStorage.getItem(info.username) || "");
+        if (account.password != null && account.password === info.password){
             setUsername(info.username);
             return true;
         }
