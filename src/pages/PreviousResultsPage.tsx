@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
 import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
-import { usePreviousAIResults } from "../AIResultsContext";
+import { PreviousResult, usePreviousAIResults } from "../AIResultsContext";
+import { useAuth } from "../Auth";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -13,22 +14,42 @@ if (prevKey !== null) {
 }
 
 
-//type PreviousResultRecord = Record<string, DetailedResultType[]> // not a good idea, but its not like we have a server to hash to and from
+type PreviousResultRecord = Record<string, PreviousResult[]> // not a good idea, but its not like we have a server to hash to and from
 
 
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
+    const authContext = useAuth();
+    console.log(authContext)
     const prevResults: DetailedResultType[] = usePreviousAIResults().previousResults;
-    console.log(usePreviousAIResults().previousResults)
+    const [previResults, setPrevResults] = useState<DetailedResultType[]>(()=>{
+      let stored:DetailedResultType[] = JSON.parse(localStorage.getItem(authContext.username) || "")
+      //console.log(stored)
+      //console.log(localStorage.getItem(authContext.username))
+      return (Array.isArray(stored) ? stored: [])
+    })
+    //console.log(usePreviousAIResults().previousResults)
+    //console.log(previResults)
+    let location = useLocation();
+
+    useEffect(()=>{
+      let stored:DetailedResultType[] = JSON.parse(localStorage.getItem(authContext.username) || "")
+      console.log(stored)
+      console.log("here")
+      setPrevResults(Array.isArray(stored) ? stored : [])
+      
+
+    }, [authContext.username, location])
+
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
         window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
       }
 
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
-  }
+    function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+      setKey(event.target.value);
+    }
 
   // for navigating from the previous results page to the home page
   function NavigateHomeButton(){
@@ -48,7 +69,7 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
-          {prevResults.map((value)=><div><DetailedResult {...value}></DetailedResult></div>)}
+          {previResults.map((value)=><div><DetailedResult {...value}></DetailedResult></div>)}
           {}
             
 

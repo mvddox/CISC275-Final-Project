@@ -4,8 +4,9 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
-import { useAIResults, usePreviousAIResults } from '../../AIResultsContext';
+import { PreviousResult, useAIResults, usePreviousAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../Auth';
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -23,6 +24,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
     const prevResults = usePreviousAIResults();
     const navigate = useNavigate();
+    const authContext = useAuth();
 
     async function startAi(){
         setLoading(true)
@@ -31,6 +33,7 @@ function OpenAiComponent({DetailedResults, disabled}:
         setFinalResult("");
         setFinalSentence("");
         setAiError("");
+
 
         let finishedQuestions: number = 0;
         let userResponses: Promise<string>[] = Object.entries(DetailedResults).map(
@@ -149,7 +152,25 @@ function OpenAiComponent({DetailedResults, disabled}:
                     finalCareer: JSON.parse(response.output_text).future_career, 
                     finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
                   colorVibe:JSON.parse(response.output_text).color_vibe,}])
-                console.log(prevResults)
+                //console.log(prevResults)
+                console.log(authContext)
+                
+                localStorage.getItem(authContext.username)
+                if(!Array.isArray(localStorage.getItem(authContext.username) || "")){
+                  localStorage.setItem(authContext.username, JSON.stringify([]));
+                  console.log("here")
+                  console.log(JSON.parse(localStorage.getItem(authContext.username) || ""))
+                }
+                console.log(JSON.parse(localStorage.getItem(authContext.username) || ""))
+                let storedResults: PreviousResult[] = JSON.parse(localStorage.getItem(authContext.username) || "")
+                storedResults = [...storedResults, { ...newResult,
+                  finalResult: JSON.parse(response.output_text).user_definition,
+                  finalSentence: JSON.parse(response.output_text).final_sentence,
+                  results: userResponses,
+                  finalCareer: JSON.parse(response.output_text).future_career, 
+                  finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
+                colorVibe:JSON.parse(response.output_text).color_vibe,}]
+                localStorage.setItem(authContext.username, JSON.stringify(storedResults));
             })
         }
         catch (e){

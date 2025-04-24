@@ -27,7 +27,6 @@ import DetailedResultsPage from './pages/DetailedResultsPage';
 //   keyData = JSON.parse(prevKey);
 // }
 
-
 function App() {
   // const [key, setKey] = useState<string>(keyData); //for api key input
   
@@ -45,7 +44,6 @@ function App() {
     subway: false,
     family: false,  
   }); 
-
 
   
   const toggleVideo = (videoKey: keyof typeof videoStates) => {

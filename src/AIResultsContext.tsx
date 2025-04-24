@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { DetailedResultType } from './pages/components/DetailedResult';
+import { BasicResultType } from './pages/components/BasicResult';
 //Need to share data between the questions and the results page
 interface AIResultsContextType {
   results: string[]; // list of results for each question
@@ -18,6 +20,9 @@ interface PreviousAIResultsContextType {
   previousResults: AIResultsContextType[],
   setPreviousResults: (results:AIResultsContextType[])=> void
 }
+
+
+export type PreviousResult = DetailedResultType | BasicResultType
 
 
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
