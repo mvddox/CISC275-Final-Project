@@ -32,11 +32,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = (info: LoginInfo): boolean => {
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
-        const account:Account = JSON.parse(localStorage.getItem(info.username) || "");
-        if (account.password != null && account.password === info.password){
-            setUsername(info.username);
-            return true;
-        }
+        if (localStorage.getItem(info.username) || ""){
+            const account:Account = JSON.parse(localStorage.getItem(info.username) || "");
+            if (account.password != null && account.password === info.password){
+                setUsername(info.username);
+                return true;
+            }
+        }   
         return false;
     }
 
