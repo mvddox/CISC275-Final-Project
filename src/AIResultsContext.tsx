@@ -16,27 +16,12 @@ interface AIResultsContextType {
   setFinalCareer: (finalCareer: string) => void;
   setColorVibe: (colorVibe: string) => void;
 }   
-interface PreviousAIResultsContextType {
-  previousResults: AIResultsContextType[],
-  setPreviousResults: (results:AIResultsContextType[])=> void
-}
-
 
 export type PreviousResult = DetailedResultType | BasicResultType
 
 
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
-const PreviousAIResultsContext = createContext<PreviousAIResultsContextType>({previousResults: [], setPreviousResults: (results:AIResultsContextType[])=>{}});
 
-export const PreviousAIResultsProvider = ({ children }: { children: ReactNode }) => {
-  const [previousResults, setPreviousResults] = useState<AIResultsContextType[]>([]);
-
-  return (
-    <PreviousAIResultsContext.Provider value={{previousResults, setPreviousResults}}>
-      {children}
-    </PreviousAIResultsContext.Provider>
-  );
-};
 
 export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [results, setResults] = useState<string[]>([]);
@@ -47,12 +32,10 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [colorVibe, setColorVibe] = useState<string>("")
 
   return (
-    <PreviousAIResultsProvider>
     <AIResultsContext.Provider value={{ results, finalResult, finalSentence, finalDeclaredFuture, finalCareer, colorVibe,
              setResults, setFinalResult, setFinalSentence, setFinalDeclaredFuture, setFinalCareer, setColorVibe }}>
       {children}
     </AIResultsContext.Provider>
-    </PreviousAIResultsProvider>
   );
 };
 
@@ -61,11 +44,5 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
 export const useAIResults = ():AIResultsContextType  => {
   const context = useContext(AIResultsContext);
   if (!context) throw new Error("useAIResults must be used within a AIResultsProvider");
-  return context;
-};
-
-export const usePreviousAIResults = ():PreviousAIResultsContextType  => {
-  const context = useContext(PreviousAIResultsContext);
-  if (!context) throw new Error("usePreviousAIResults must be used within a PreviousAIResultsContext");
   return context;
 };

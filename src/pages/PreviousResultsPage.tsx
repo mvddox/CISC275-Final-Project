@@ -3,7 +3,6 @@ import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
 import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
-import { PreviousResult, usePreviousAIResults } from "../AIResultsContext";
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
 
@@ -15,29 +14,18 @@ if (prevKey !== null) {
 }
 
 
-type PreviousResultRecord = Record<string, PreviousResult[]> // not a good idea, but its not like we have a server to hash to and from
-
 
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const authContext = useAuth();
-    console.log(authContext)
     const [previResults, setPrevResults] = useState<DetailedResultType[]>(()=>{
-      console.log(authContext.username)
       let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
       return (stored.prevResults)
     })
-    //console.log(usePreviousAIResults().previousResults)
-    //console.log(previResults)
     let location = useLocation();
 
     useEffect(()=>{
-      let stored:DetailedResultType[] = JSON.parse(localStorage.getItem(authContext.username) || "")
-      console.log(stored)
-      console.log("here")
       setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
-      
-
     }, [authContext.username, location])
 
 

@@ -4,7 +4,7 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType } from
 import { Button } from 'react-bootstrap';
 import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
-import { PreviousResult, useAIResults, usePreviousAIResults } from '../../AIResultsContext';
+import { useAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Auth';
 import { Account } from '../LoginPage';
@@ -23,7 +23,6 @@ function OpenAiComponent({DetailedResults, disabled}:
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
-    const prevResults = usePreviousAIResults();
     const navigate = useNavigate();
     const authContext = useAuth();
 
@@ -145,31 +144,17 @@ function OpenAiComponent({DetailedResults, disabled}:
                 result.setFinalCareer(JSON.parse(response.output_text).future_career)
                 result.setColorVibe(JSON.parse(response.output_text).color_vibe)
                 let newResult = {...result};
-                prevResults.setPreviousResults([...prevResults.previousResults, 
-                  { ...newResult,
+                let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
+                if (storedAcount.prevResults){
+                  storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
                     finalResult: JSON.parse(response.output_text).user_definition,
                     finalSentence: JSON.parse(response.output_text).final_sentence,
-                    results: userResponses,
+                    results: [...userResponses],
                     finalCareer: JSON.parse(response.output_text).future_career, 
                     finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                  colorVibe:JSON.parse(response.output_text).color_vibe,}])
-                //console.log(prevResults)
-                console.log(authContext)
-                // if(!Array.isArray(localStorage.getItem(authContext.username) || "")){
-                //   localStorage.setItem(authContext.username, JSON.stringify([]));
-                //   console.log("here")
-                //   console.log(JSON.parse(localStorage.getItem(authContext.username) || ""))
-                // }
-                //console.log(JSON.parse(localStorage.getItem(authContext.username) || ""))
-                let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "")
-                storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
-                  finalResult: JSON.parse(response.output_text).user_definition,
-                  finalSentence: JSON.parse(response.output_text).final_sentence,
-                  results: userResponses,
-                  finalCareer: JSON.parse(response.output_text).future_career, 
-                  finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                  colorVibe:JSON.parse(response.output_text).color_vibe,}]
-                localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
+                    colorVibe:JSON.parse(response.output_text).color_vibe,}]
+                  localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
+                }
             })
         }
         catch (e){
