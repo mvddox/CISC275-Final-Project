@@ -5,6 +5,7 @@ import "./PreviousResultsPage.css"
 import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
+import { PreviousResult } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -18,7 +19,7 @@ if (prevKey !== null) {
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const authContext = useAuth();
-    const [previResults, setPrevResults] = useState<DetailedResultType[]>(()=>{
+    const [prevResults, setPrevResults] = useState<PreviousResult[]>(()=>{
       let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
       return (stored.prevResults)
     })
@@ -48,6 +49,13 @@ function PreviousResultsPage(){
     </div>)
   }
 
+  function removeResult(removedValue: PreviousResult){
+    let account:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
+    account.prevResults = prevResults.filter((value)=> value!== removedValue)
+    localStorage.setItem(authContext.username, JSON.stringify(account))
+    setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
+  }
+
     return (
         <div className="Previous">
             <div className="header-content"> 
@@ -56,7 +64,7 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
-          {previResults.map((value)=><div><DetailedResult {...value}></DetailedResult></div>)}
+          {prevResults.map((value)=><div><DetailedResult {...value}></DetailedResult><Button onClick={()=> removeResult(value)}>Delete?</Button></div>)}
           {}
             
 
