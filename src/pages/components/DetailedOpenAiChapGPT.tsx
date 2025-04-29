@@ -95,7 +95,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         content: "The user gave answers to those questions which you determined a result based on each corresponding question; these results are:" + userResponses.map((val)=>val)
                     },
                     {   role: "developer",
-                        content: "Based on the results: in at least three sentences how would you define the person as a whole? "
+                        content: "Based on the results: in many sentences how would you define the person as a whole? "
                         + "In one sentence, how would you report their future? "
                         + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                         + "In one simple phrase, what is their future job?"
@@ -111,7 +111,8 @@ function OpenAiComponent({DetailedResults, disabled}:
                         type: "object",
                         properties: {
                           user_definition: { 
-                            type: "string" 
+                            type: "string",
+                            description: "the user summary in at least five sentences"
                           },
                           final_sentence: { 
                             type: "string" 
@@ -169,7 +170,7 @@ function OpenAiComponent({DetailedResults, disabled}:
         setLoading(false)
     }
     return <div className="ai-container">
-          <div>{date}</div>
+          <div>Generated at {date}</div>
       {/* Shows progress message if currently loading */}
       {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
 
