@@ -24,6 +24,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("") // final phasse
     const [finalCareer, setFinalCareer] = useState<string>("") // final career
     const [colorVibe, setColorVibe] = useState<string>("")
+    const [date, setDate] = useState<string>("")
 
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
     
@@ -145,13 +146,15 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     setFinalCareer(JSON.parse(response.output_text).future_career)
                     setColorVibe(JSON.parse(response.output_text).color_vibe)
                     console.log(response.usage)
-    
+                    const currentDate = Date()
+                    setDate(currentDate)
                     result.setFinalResult(JSON.parse(response.output_text).user_definition);
                     result.setFinalSentence(JSON.parse(response.output_text).final_sentence);
                     result.setResults(userResponses)
                     result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                     result.setFinalCareer(JSON.parse(response.output_text).future_career)
                     result.setColorVibe(JSON.parse(response.output_text).color_vibe)
+                    result.setDate(currentDate)
                     let newResult : BasicResultType = {...result};
                     let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
                     if (storedAcount.prevResults){
@@ -161,7 +164,8 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                         results: [...userResponses],
                         finalCareer: JSON.parse(response.output_text).future_career, 
                         finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                        colorVibe:JSON.parse(response.output_text).color_vibe,}]
+                        colorVibe:JSON.parse(response.output_text).color_vibe,
+                        date: currentDate}]
                       localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
                     }
                 })
@@ -176,7 +180,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
 
     return (
         <div className="ai-container">
-        
+                <div>{date}</div>
               {/* Shows progress message if currently loading */}
               {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
         
