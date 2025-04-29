@@ -6,6 +6,7 @@ import DetailedResult, { DetailedResultType } from "./components/PreviousResult"
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
 import { PreviousResultType } from "../AIResultsContext";
+import PreviousResult from "./components/PreviousResult";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -64,7 +65,7 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
-          {prevResults.map((value)=><div><DetailedResult {...value}></DetailedResult><Button onClick={()=> removeResult(value)}>Delete?</Button></div>)}
+          {prevResults.map((value)=><div><PreviousResult {...value}></PreviousResult><Button onClick={()=> removeResult(value)}>Delete?</Button></div>)}
           {}
             
 
