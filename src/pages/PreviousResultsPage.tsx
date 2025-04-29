@@ -67,6 +67,7 @@ function PreviousResultsPage(){
     result.setFinalDeclaredFuture(destination.finalDeclaredFuture)
     result.setFinalCareer(destination.finalCareer)
     result.setColorVibe(destination.colorVibe)
+    result.setDate(destination.date)
     navigate("/CurrentResultPage")
   }
 
