@@ -5,7 +5,7 @@ import "./PreviousResultsPage.css"
 import DetailedResult, { DetailedResultType } from "./components/PreviousResult";
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
-import { PreviousResultType } from "../AIResultsContext";
+import { PreviousResultType, useAIResults } from "../AIResultsContext";
 import PreviousResult from "./components/PreviousResult";
 
 export let keyData = "";
@@ -24,7 +24,10 @@ function PreviousResultsPage(){
       let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
       return (stored.prevResults)
     })
+
     let location = useLocation();
+    let result = useAIResults();
+    const navigate = useNavigate()
 
     useEffect(()=>{
       setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
@@ -57,6 +60,16 @@ function PreviousResultsPage(){
     setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
   }
 
+  function NavigateToFocus(destination: PreviousResultType){
+    result.setFinalResult(destination.finalResult);
+    result.setFinalSentence(destination.finalSentence);
+    result.setResults(destination.results)
+    result.setFinalDeclaredFuture(destination.finalDeclaredFuture)
+    result.setFinalCareer(destination.finalCareer)
+    result.setColorVibe(destination.colorVibe)
+    navigate("/CurrentResultPage")
+  }
+
     return (
         <div className="Previous">
             <div className="header-content"> 
@@ -65,7 +78,12 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
-          {prevResults.map((value)=><div><PreviousResult {...value}></PreviousResult><Button onClick={()=> removeResult(value)}>Delete?</Button></div>)}
+          {prevResults.map((value)=><div>
+            <PreviousResult {...value}></PreviousResult>
+            <Button onClick={()=> removeResult(value)}>Delete?</Button>
+            <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
+            <Button onClick={()=> {}}> Download? </Button>
+            </div>)}
           {}
             
 

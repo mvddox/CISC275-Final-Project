@@ -119,6 +119,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                           },
                           touhou_future_phrase: { 
                             type: "string", 
+                            description: "English only"
                           },
                           future_career: { 
                             type: "string", 
@@ -170,7 +171,10 @@ function OpenAiComponent({DetailedResults, disabled}:
         setLoading(false)
     }
     return <div className="ai-container">
-          <div>Generated at {date}</div>
+      
+      {/* time of ai finish */}
+      <div hidden={loading || !finalResult} >Generated at {date}</div >
+      
       {/* Shows progress message if currently loading */}
       {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
 
