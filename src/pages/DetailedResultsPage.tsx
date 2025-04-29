@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./DetailedResultsPage.css";
 import { useAIResults } from '../AIResultsContext';
-import {DetailedResultType} from "./components/DetailedResult";
+import {DetailedResultType} from "./components/PreviousResult";
 
 export let keyData = "";
 

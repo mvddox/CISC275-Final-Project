@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAIResults } from '../../AIResultsContext';
 import { Account } from '../LoginPage';
 import { useAuth } from '../../Auth';
+import { BasicResultType } from './PreviousResult';
 interface OpenAiComponentBProps {
     BasicResults: BasicAnswerRecord;
     disabled?: boolean; // Add the disabled prop here (optional)
@@ -52,8 +53,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                                 input: [
                                     {role: "system", content: instruction},
                                     {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in two sentences how would you define the user who answered?"}
-                                ]
+                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
+                                ],
+                                max_output_tokens: 18
                             });
                             finishedQuestions += 1
                             setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
@@ -66,8 +68,10 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                                 input: [
                                     {role: "system", content: instruction},
                                     {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in two or less sentences how would you define the user who answered?"}
-                                ]
+                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
+
+                                ],
+                                max_output_tokens: 18
                             });
                             finishedQuestions += 1
                             setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
@@ -148,7 +152,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                     result.setFinalCareer(JSON.parse(response.output_text).future_career)
                     result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                    let newResult = {...result};
+                    let newResult : BasicResultType = {...result};
                     let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
                     if (storedAcount.prevResults){
                       storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
@@ -172,21 +176,52 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
 
     return (
         <div className="ai-container">
-            <div className={loading ? "loading" : ""}>
-                {loading && "Loading..."}
-            </div>
-            <div className="results" hidden={loading || !results.length}>
-                {results.join(", ")}
-            </div>
-            <div className="final-result" hidden={loading || !finalResult}>
-                {finalResult}
-            </div>
-            {aiError && <div className="ai-error">{aiError}</div>}
-            <Button className="ai-button" onClick={startAi} disabled={disabled}>
+        
+              {/* Shows progress message if currently loading */}
+              {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
+        
+              {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
+              <div className="final-career" style={{"color":colorVibe}}hidden={loading || !finalResult}>
+                {finalDeclaredFuture +"~~"+ finalCareer}
+              </div>
+        
+              {/* Shows individual insights if finished loading */}
+              <div className="results" hidden={!results.length || loading}>
+                <strong>Individual Insights:</strong>
+                <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
+              </div>
+        
+              {/* Shows character analysis */}
+              <div className="final-result" hidden={!finalResult || loading}>
+                <strong>Final Profile:</strong> {finalResult}
+              </div>
+        
+              {/* Shows career prediction */}
+              <div className="final-sentence" hidden={!finalSentence || loading}>
+                <strong>Future Career Prediction:</strong> {finalSentence}
+              </div>
+        
+              {/* Displays any errors that occurred */}
+              {aiError && <div className="ai-error">{aiError}</div>}
+        
+              {/* Generate button; disabled until ready */}
+              <Button className="ai-button" onClick={startAi} disabled={disabled || loading}>
                 Generate Response
-            </Button>
-            {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
-        </div>
+              </Button>
+              
+              {/*Makes user not do stupid stuff*/}
+              <div className="ai-disclaimer" hidden={loading || !finalSentence}>
+                Generated by AI: All choices are yours, and the future is ultimately in your hands. Not responsible for any user damages.
+              </div>
+        
+              {/* Instructional message if the button is disabled */}
+              {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
+              
+              <Button className="ai-button" onClick={()=>navigate("/BasicResultsPage")} disabled={disabled || loading || finalCareer === ""}>
+                More results?  
+              </Button>
+        
+            </div>
     );
 }
 

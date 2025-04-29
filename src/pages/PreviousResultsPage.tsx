@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
-import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
+import DetailedResult, { DetailedResultType } from "./components/PreviousResult";
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
-import { PreviousResult } from "../AIResultsContext";
+import { PreviousResultType } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -19,7 +19,7 @@ if (prevKey !== null) {
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
     const authContext = useAuth();
-    const [prevResults, setPrevResults] = useState<PreviousResult[]>(()=>{
+    const [prevResults, setPrevResults] = useState<PreviousResultType[]>(()=>{
       let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
       return (stored.prevResults)
     })
@@ -49,7 +49,7 @@ function PreviousResultsPage(){
     </div>)
   }
 
-  function removeResult(removedValue: PreviousResult){
+  function removeResult(removedValue: PreviousResultType){
     let account:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
     account.prevResults = prevResults.filter((value)=> value!== removedValue)
     localStorage.setItem(authContext.username, JSON.stringify(account))

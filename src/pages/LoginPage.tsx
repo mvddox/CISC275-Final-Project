@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css"
 import { useAuth } from "../Auth";
-import { PreviousResult } from "../AIResultsContext";
+import { PreviousResultType } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -14,7 +14,7 @@ if (prevKey !== null) {
 
 export interface Account {
   password: string,
-  prevResults: PreviousResult[]
+  prevResults: PreviousResultType[]
 }
 
 

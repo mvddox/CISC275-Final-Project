@@ -1,4 +1,5 @@
 import React from 'react';
+import { PreviousResultType } from '../../AIResultsContext';
 
 
 export interface DetailedResultType{
@@ -9,10 +10,18 @@ export interface DetailedResultType{
     finalCareer: string // what they are going to do in future
     colorVibe: string, // color vibe   
 }
+export interface BasicResultType{
+  results: string[]; // list of results for each question
+  finalResult: string; // general summary
+  finalSentence: string; // final job title
+  finalDeclaredFuture: string // fun stuff
+  finalCareer: string // what they are going to do in future
+  colorVibe: string, // color vibe   
+}
 
 
 
-function DetailedResult(finishedQuestion: DetailedResultType){
+function PreviousResult(finishedQuestion: PreviousResultType){
       return <div className="results-container">
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedQuestion.colorVibe}}>
@@ -21,7 +30,7 @@ function DetailedResult(finishedQuestion: DetailedResultType){
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
           <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
-            {finishedQuestion.results.map((res, i) => (
+            {finishedQuestion.results.map((res: string, i: number) => (
               <li key={i}>{res}</li>
             ))}
           </ul>
@@ -42,4 +51,4 @@ function DetailedResult(finishedQuestion: DetailedResultType){
         </div>
       </div>
 }
-export default DetailedResult
+export default PreviousResult
