@@ -211,7 +211,7 @@ function OpenAiComponent({DetailedResults, disabled}:
       {/* Instructional message if the button is disabled */}
       {disabled && <p className="disabled-message">Please answer all detailed questions to enable a response.</p>}
       
-      <Button className="ai-button" onClick={()=>navigate("/DetailedResultsPage")} disabled={disabled || loading || finalCareer === ""}>
+      <Button className="ai-button" onClick={()=>navigate("/CurrentResultPage")} disabled={disabled || loading || finalCareer === ""}>
         More results?  
       </Button>
 

@@ -222,7 +222,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
               {/* Instructional message if the button is disabled */}
               {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
               
-              <Button className="ai-button" onClick={()=>navigate("/BasicResultsPage")} disabled={disabled || loading || finalCareer === ""}>
+              <Button className="ai-button" onClick={()=>navigate("/CurrentResultPage")} disabled={disabled || loading || finalCareer === ""}>
                 More results?  
               </Button>
         
