@@ -8,6 +8,7 @@ import { useAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Auth';
 import { Account } from '../LoginPage';
+import { DetailedResultType } from './PreviousResult';
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -20,6 +21,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [finalCareer, setFinalCareer] = useState<string>("") // final career
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
+    const [date, setDate] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
@@ -93,7 +95,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         content: "The user gave answers to those questions which you determined a result based on each corresponding question; these results are:" + userResponses.map((val)=>val)
                     },
                     {   role: "developer",
-                        content: "Based on the results: in a many sentences how would you define the person as a whole? "
+                        content: "Based on the results: in at least three sentences how would you define the person as a whole? "
                         + "In one sentence, how would you report their future? "
                         + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                         + "In one simple phrase, what is their future job?"
@@ -143,7 +145,9 @@ function OpenAiComponent({DetailedResults, disabled}:
                 result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 result.setFinalCareer(JSON.parse(response.output_text).future_career)
                 result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                let newResult = {...result};
+                let newResult: DetailedResultType = {...result};
+                let currentDate = Date()
+                setDate(currentDate)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
                 if (storedAcount.prevResults){
                   storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
@@ -152,7 +156,8 @@ function OpenAiComponent({DetailedResults, disabled}:
                     results: [...userResponses],
                     finalCareer: JSON.parse(response.output_text).future_career, 
                     finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                    colorVibe:JSON.parse(response.output_text).color_vibe,}]
+                    colorVibe:JSON.parse(response.output_text).color_vibe,
+                    date: currentDate}]
                   localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
                 }
             })
@@ -164,7 +169,7 @@ function OpenAiComponent({DetailedResults, disabled}:
         setLoading(false)
     }
     return <div className="ai-container">
-
+          <div>{date}</div>
       {/* Shows progress message if currently loading */}
       {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
 
