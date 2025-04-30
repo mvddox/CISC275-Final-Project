@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css"
 import { useAuth } from "../Auth";
+import { PreviousResult } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -10,6 +11,12 @@ const prevKey = localStorage.getItem(saveKeyData); //so it'll look like: MYKEY: 
 if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
+
+export interface Account {
+  password: string,
+  prevResults: PreviousResult[]
+}
+
 
 function LoginPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
@@ -26,9 +33,10 @@ function LoginPage(){
       }
 
     function storeNewUser(username: string, password: string): boolean {
-        const existingPassword = localStorage.getItem(username);
-        if (existingPassword === null){
-            localStorage.setItem(username, password)
+        //const existingPassword = JSON.parse(localStorage.getItem(username) || "").password;
+        const newAccount:Account = {password:password, prevResults: []}
+        if (localStorage.getItem(username) === null){
+            localStorage.setItem(username, JSON.stringify(newAccount))
             authContext.login({username, password});
             return true;
         }

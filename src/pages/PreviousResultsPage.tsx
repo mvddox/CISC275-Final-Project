@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
+import DetailedResult, { DetailedResultType } from "./components/DetailedResult";
+import { useAuth } from "../Auth";
+import { Account } from "./LoginPage";
+import { PreviousResult } from "../AIResultsContext";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -10,17 +14,30 @@ if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
+
+
 function PreviousResultsPage(){
     const [key, setKey] = useState<string>(keyData); //for api key input
+    const authContext = useAuth();
+    const [prevResults, setPrevResults] = useState<PreviousResult[]>(()=>{
+      let stored:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
+      return (stored.prevResults)
+    })
+    let location = useLocation();
+
+    useEffect(()=>{
+      setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
+    }, [authContext.username, location])
+
 
     function handleSubmit() {
         localStorage.setItem(saveKeyData, JSON.stringify(key));
         window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
       }
 
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
-  }
+    function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+      setKey(event.target.value);
+    }
 
   // for navigating from the previous results page to the home page
   function NavigateHomeButton(){
@@ -32,6 +49,13 @@ function PreviousResultsPage(){
     </div>)
   }
 
+  function removeResult(removedValue: PreviousResult){
+    let account:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
+    account.prevResults = prevResults.filter((value)=> value!== removedValue)
+    localStorage.setItem(authContext.username, JSON.stringify(account))
+    setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
+  }
+
     return (
         <div className="Previous">
             <div className="header-content"> 
@@ -40,6 +64,10 @@ function PreviousResultsPage(){
                 <NavigateHomeButton/>
                 </div>
             </div>
+          {prevResults.map((value)=><div><DetailedResult {...value}></DetailedResult><Button onClick={()=> removeResult(value)}>Delete?</Button></div>)}
+          {}
+            
+
         <footer>
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>

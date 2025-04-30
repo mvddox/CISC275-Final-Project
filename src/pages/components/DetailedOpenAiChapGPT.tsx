@@ -6,6 +6,8 @@ import { keyData } from '../DetailedQuestionsPage';
 import './DetailedOpenAiChatGPT.css';
 import { useAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../Auth';
+import { Account } from '../LoginPage';
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -19,12 +21,10 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
-    const { setResults: setContexResults,  setFinalSentence:setContexFinalSentance, setFinalResult: setContexFinalResult,
-      setFinalDeclaredFuture:setFinalContextDeclaredFuture, setFinalCareer: setFinalContextCareer,
-      setColorVibe: setContextColorVibe} = useAIResults();
+
+    const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
     const navigate = useNavigate();
-
-
+    const authContext = useAuth();
 
     async function startAi(){
         setLoading(true)
@@ -33,6 +33,7 @@ function OpenAiComponent({DetailedResults, disabled}:
         setFinalResult("");
         setFinalSentence("");
         setAiError("");
+
 
         let finishedQuestions: number = 0;
         let userResponses: Promise<string>[] = Object.entries(DetailedResults).map(
@@ -80,8 +81,7 @@ function OpenAiComponent({DetailedResults, disabled}:
             
             await Promise.all(userResponses).then(async (userResponses)=>    
                 {
-                setProgressMessage("Arbitrating your final judgment")
-                console.log(userResponses)
+                setProgressMessage("Arbitrating your final judgment...")
                 const response = await openai.responses.create({
                 model: "gpt-4o",
                 instructions: "use second tense",
@@ -136,12 +136,25 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 console.log(response.usage)
-                setContexFinalResult(JSON.parse(response.output_text).user_definition);
-                setContexFinalSentance(JSON.parse(response.output_text).final_sentence);
-                setContexResults(userResponses)
-                setFinalContextDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
-                setFinalContextCareer(JSON.parse(response.output_text).future_career)
-                setContextColorVibe(JSON.parse(response.output_text).color_vibe)
+
+                result.setFinalResult(JSON.parse(response.output_text).user_definition);
+                result.setFinalSentence(JSON.parse(response.output_text).final_sentence);
+                result.setResults(userResponses)
+                result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
+                result.setFinalCareer(JSON.parse(response.output_text).future_career)
+                result.setColorVibe(JSON.parse(response.output_text).color_vibe)
+                let newResult = {...result};
+                let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
+                if (storedAcount.prevResults){
+                  storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
+                    finalResult: JSON.parse(response.output_text).user_definition,
+                    finalSentence: JSON.parse(response.output_text).final_sentence,
+                    results: [...userResponses],
+                    finalCareer: JSON.parse(response.output_text).future_career, 
+                    finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
+                    colorVibe:JSON.parse(response.output_text).color_vibe,}]
+                  localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
+                }
             })
         }
         catch (e){

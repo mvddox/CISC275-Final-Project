@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { DetailedResultType } from './pages/components/DetailedResult';
+import { BasicResultType } from './pages/components/BasicResult';
 //Need to share data between the questions and the results page
 interface AIResultsContextType {
   results: string[]; // list of results for each question
@@ -15,7 +17,11 @@ interface AIResultsContextType {
   setColorVibe: (colorVibe: string) => void;
 }   
 
+export type PreviousResult = DetailedResultType | BasicResultType
+
+
 const AIResultsContext = createContext<AIResultsContextType | undefined>(undefined);
+
 
 export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [results, setResults] = useState<string[]>([]);
@@ -32,6 +38,8 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
     </AIResultsContext.Provider>
   );
 };
+
+
 
 export const useAIResults = ():AIResultsContextType  => {
   const context = useContext(AIResultsContext);

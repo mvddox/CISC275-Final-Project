@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./DetailedResultsPage.css";
 import { useAIResults } from '../AIResultsContext';
+import {DetailedResultType} from "./components/DetailedResult";
 
 export let keyData = "";
 
@@ -25,13 +26,7 @@ function NavigationButton() {
 
 function DetailedResultsPage() {
   const [key, setKey] = useState<string>(keyData);
-  const { results, // list of results for each question
-    finalSentence, // general summary
-    finalResult, // final job title
-    finalDeclaredFuture, // fun stuff
-    finalCareer, // what they are going to do in future
-    colorVibe
-  } = useAIResults();
+  const finishedQuestion: DetailedResultType = useAIResults();
 
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -51,13 +46,13 @@ function DetailedResultsPage() {
       </div>
       <div className="results-container">
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
-        <div className="final-career" style={{"color":colorVibe}}>
-          {finalDeclaredFuture +"~~"+ finalCareer}
+        <div className="final-career" style={{"color":finishedQuestion.colorVibe}}>
+          {finishedQuestion.finalDeclaredFuture +"~~"+ finishedQuestion.finalCareer}
         </div>
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
           <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
-            {results.map((res, i) => (
+            {finishedQuestion.results.map((res, i) => (
               <li key={i}>{res}</li>
             ))}
           </ul>
@@ -65,12 +60,12 @@ function DetailedResultsPage() {
         {/* Shows character analysis */}
         <div className="final-results">
           <h3>Character Analysis:</h3>
-          <p>{finalResult}</p>
+          <p>{finishedQuestion.finalResult}</p>
         </div>
         {/* Shows career prediction */}
         <div className="final-sentence">
           <h3>Overall Suggestion:</h3>
-          <p>{finalSentence}</p>
+          <p>{finishedQuestion.finalSentence}</p>
         </div>
       </div>
       {/*Makes user not do stupid stuff*/}
