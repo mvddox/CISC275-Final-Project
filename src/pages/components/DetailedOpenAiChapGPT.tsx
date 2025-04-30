@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Auth';
 import { Account } from '../LoginPage';
 import { DetailedResultType, resultValues } from './PreviousResult';
+import ValueBars from './valueBars';
 
 
 
@@ -132,19 +133,23 @@ function OpenAiComponent({DetailedResults, disabled}:
                           },
                           values: {
                             type: "object",
-                            empathy:{
-                              type: "number",
-                              description: "rating between 0 and 100. 0 as sociopath, 100 as paragon"
+                            properties: {
+                              empathy:{
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as sociopath, 100 as paragon"
+                              },
+                              workLifeBalance: {
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as only work, 100 as only life"
+                              },
+                              ambition:{
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as none, 100 as everything"
+                              }
                             },
-                            workLifeBalance: {
-                              type: "number",
-                              description: "rating between 0 and 100. 0 as only work, 100 as only life"
-                            },
-                            ambition:{
-                              type: "number",
-                              description: "rating between 0 and 100. 0 as none, 100 as everything"
-                            }
-
+                            additionalProperties: false,
+                            required: ["empathy","workLifeBalance","ambition"]
+                        
                           }
                         },
                         required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values"],
@@ -219,6 +224,10 @@ function OpenAiComponent({DetailedResults, disabled}:
         <strong>Future Career Prediction:</strong> {finalSentence}
       </div>
 
+      <div hidden={!finalSentence || loading}>
+        <ValueBars values={resultValues}></ValueBars>
+      </div>
+
       {/* Displays any errors that occurred */}
       {aiError && <div className="ai-error">{aiError}</div>}
 
@@ -226,6 +235,7 @@ function OpenAiComponent({DetailedResults, disabled}:
       <Button className="ai-button" onClick={startAi} disabled={disabled || loading}>
         Generate Response
       </Button>
+
       
       {/*Makes user not do stupid stuff*/}
       <div className="ai-disclaimer" hidden={loading || !finalSentence}>
