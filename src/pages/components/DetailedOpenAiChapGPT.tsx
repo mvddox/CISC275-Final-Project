@@ -8,7 +8,9 @@ import { useAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Auth';
 import { Account } from '../LoginPage';
-import { DetailedResultType } from './PreviousResult';
+import { DetailedResultType, resultValues } from './PreviousResult';
+
+
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -22,6 +24,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const [date, setDate] = useState<string>("")
+    const [resultValues, setResultValues] = useState<resultValues>({empathy:50,workLifeBalance:50,ambition:50})
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
@@ -127,8 +130,24 @@ function OpenAiComponent({DetailedResults, disabled}:
                           color_vibe: { 
                             type: "string", 
                           },
+                          values: {
+                            type: "object",
+                            empathy:{
+                              type: "number",
+                              description: "rating between 0 and 100. 0 as sociopath, 100 as paragon"
+                            },
+                            workLifeBalance: {
+                              type: "number",
+                              description: "rating between 0 and 100. 0 as only work, 100 as only life"
+                            },
+                            ambition:{
+                              type: "number",
+                              description: "rating between 0 and 100. 0 as none, 100 as everything"
+                            }
+
+                          }
                         },
-                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe"],
+                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values"],
                         additionalProperties: false,
                       },
                     }
@@ -139,6 +158,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
+                setResultValues(JSON.parse(response.output_text).values)
                 console.log(response.usage)
 
                 result.setFinalResult(JSON.parse(response.output_text).user_definition);
@@ -147,7 +167,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                 result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 result.setFinalCareer(JSON.parse(response.output_text).future_career)
                 result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                let newResult: DetailedResultType = {...result};
+                let newResult: DetailedResultType = {...result, values: JSON.parse(response.output_text).values};
                 let currentDate = Date()
                 setDate(currentDate)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")

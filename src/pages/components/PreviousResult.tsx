@@ -1,6 +1,11 @@
 import React from 'react';
 import { PreviousResultType } from '../../AIResultsContext';
 
+export interface resultValues{
+    empathy: number,
+    workLifeBalance: number,
+    ambition: number,
+}
 
 export interface DetailedResultType{
     results: string[]; // list of results for each question
@@ -9,7 +14,8 @@ export interface DetailedResultType{
     finalDeclaredFuture: string // fun stuff
     finalCareer: string // what they are going to do in future
     colorVibe: string, // color vibe
-    date: string   
+    date: string
+    values: resultValues   
 }
 export interface BasicResultType{
   results: string[]; // list of results for each question
