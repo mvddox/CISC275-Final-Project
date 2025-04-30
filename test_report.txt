@@ -17,36 +17,13 @@ FAIL src/pages/BasicQuestionsPage.test.tsx
     >  7 | import { useNavigate } from "react-router-dom";
          | ^
        8 | import { useAIResults } from '../../AIResultsContext';
-       9 | interface OpenAiComponentBProps {
-      10 |     BasicResults: BasicAnswerRecord;
+       9 | import { Account } from '../LoginPage';
+      10 | import { useAuth } from '../../Auth';
 
       at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
       at Object.<anonymous> (src/pages/components/BasicOpenAiChapGPT.tsx:7:1)
       at Object.<anonymous> (src/pages/BasicQuestionsPage.tsx:10:1)
       at Object.<anonymous> (src/pages/BasicQuestionsPage.test.tsx:5:1)
-
-FAIL src/pages/DetailedQuestionsPage.test.tsx
-  ● Test suite failed to run
-
-    Cannot find module 'react-router-dom' from 'src/pages/components/DetailedOpenAiChapGPT.tsx'
-
-    Require stack:
-      src/pages/components/DetailedOpenAiChapGPT.tsx
-      src/pages/DetailedQuestionsPage.tsx
-      src/pages/DetailedQuestionsPage.test.tsx
-
-       6 | import './DetailedOpenAiChatGPT.css';
-       7 | import { useAIResults } from '../../AIResultsContext';
-    >  8 | import { useNavigate } from "react-router-dom";
-         | ^
-       9 |
-      10 | function OpenAiComponent({DetailedResults, disabled}:
-      11 |     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
-
-      at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
-      at Object.<anonymous> (src/pages/components/DetailedOpenAiChapGPT.tsx:8:1)
-      at Object.<anonymous> (src/pages/DetailedQuestionsPage.tsx:8:1)
-      at Object.<anonymous> (src/pages/DetailedQuestionsPage.test.tsx:5:1)
 
 FAIL src/App.test.tsx
   ● Test suite failed to run
@@ -64,8 +41,8 @@ FAIL src/App.test.tsx
     >  7 | import { useNavigate } from "react-router-dom";
          | ^
        8 | import { useAIResults } from '../../AIResultsContext';
-       9 | interface OpenAiComponentBProps {
-      10 |     BasicResults: BasicAnswerRecord;
+       9 | import { Account } from '../LoginPage';
+      10 | import { useAuth } from '../../Auth';
 
       at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
       at Object.<anonymous> (src/pages/components/BasicOpenAiChapGPT.tsx:7:1)
@@ -73,38 +50,97 @@ FAIL src/App.test.tsx
       at Object.<anonymous> (src/App.tsx:3:1)
       at Object.<anonymous> (src/App.test.tsx:5:1)
 
-A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+FAIL src/pages/DetailedQuestionsPage.test.tsx
+  ● Test suite failed to run
+
+    Cannot find module 'react-router-dom' from 'src/pages/components/DetailedOpenAiChapGPT.tsx'
+
+    Require stack:
+      src/pages/components/DetailedOpenAiChapGPT.tsx
+      src/pages/DetailedQuestionsPage.tsx
+      src/pages/DetailedQuestionsPage.test.tsx
+
+       6 | import './DetailedOpenAiChatGPT.css';
+       7 | import { useAIResults } from '../../AIResultsContext';
+    >  8 | import { useNavigate } from "react-router-dom";
+         | ^
+       9 | import { useAuth } from '../../Auth';
+      10 | import { Account } from '../LoginPage';
+      11 | import { DetailedResultType } from './PreviousResult';
+
+      at Resolver.resolveModule (node_modules/jest-resolve/build/resolver.js:324:11)
+      at Object.<anonymous> (src/pages/components/DetailedOpenAiChapGPT.tsx:8:1)
+      at Object.<anonymous> (src/pages/DetailedQuestionsPage.tsx:8:1)
+      at Object.<anonymous> (src/pages/DetailedQuestionsPage.test.tsx:5:1)
+
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
 ----------------------------|---------|----------|---------|---------|-------------------
 File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ----------------------------|---------|----------|---------|---------|-------------------
 All files                   |       0 |        0 |       0 |       0 |                   
  src                        |       0 |        0 |       0 |       0 |                   
-  AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 18-39             
-  App.tsx                   |       0 |        0 |       0 |       0 | 44-132            
-  Auth.tsx                  |       0 |        0 |       0 |       0 | 19-58             
+  AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 24-49             
+  App.tsx                   |       0 |        0 |       0 |       0 | 22-109            
+  Auth.tsx                  |       0 |        0 |       0 |       0 | 20-64             
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19              
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10              
  src/pages                  |       0 |        0 |       0 |       0 |                   
   BasicQuestion.tsx         |       0 |      100 |       0 |       0 | 9-21              
   BasicQuestionsList.tsx    |       0 |      100 |     100 |       0 | 18-44             
-  BasicQuestionsPage.tsx    |       0 |        0 |       0 |       0 | 13-159            
-  BasicResultsPage.tsx      |       0 |        0 |       0 |       0 | 7-49              
+  BasicQuestionsPage.tsx    |       0 |        0 |       0 |       0 | 14-160            
+  CurrentResultPage.tsx     |       0 |        0 |       0 |       0 | 10-88             
   DetailedQuestion.tsx      |       0 |        0 |       0 |       0 | 10-30             
   DetailedQuestionsList.tsx |       0 |      100 |     100 |       0 | 20-66             
   DetailedQuestionsPage.tsx |       0 |        0 |       0 |       0 | 12-117            
-  DetailedResultsPage.tsx   |       0 |        0 |       0 |       0 | 7-61              
   Home.tsx                  |       0 |        0 |       0 |       0 | 9-100             
-  LoginPage.tsx             |       0 |        0 |       0 |       0 | 7-117             
+  LoginPage.tsx             |       0 |        0 |       0 |       0 | 8-125             
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 6-102             
-  PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 6-35              
+  PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 11-116            
  src/pages/components       |       0 |        0 |       0 |       0 |                   
-  BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 15-78             
-  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 12-195            
+  BasicOpenAiChapGPT.tsx    |       0 |        0 |       0 |       0 | 18-226            
+  DetailedOpenAiChapGPT.tsx |       0 |        0 |       0 |       0 | 15-219            
+  PreviousResult.tsx        |       0 |      100 |       0 |       0 | 27-37             
   ProgressBar.tsx           |       0 |      100 |       0 |       0 | 3-21              
+  debugBasic.tsx            |       0 |      100 |       0 |       0 | 6-35              
   debugDetailed.tsx         |       0 |      100 |       0 |       0 | 7-43              
 ----------------------------|---------|----------|---------|---------|-------------------
 Test Suites: 3 failed, 3 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        6.231 s
+Time:        6.714 s
 Ran all test suites.
