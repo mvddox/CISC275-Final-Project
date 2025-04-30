@@ -39,15 +39,15 @@ function ValueBars({values}: {values: resultValues}){
         </Row>
         Ambition
         <Row>
-            <Col>Placant</Col>
+            <Col>Passive</Col>
            <Col xs={8}><SingleValueBar progress={values.ambition}></SingleValueBar></Col>
-            <Col>Augustine</Col>
+            <Col>Ad Astra!</Col>
         </Row>
         Work Life
         <Row>
             <Col>Workoholic</Col>
            <Col xs={8}><SingleValueBar progress={values.workLifeBalance}></SingleValueBar></Col>
-            <Col>Unemployed</Col>
+            <Col>NEET</Col>
         </Row>
     </Container>
 

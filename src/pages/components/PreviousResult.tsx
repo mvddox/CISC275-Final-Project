@@ -35,7 +35,7 @@ export function isDetailed(object: PreviousResultType): object is DetailedResult
 
 function PreviousResult({finishedResult, complete}: {finishedResult: PreviousResultType, complete: boolean}){
       return <div className="results-container">
-      
+        {isDetailed(finishedResult) ? <div>Detailed Result</div>: <div>Basic Result</div>}
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
           {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}

@@ -1,114 +1,95 @@
 html, body, #root {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .Results {
-  
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Aligns items to the top */
-    font-size: calc(10px + 2vmin);
-    color: rgb(255, 255, 255);
-    flex-grow: 1; /* Allows it to expand and fill space */
-    width: 100%;
-    background-color: rgb(187, 178, 237);
-  }
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Results {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(187, 178, 237);
+}
 
 .results-container{
-  margin: 20px;
-  padding: 10px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+margin: 20px;
+padding: 10px;
+font-family: Arial, sans-serif;
+background-color: #f9f9f9;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-  .results-list {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Aligns items to the top */
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    /* flex-grow: 1; Allows it to expand and fill space */
-    width: 100%;
-    background-color: #f9f9f9;
-    
-  }
-  .final-sentence{
-    margin: 0;
-
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Aligns items to the top */
-    font-size: calc(10px + 2vmin);
-    color: rgb(0, 0, 0);
-    flex-grow: 1; /* Allows it to expand and fill space */
-    width: 100%;
-    border-top: 0;
-  }
-  .final-results{
-    margin: 0;
-    
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Aligns items to the top */
-    font-size: calc(14px);
-    color: rgb(0, 0, 0);
-    flex-grow: 1; /* Allows it to expand and fill space */
-    width: 100%;
-  }
-  
-  .date {
-    color: black
-  }
-  
-  .header-content { 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: rgb(52, 33, 160);
-    width: 100%; 
-    padding-bottom: 20px; 
-  }
-  
-  .header-content h1 {
-    font-size: 2em;
-  }
-  
-
-  .Button{
-    background-color: rgb(108, 92, 195);
-    border: 1px solid black; 
-    text-align: center;
-}
-.final-career{
-  margin-top: 20px;
-  color: #2d2d2d;
-  font-weight: bold;
-  font-size: 1.5rem;
-  border-top: 2px solid #007bff;
-  padding-top: 10px;
+.results-list {
+  text-align: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start; /* Aligns items to the top */
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  /* flex-grow: 1; Allows it to expand and fill space */
+  width: 100%;
+  background-color: #f9f9f9;
+  
+}
+.final-sentence{
+  margin: 0;
 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the top */
+  font-size: calc(10px + 2vmin);
+  color: rgb(0, 0, 0);
+  flex-grow: 1; /* Allows it to expand and fill space */
+  width: 100%;
+  border-top: 0;
+}
+.final-results{
+  margin: 0;
+  
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the top */
+  font-size: calc(14px);
+  color: rgb(0, 0, 0);
+  flex-grow: 1; /* Allows it to expand and fill space */
+  width: 100%;
 }
 
+.date {
+  color: black
+}
+
+.header-content { 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(52, 33, 160);
+  width: 100%; 
+  padding-bottom: 20px; 
+}
+
+.header-content h1 {
+  font-size: 2em;
+}
+
+
+.Button{
+  background-color: rgb(108, 92, 195);
+  border: 1px solid black; 
+  text-align: center;
+}
 
 .ai-disclaimer{
-  background-color: yellow;
-  color: red
+background-color: yellow;
+color: red
 }

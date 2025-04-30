@@ -78,6 +78,9 @@ function CurrentResultPage() {
         <NavigationButton />
       </div>
       <div className="results-container">
+
+          {isDetailed(finishedResult) ? <div>Detailed Result</div>: <div>Basic Result</div>}
+
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
           {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
