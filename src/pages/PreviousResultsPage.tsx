@@ -7,6 +7,7 @@ import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
 import { PreviousResultType, useAIResults } from "../AIResultsContext";
 import PreviousResult from "./components/PreviousResult";
+import { renderToString } from "react-dom/server";
 
 export let keyData = "";
 const saveKeyData = "MYKEY";
@@ -52,6 +53,33 @@ function PreviousResultsPage(){
       </Button>
     </div>)
   }
+  // credit to https://stackoverflow.com/questions/68152987/how-to-download-part-of-a-react-component
+    function donwloadResult(finishedResult: PreviousResultType){
+      // putting the css here makes in look ugly so i put it in public
+      fetch("/Result.css").then((x)=>{
+        x.text().then((y)=>{
+          const html = renderToString(<div>
+            <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+          const blob = new Blob([html]);
+          const url = URL.createObjectURL(blob);
+          const tempEl = document.createElement("a");
+          document.body.appendChild(tempEl);
+          tempEl.href = url;
+          tempEl.download = "CareerResults.html";
+          tempEl.click();
+          setTimeout(() => {
+            URL.revokeObjectURL(url);
+            if(tempEl.parentNode){
+              tempEl.parentNode.removeChild(tempEl);
+            }
+          }, 2000);
+    
+    
+    })
+      })
+  
+  
+    }
 
   function removeResult(removedValue: PreviousResultType){
     let account:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
@@ -83,7 +111,7 @@ function PreviousResultsPage(){
             <PreviousResult {...value}></PreviousResult>
             <Button onClick={()=> removeResult(value)}>Delete?</Button>
             <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
-            <Button onClick={()=> {}}> Download? </Button>
+            <Button onClick={()=> donwloadResult(value)}> Download? </Button>
             </div>)}
           {}
             
