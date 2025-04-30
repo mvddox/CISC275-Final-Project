@@ -54,7 +54,8 @@ function PreviousResultsPage(){
     </div>)
   }
   // credit to https://stackoverflow.com/questions/68152987/how-to-download-part-of-a-react-component
-    function donwloadResult(finishedResult: PreviousResultType){
+  // downloads result as html file
+    function downloadResult(finishedResult: PreviousResultType){
       // putting the css here makes in look ugly so i put it in public
       fetch("/Result.css").then((x)=>{
         x.text().then((y)=>{
@@ -81,6 +82,7 @@ function PreviousResultsPage(){
   
     }
 
+  //removes result from storage
   function removeResult(removedValue: PreviousResultType){
     let account:Account = JSON.parse(localStorage.getItem(authContext.username) || "")
     account.prevResults = prevResults.filter((value)=> value!== removedValue)
@@ -88,6 +90,7 @@ function PreviousResultsPage(){
     setPrevResults(JSON.parse(localStorage.getItem(authContext.username) || "").prevResults)
   }
 
+  // handler for user to focus on a single result back at currentresultpage where more details are shown
   function NavigateToFocus(destination: PreviousResultType){
     result.setFinalResult(destination.finalResult);
     result.setFinalSentence(destination.finalSentence);
@@ -111,7 +114,7 @@ function PreviousResultsPage(){
             <PreviousResult {...value}></PreviousResult>
             <Button onClick={()=> removeResult(value)}>Delete?</Button>
             <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
-            <Button onClick={()=> donwloadResult(value)}> Download? </Button>
+            <Button onClick={()=> downloadResult(value)}> Download? </Button>
             </div>)}
           {}
             
