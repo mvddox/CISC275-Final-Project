@@ -15,8 +15,7 @@ import MyProfilePage from './pages/MyProfilePage';
 import LoginPage from './pages/LoginPage';
 import { Dropdown } from 'react-bootstrap';
 import { AIResultsProvider } from './AIResultsContext';
-import BasicResultsPage from './pages/BasicResultsPage';
-import DetailedResultsPage from './pages/DetailedResultsPage';
+import CurrentResultPage from './pages/CurrentResultPage';
 
 function App() {
   
@@ -151,12 +150,8 @@ function App() {
                             element={<LoginPage />}
                         />
                         <Route
-                            path="/BasicResultsPage"
-                            element={<BasicResultsPage />}
-                        />
-                        <Route
-                            path="/DetailedResultsPage"
-                            element={<DetailedResultsPage />} 
+                            path="/CurrentResultPage"
+                            element={<CurrentResultPage />}
                         />
                     </Routes>
                     </AIResultsProvider>
