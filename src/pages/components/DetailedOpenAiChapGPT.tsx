@@ -8,7 +8,10 @@ import { useAIResults } from '../../AIResultsContext';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../Auth';
 import { Account } from '../LoginPage';
-import { DetailedResultType } from './PreviousResult';
+import { DetailedResultType, resultValues } from './PreviousResult';
+import ValueBars from './valueBars';
+
+
 
 function OpenAiComponent({DetailedResults, disabled}:
     {DetailedResults: DetailedQuestionRecord, disabled: boolean}){
@@ -22,6 +25,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [progressMessage, setProgressMessage] = useState<string>("")
     const [colorVibe, setColorVibe] = useState<string>("")
     const [date, setDate] = useState<string>("")
+    const [resultValues, setResultValues] = useState<resultValues>({empathy:50,workLifeBalance:50,ambition:50})
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
@@ -127,8 +131,28 @@ function OpenAiComponent({DetailedResults, disabled}:
                           color_vibe: { 
                             type: "string", 
                           },
+                          values: {
+                            type: "object",
+                            properties: {
+                              empathy:{
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as sociopath, 100 as paragon"
+                              },
+                              workLifeBalance: {
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as only work, 100 as only life"
+                              },
+                              ambition:{
+                                type: "number",
+                                description: "rating between 0 and 100. 0 as none, 100 as everything"
+                              }
+                            },
+                            additionalProperties: false,
+                            required: ["empathy","workLifeBalance","ambition"]
+                        
+                          }
                         },
-                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe"],
+                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values"],
                         additionalProperties: false,
                       },
                     }
@@ -139,27 +163,24 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
-                console.log(response.usage)
-
-                result.setFinalResult(JSON.parse(response.output_text).user_definition);
-                result.setFinalSentence(JSON.parse(response.output_text).final_sentence);
-                result.setResults(userResponses)
-                result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
-                result.setFinalCareer(JSON.parse(response.output_text).future_career)
-                result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                let newResult: DetailedResultType = {...result};
+                setResultValues(JSON.parse(response.output_text).values)
                 let currentDate = Date()
                 setDate(currentDate)
+                console.log(response.usage)
+                let currentResult: DetailedResultType = {
+                  finalResult: JSON.parse(response.output_text).user_definition,
+                  finalSentence: JSON.parse(response.output_text).final_sentence,
+                  results: [...userResponses],
+                  finalCareer: JSON.parse(response.output_text).future_career, 
+                  finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
+                  colorVibe:JSON.parse(response.output_text).color_vibe,
+                  date: currentDate,
+                  values: (JSON.parse(response.output_text).values) 
+                }
+                result.setResult( currentResult)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
                 if (storedAcount.prevResults){
-                  storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
-                    finalResult: JSON.parse(response.output_text).user_definition,
-                    finalSentence: JSON.parse(response.output_text).final_sentence,
-                    results: [...userResponses],
-                    finalCareer: JSON.parse(response.output_text).future_career, 
-                    finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                    colorVibe:JSON.parse(response.output_text).color_vibe,
-                    date: currentDate}]
+                  storedAcount.prevResults = [...storedAcount.prevResults, { ...currentResult,}]
                   localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
                 }
             })
@@ -199,6 +220,10 @@ function OpenAiComponent({DetailedResults, disabled}:
         <strong>Future Career Prediction:</strong> {finalSentence}
       </div>
 
+      <div hidden={!finalSentence || loading}>
+        <ValueBars values={resultValues}></ValueBars>
+      </div>
+
       {/* Displays any errors that occurred */}
       {aiError && <div className="ai-error">{aiError}</div>}
 
@@ -206,6 +231,7 @@ function OpenAiComponent({DetailedResults, disabled}:
       <Button className="ai-button" onClick={startAi} disabled={disabled || loading}>
         Generate Response
       </Button>
+
       
       {/*Makes user not do stupid stuff*/}
       <div className="ai-disclaimer" hidden={loading || !finalSentence}>

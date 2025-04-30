@@ -3,9 +3,9 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./CurrentResultPage.css"
 import { PreviousResultType, useAIResults } from '../AIResultsContext';
-import PreviousResult from "./components/PreviousResult";
+import PreviousResult, { isDetailed } from "./components/PreviousResult";
 import { renderToString } from 'react-dom/server';
-
+import ValueBars from "./components/valueBars";
 
 export let keyData = "";
 
@@ -25,10 +25,20 @@ function NavigationButton() {
     </div>
   );
 }
+function NavigationPreviousResultsButton() {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Button className="Button" onClick={() => navigate("/PreviousResults")}>
+      Back to Previous?
+      </Button>
+    </div>
+  );
+}
 
 function CurrentResultPage() {
   const [key, setKey] = useState<string>(keyData);
-  const finishedResult: PreviousResultType = useAIResults();
+  const finishedResult: PreviousResultType = useAIResults().result;
 
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -47,7 +57,7 @@ function CurrentResultPage() {
     fetch("/Result.css").then((x)=>{
       x.text().then((y)=>{
         const html = renderToString(<div>
-          <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+          <style>{y}</style><PreviousResult finishedResult={{...finishedResult}} complete={true}></PreviousResult></div>)
         const blob = new Blob([html]);
         const url = URL.createObjectURL(blob);
         const tempEl = document.createElement("a");
@@ -67,8 +77,9 @@ function CurrentResultPage() {
     })
 
 
-  }
+    
 
+  }
   return (
     <div className="Results">
       
@@ -77,6 +88,9 @@ function CurrentResultPage() {
         <NavigationButton />
       </div>
       <div className="results-container">
+
+          {isDetailed(finishedResult) ? <div>Detailed Result</div>: <div>Basic Result</div>}
+
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
           {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
@@ -99,6 +113,11 @@ function CurrentResultPage() {
           <h3>Overall Suggestion:</h3>
           <p>{finishedResult.finalSentence}</p>
         </div>
+
+        {isDetailed(finishedResult)  ?
+            <ValueBars values={finishedResult.values}></ValueBars>
+        : <></>}
+
         <div className="date">Generated at: {finishedResult.date}</div>
         {/*Makes user not do stupid stuff*/}
         <div className="ai-disclaimer">
@@ -108,6 +127,7 @@ function CurrentResultPage() {
       <Button onClick={downloadResult}>
         Download?
       </Button>
+      <NavigationPreviousResultsButton></NavigationPreviousResultsButton>
 
       <footer>
         <Form>

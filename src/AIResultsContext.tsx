@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { BasicResultType, DetailedResultType } from './pages/components/PreviousResult';
+import { BasicResultType, DetailedResultType, resultValues } from './pages/components/PreviousResult';
 //Need to share data between the questions and the results page
 interface AIResultsContextType {
   results: string[]; // list of results for each question
@@ -9,6 +9,7 @@ interface AIResultsContextType {
   finalCareer: string // what they are going to do in future
   colorVibe: string, // color vibe
   date: string
+  values?: resultValues
   setResults: (results: string[]) => void;
   setFinalResult: (finalResult: string) => void;
   setFinalSentence: (finalSentence: string) => void;
@@ -16,6 +17,11 @@ interface AIResultsContextType {
   setFinalCareer: (finalCareer: string) => void;
   setColorVibe: (colorVibe: string) => void;
   setDate: (date:string) => void;
+  setValues: (values:resultValues) => void;
+
+  result: PreviousResultType
+  setResult: (result: PreviousResultType) => void;
+
 }   
 
 export type PreviousResultType = DetailedResultType | BasicResultType
@@ -32,10 +38,21 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
   const [finalCareer, setFinalCareer] = useState<string>("")
   const [colorVibe, setColorVibe] = useState<string>("")
   const [date, setDate] = useState<string>("")
+  const [values, setValues] = useState<resultValues>({empathy:50, ambition: 50, workLifeBalance: 50})
+  const [result, setResult] = useState<PreviousResultType>({
+    results:[],
+    finalResult:"",
+    finalSentence:"",
+    finalDeclaredFuture: "",
+    finalCareer: "",
+    colorVibe: "",
+    date: "",
+    values: {empathy:50, ambition: 50, workLifeBalance: 50}
+  })
 
   return (
-    <AIResultsContext.Provider value={{ results, finalResult, finalSentence, finalDeclaredFuture, finalCareer, colorVibe, date,
-             setResults, setFinalResult, setFinalSentence, setFinalDeclaredFuture, setFinalCareer, setColorVibe, setDate }}>
+    <AIResultsContext.Provider value={{ results, finalResult, finalSentence, finalDeclaredFuture, finalCareer, colorVibe, date, values,
+             setResults, setFinalResult, setFinalSentence, setFinalDeclaredFuture, setFinalCareer, setColorVibe, setDate, setValues, result, setResult }}>
       {children}
     </AIResultsContext.Provider>
   );

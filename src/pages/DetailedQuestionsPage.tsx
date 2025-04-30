@@ -20,9 +20,6 @@ if (prevKey !== null) {
 function DetailedQuestionsPage() {
   const [viewedQuestion, setViewedQuestion] = useState<number>(0) //index of which question to view
   const [answers, setAnswers] = useState<DetailedQuestionRecord>({}) //collects all the user inputed answers into a record based on id
-  const givenAnswers: string =
-      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ") //converts record to string for debugging
-  const [clickedResults, setClickedResults] = useState<boolean>(false) //tracks if user clicked on results
   const [key, setKey] = useState<string>(keyData); //for api key input
 
   const [debugMode, setDebugMode] = useState<boolean>(false) // for debug mode
@@ -105,8 +102,6 @@ function NavigateToHomeButton(){
         <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 ===
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
-        <Button className='Header-Buttons-Detailed-button' onClick={()=>setClickedResults(!clickedResults)}>Show Results</Button> {clickedResults && <span>Your results are
-          {" " + givenAnswers}</span>}
       </div>
       <div className ='Detailed-Body'>
         <QuestionProgressBar progress={progress} />

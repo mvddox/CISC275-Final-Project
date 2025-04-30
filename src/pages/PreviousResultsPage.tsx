@@ -59,7 +59,7 @@ function PreviousResultsPage(){
       fetch("/Result.css").then((x)=>{
         x.text().then((y)=>{
           const html = renderToString(<div>
-            <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+            <style>{y}</style><PreviousResult finishedResult={{...finishedResult}} complete={true}></PreviousResult></div>)
           const blob = new Blob([html]);
           const url = URL.createObjectURL(blob);
           const tempEl = document.createElement("a");
@@ -91,13 +91,7 @@ function PreviousResultsPage(){
 
   // handler for user to focus on a single result back at currentresultpage where more details are shown
   function NavigateToFocus(destination: PreviousResultType){
-    result.setFinalResult(destination.finalResult);
-    result.setFinalSentence(destination.finalSentence);
-    result.setResults(destination.results)
-    result.setFinalDeclaredFuture(destination.finalDeclaredFuture)
-    result.setFinalCareer(destination.finalCareer)
-    result.setColorVibe(destination.colorVibe)
-    result.setDate(destination.date)
+    result.setResult(destination)
     navigate("/CurrentResultPage")
   }
 
@@ -110,7 +104,7 @@ function PreviousResultsPage(){
                 </div>
             </div>
           {prevResults.map((value)=><div>
-            <PreviousResult {...value}></PreviousResult>
+            <PreviousResult finishedResult={{...value}} complete={false}></PreviousResult>
             <Button onClick={()=> removeResult(value)}>Delete?</Button>
             <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
             <Button onClick={()=> downloadResult(value)}> Download? </Button>

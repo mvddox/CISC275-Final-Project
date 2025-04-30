@@ -40,12 +40,9 @@ const splitQuestions = (questions: BasicQuestionType[], max: number): BasicQuest
 
 function BasicQuestionsPage() {
   const [answers, setAnswers] = useState<BasicAnswerRecord>({}) //for the answers of all questions collected
-  const givenAnswers: string =
-      Object.entries(answers).map(([id,answer]: [string ,string]) => ("["+id+", "+answer+"]")).join(", ")
   const viewableQuestions: BasicQuestionType[][] = splitQuestions(BASIC_QUESTIONS, 8)
   const [viewedQuestionsCount, setViewedQuestionsCount] = useState<number>(0)
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
-  const [clickedResults, setClickedResults] = useState<boolean>(false) //for seeing the results after button click
   const [key, setKey] = useState<string>(keyData); //for api key input
   const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
   const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
@@ -157,10 +154,6 @@ function NavigateToHomeButton(){
         setViewedQuestionsCount(viewedQuestionsCount+1)
       }}>
       Next</Button>
-      <Button className="Button" onClick={()=>{setClickedResults(!clickedResults)}}>
-        Show results</Button>{clickedResults && <span>Your results are
-      
-          {" " +givenAnswers}</span>}
           </div>
           <DebugBasic setAnswers={setAnswers}></DebugBasic>
           <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div>
