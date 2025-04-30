@@ -29,13 +29,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const storedUserStatus = localStorage.getItem('loggedUser')
     const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(storedLoginStatus);
     const [ username, setUsername ] = useState<string>(storedUserStatus || "");
-
+    
     const login = (info: LoginInfo): boolean => {
-        setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', 'true');
+        
         if (localStorage.getItem(info.username) || ""){
             const account:Account = JSON.parse(localStorage.getItem(info.username) || "");
             if (account.password != null && account.password === info.password){
+                setIsLoggedIn(true);
+                localStorage.setItem('isLoggedIn', 'true');
                 setUsername(info.username);
                 localStorage.setItem('loggedUser', info.username);
                 return true;
