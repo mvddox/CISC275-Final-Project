@@ -59,7 +59,7 @@ function PreviousResultsPage(){
       fetch("/Result.css").then((x)=>{
         x.text().then((y)=>{
           const html = renderToString(<div>
-            <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+            <style>{y}</style><PreviousResult finishedResult={{...finishedResult}} complete={true}></PreviousResult></div>)
           const blob = new Blob([html]);
           const url = URL.createObjectURL(blob);
           const tempEl = document.createElement("a");
@@ -104,7 +104,7 @@ function PreviousResultsPage(){
                 </div>
             </div>
           {prevResults.map((value)=><div>
-            <PreviousResult {...value}></PreviousResult>
+            <PreviousResult finishedResult={{...value}} complete={false}></PreviousResult>
             <Button onClick={()=> removeResult(value)}>Delete?</Button>
             <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
             <Button onClick={()=> downloadResult(value)}> Download? </Button>

@@ -30,9 +30,6 @@ function CurrentResultPage() {
   const [key, setKey] = useState<string>(keyData);
   const finishedResult: PreviousResultType = useAIResults().result;
 
-  console.log({...finishedResult})
-  console.log(isDetailed(finishedResult))
-
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
     window.location.reload();
@@ -50,7 +47,7 @@ function CurrentResultPage() {
     fetch("/Result.css").then((x)=>{
       x.text().then((y)=>{
         const html = renderToString(<div>
-          <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+          <style>{y}</style><PreviousResult finishedResult={{...finishedResult}} complete={true}></PreviousResult></div>)
         const blob = new Blob([html]);
         const url = URL.createObjectURL(blob);
         const tempEl = document.createElement("a");

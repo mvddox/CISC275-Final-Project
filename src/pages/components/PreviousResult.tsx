@@ -28,39 +28,42 @@ export interface BasicResultType{
   date: string
 }
 
+//typeguard to check if it is detailed; inversley it would be basic
 export function isDetailed(object: PreviousResultType): object is DetailedResultType {
   return 'values' in object;
 }
 
-
-
-function PreviousResult(finishedQuestion: PreviousResultType){
+function PreviousResult({finishedResult, complete}: {finishedResult: PreviousResultType, complete: boolean}){
       return <div className="results-container">
       
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
-        <div className="final-career" style={{"color":finishedQuestion.colorVibe}}>
-          {finishedQuestion.finalDeclaredFuture +"~~"+ finishedQuestion.finalCareer}
+        <div className="final-career" style={{"color":finishedResult.colorVibe}}>
+          {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
         </div>
         {/* Shows individual insights if finished loading */}
-        <div className="results-list">
+        {complete ? <div className="results-list">
           <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
-            {finishedQuestion.results.map((res: string, i: number) => (
+            {finishedResult.results.map((res: string, i: number) => (
               <li key={i}>{res}</li>
             ))}
           </ul>
-        </div>
+        </div>: <></>}
         {/* Shows character analysis */}
         <div className="final-results">
           <h3>Character Analysis:</h3>
-          <p>{finishedQuestion.finalResult}</p>
+          <p>{finishedResult.finalResult}</p>
         </div>
         {/* Shows career prediction */}
         <div className="final-sentence">
           <h3>Overall Suggestion:</h3>
-          <p>{finishedQuestion.finalSentence}</p>
+          <p>{finishedResult.finalSentence}</p>
         </div>
 
-        <div className="date">Achieved at: {finishedQuestion.date}</div>
+        {isDetailed(finishedResult) && complete ?
+            <ValueBars values={finishedResult.values}></ValueBars>
+        : <></>}
+
+        <div className="date">Achieved at: {finishedResult.date}</div>
         {/*Makes user not do stupid stuff, (or more correctly, us less liable!)*/}
         <div className="ai-disclaimer">
           <div>"I THINK THEREFORE I AM!" You think your own thoughts, not the AI, and therefore you act your own actions</div>
