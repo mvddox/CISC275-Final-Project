@@ -42,7 +42,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 return true;
             }
         }   
-        return false;
+        return false; 
     }
 
     const logout = () => {
