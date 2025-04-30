@@ -25,6 +25,16 @@ function NavigationButton() {
     </div>
   );
 }
+function NavigationPreviousResultsButton() {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Button className="Button" onClick={() => navigate("/PreviousResults")}>
+      Back to Previous?
+      </Button>
+    </div>
+  );
+}
 
 function CurrentResultPage() {
   const [key, setKey] = useState<string>(keyData);
@@ -117,6 +127,7 @@ function CurrentResultPage() {
       <Button onClick={downloadResult}>
         Download?
       </Button>
+      <NavigationPreviousResultsButton></NavigationPreviousResultsButton>
 
       <footer>
         <Form>
