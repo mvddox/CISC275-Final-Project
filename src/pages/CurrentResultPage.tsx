@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./CurrentResultPage.css";
+import "./CurrentResultPage.css"
 import { PreviousResultType, useAIResults } from '../AIResultsContext';
 import PreviousResult from "./components/PreviousResult";
 import { renderToString } from 'react-dom/server';
@@ -42,20 +42,30 @@ function CurrentResultPage() {
 
   // credit to https://stackoverflow.com/questions/68152987/how-to-download-part-of-a-react-component
   function donwloadResult(){
-    const html = renderToString(<PreviousResult {...finishedResult}></PreviousResult>)
-    const blob = new Blob([html], { type: "html" });
-    const url = URL.createObjectURL(blob);
-    const tempEl = document.createElement("a");
-    document.body.appendChild(tempEl);
-    tempEl.href = url;
-    tempEl.download = "thispage.html";
-    tempEl.click();
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-      if(tempEl.parentNode){
-        tempEl.parentNode.removeChild(tempEl);
-      }
-    }, 2000);
+    // putting the css here makes in look ugly so i put it in public
+    fetch("/Result.css").then((x)=>{
+      x.text().then((y)=>{
+        const html = renderToString(<div>
+          <style>{y}</style><PreviousResult {...finishedResult}></PreviousResult></div>)
+        const blob = new Blob([html]);
+        const url = URL.createObjectURL(blob);
+        const tempEl = document.createElement("a");
+        document.body.appendChild(tempEl);
+        tempEl.href = url;
+        tempEl.download = "CareerResults.html";
+        tempEl.click();
+        setTimeout(() => {
+          URL.revokeObjectURL(url);
+          if(tempEl.parentNode){
+            tempEl.parentNode.removeChild(tempEl);
+          }
+        }, 2000);
+  
+  
+  })
+    })
+
+
   }
 
   return (

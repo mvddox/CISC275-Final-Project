@@ -25,6 +25,7 @@ export interface BasicResultType{
 
 function PreviousResult(finishedQuestion: PreviousResultType){
       return <div className="results-container">
+      
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedQuestion.colorVibe}}>
           {finishedQuestion.finalDeclaredFuture +"~~"+ finishedQuestion.finalCareer}
