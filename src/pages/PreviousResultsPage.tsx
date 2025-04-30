@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./PreviousResultsPage.css"
-import DetailedResult, { DetailedResultType } from "./components/PreviousResult";
 import { useAuth } from "../Auth";
 import { Account } from "./LoginPage";
 import { PreviousResultType, useAIResults } from "../AIResultsContext";
