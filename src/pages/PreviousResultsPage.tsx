@@ -91,13 +91,7 @@ function PreviousResultsPage(){
 
   // handler for user to focus on a single result back at currentresultpage where more details are shown
   function NavigateToFocus(destination: PreviousResultType){
-    result.setFinalResult(destination.finalResult);
-    result.setFinalSentence(destination.finalSentence);
-    result.setResults(destination.results)
-    result.setFinalDeclaredFuture(destination.finalDeclaredFuture)
-    result.setFinalCareer(destination.finalCareer)
-    result.setColorVibe(destination.colorVibe)
-    result.setDate(destination.date)
+    result.setResult(destination)
     navigate("/CurrentResultPage")
   }
 

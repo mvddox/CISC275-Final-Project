@@ -164,27 +164,23 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 setResultValues(JSON.parse(response.output_text).values)
-                console.log(response.usage)
-
-                result.setFinalResult(JSON.parse(response.output_text).user_definition);
-                result.setFinalSentence(JSON.parse(response.output_text).final_sentence);
-                result.setResults(userResponses)
-                result.setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
-                result.setFinalCareer(JSON.parse(response.output_text).future_career)
-                result.setColorVibe(JSON.parse(response.output_text).color_vibe)
-                let newResult: DetailedResultType = {...result, values: JSON.parse(response.output_text).values};
                 let currentDate = Date()
                 setDate(currentDate)
+                console.log(response.usage)
+                let currentResult: DetailedResultType = {
+                  finalResult: JSON.parse(response.output_text).user_definition,
+                  finalSentence: JSON.parse(response.output_text).final_sentence,
+                  results: [...userResponses],
+                  finalCareer: JSON.parse(response.output_text).future_career, 
+                  finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
+                  colorVibe:JSON.parse(response.output_text).color_vibe,
+                  date: currentDate,
+                  values: (JSON.parse(response.output_text).values) 
+                }
+                result.setResult( currentResult)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
                 if (storedAcount.prevResults){
-                  storedAcount.prevResults = [...storedAcount.prevResults, { ...newResult,
-                    finalResult: JSON.parse(response.output_text).user_definition,
-                    finalSentence: JSON.parse(response.output_text).final_sentence,
-                    results: [...userResponses],
-                    finalCareer: JSON.parse(response.output_text).future_career, 
-                    finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
-                    colorVibe:JSON.parse(response.output_text).color_vibe,
-                    date: currentDate}]
+                  storedAcount.prevResults = [...storedAcount.prevResults, { ...currentResult,}]
                   localStorage.setItem(authContext.username, JSON.stringify(storedAcount));
                 }
             })

@@ -3,9 +3,9 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./CurrentResultPage.css"
 import { PreviousResultType, useAIResults } from '../AIResultsContext';
-import PreviousResult from "./components/PreviousResult";
+import PreviousResult, { isDetailed } from "./components/PreviousResult";
 import { renderToString } from 'react-dom/server';
-
+import ValueBars from "./components/valueBars";
 
 export let keyData = "";
 
@@ -28,7 +28,10 @@ function NavigationButton() {
 
 function CurrentResultPage() {
   const [key, setKey] = useState<string>(keyData);
-  const finishedResult: PreviousResultType = useAIResults();
+  const finishedResult: PreviousResultType = useAIResults().result;
+
+  console.log({...finishedResult})
+  console.log(isDetailed(finishedResult))
 
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -67,8 +70,9 @@ function CurrentResultPage() {
     })
 
 
-  }
+    
 
+  }
   return (
     <div className="Results">
       
@@ -99,6 +103,11 @@ function CurrentResultPage() {
           <h3>Overall Suggestion:</h3>
           <p>{finishedResult.finalSentence}</p>
         </div>
+
+        {isDetailed(finishedResult)  ?
+            <ValueBars values={finishedResult.values}></ValueBars>
+        : <></>}
+
         <div className="date">Generated at: {finishedResult.date}</div>
         {/*Makes user not do stupid stuff*/}
         <div className="ai-disclaimer">

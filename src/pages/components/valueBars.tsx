@@ -1,3 +1,4 @@
+import { Col, Container, Row } from "react-bootstrap";
 import { resultValues } from "./PreviousResult";
 
   // function that created the progess bar
@@ -29,11 +30,26 @@ import { resultValues } from "./PreviousResult";
 
 
 function ValueBars({values}: {values: resultValues}){
-    return <div>
-        <SingleValueBar progress={values.empathy}></SingleValueBar>
-        <SingleValueBar progress={values.ambition}></SingleValueBar>
-        <SingleValueBar progress={values.workLifeBalance}></SingleValueBar>
-    </div>
+    return <Container>
+        Empathy
+        <Row>
+            <Col>Sociopath</Col>
+           <Col xs={8}><SingleValueBar progress={values.empathy}></SingleValueBar></Col>
+            <Col>Paragon</Col>
+        </Row>
+        Ambition
+        <Row>
+            <Col>Placant</Col>
+           <Col xs={8}><SingleValueBar progress={values.ambition}></SingleValueBar></Col>
+            <Col>Augustine</Col>
+        </Row>
+        Work Life
+        <Row>
+            <Col>Workoholic</Col>
+           <Col xs={8}><SingleValueBar progress={values.workLifeBalance}></SingleValueBar></Col>
+            <Col>Unemployed</Col>
+        </Row>
+    </Container>
 
 }
 export default ValueBars

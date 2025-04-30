@@ -1,5 +1,6 @@
 import React from 'react';
 import { PreviousResultType } from '../../AIResultsContext';
+import ValueBars from './valueBars';
 
 export interface resultValues{
     empathy: number,
@@ -25,6 +26,10 @@ export interface BasicResultType{
   finalCareer: string // what they are going to do in future
   colorVibe: string, // color vibe   
   date: string
+}
+
+export function isDetailed(object: PreviousResultType): object is DetailedResultType {
+  return 'values' in object;
 }
 
 
@@ -54,6 +59,7 @@ function PreviousResult(finishedQuestion: PreviousResultType){
           <h3>Overall Suggestion:</h3>
           <p>{finishedQuestion.finalSentence}</p>
         </div>
+
         <div className="date">Achieved at: {finishedQuestion.date}</div>
         {/*Makes user not do stupid stuff, (or more correctly, us less liable!)*/}
         <div className="ai-disclaimer">
