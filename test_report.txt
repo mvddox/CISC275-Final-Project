@@ -116,7 +116,7 @@ All files                   |       0 |        0 |       0 |       0 |
  src                        |       0 |        0 |       0 |       0 |                   
   AIResultsContext.tsx      |       0 |        0 |       0 |       0 | 24-49             
   App.tsx                   |       0 |        0 |       0 |       0 | 22-109            
-  Auth.tsx                  |       0 |        0 |       0 |       0 | 20-64             
+  Auth.tsx                  |       0 |        0 |       0 |       0 | 20-65             
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19              
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10              
  src/pages                  |       0 |        0 |       0 |       0 |                   
@@ -142,5 +142,5 @@ All files                   |       0 |        0 |       0 |       0 |
 Test Suites: 3 failed, 3 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        6.714 s
+Time:        6.687 s
 Ran all test suites.
