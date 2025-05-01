@@ -62,6 +62,10 @@
         font-size: calc(10px + 2vmin)
     }
 
+    .passwordButton {
+      padding-top: 10px;
+    }
+
     .accFailText {
       color: red
     }

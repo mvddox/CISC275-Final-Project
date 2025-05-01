@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Account } from "./LoginPage";
 import "./MyProfilePage.css";
 
 export let keyData = "";
@@ -12,8 +13,12 @@ if (prevKey !== null) {
 
 function MyProfilePage() {
   const [key, setKey] = useState<string>(keyData);
-  const [about, setAbout] = useState<string>("");
-  const [currentUsername, setCurrentUsername] = useState<string>("");
+  const [about, setAbout] = useState<string>(""); // the about section for the user
+  const [currentUsername, setCurrentUsername] = useState<string>(""); // the current username
+  const [currentPassword, setCurrentPassword] = useState<string>(""); // the current user's password
+  const [newPassword, setNewPassword] = useState<string>(""); // the new password that the user wants to set
+  const [changePassFail, setChangePassFail] = useState<boolean>(false); // true if setting password failed
+  const [changePassSuccess, setChangePassSuccess] = useState<boolean>(false); // true if setting password was successful
 
   // Allowed usernames for which the "About you" section will be shown
   //const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
@@ -69,6 +74,20 @@ function MyProfilePage() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
     window.location.reload();
   }
+  
+  //resets password if given current password is valid
+  function handleResetPassword(){
+    let account:Account = JSON.parse(localStorage.getItem(currentUsername) || "");
+    if (account.password === currentPassword){
+      account.password = newPassword;
+      localStorage.setItem(currentUsername, JSON.stringify(account));
+      setChangePassFail(false);
+      setChangePassSuccess(true);
+      return;
+    }
+    setChangePassFail(true);
+    setChangePassSuccess(false);
+  }
 
   // Save the "About you" section to localStorage
   function handleProfileSubmit(event: React.FormEvent) {
@@ -99,6 +118,14 @@ function MyProfilePage() {
     );
   }
 
+  function updateCurrentPassword(event: React.ChangeEvent<HTMLInputElement>){
+    setCurrentPassword(event.target.value);
+  }
+
+  function updateNewPassword(event: React.ChangeEvent<HTMLInputElement>){
+    setNewPassword(event.target.value);
+  }
+
   return (
     <div className="Profile">
       <div className="header-content">
@@ -115,7 +142,34 @@ function MyProfilePage() {
             <strong>Username:</strong> {currentUsername}
           </div>
         )}
-
+        <div className = 'passwordBoxes'>
+        <div><strong>Reset Password:</strong></div>
+        <Form>
+          <Form.Group controlId="CurrentPassword">
+            <Form.Label>Current Password:</Form.Label>
+              <Form.Control
+                value={currentPassword}
+                  onChange={updateCurrentPassword} />
+          </Form.Group>
+        </Form>
+        <Form>
+          <Form.Group controlId="NewPassword">
+            <Form.Label>New Password:</Form.Label>
+              <Form.Control
+                value={newPassword}
+                  onChange={updateNewPassword} />
+          </Form.Group>
+        </Form>
+          <div className = 'resetFailMessage'>
+            {(changePassFail && "Current Password Does Not Match")}
+          </div>
+          <div className = 'resetSuccessMessage'>
+            {(changePassSuccess && "Password Successfully Reset")}
+          </div>
+          <div className = 'passwordButton'>
+            <Button onClick = {handleResetPassword}>Reset</Button>
+          </div>
+        </div>
         {/* "About You" Section that is always visible */}
         <Form onSubmit={handleProfileSubmit}>
           <Form.Group className="mb-3" controlId="formBasicAbout">
