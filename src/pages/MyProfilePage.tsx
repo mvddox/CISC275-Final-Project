@@ -14,6 +14,8 @@ function MyProfilePage() {
   const [key, setKey] = useState<string>(keyData);
   const [about, setAbout] = useState<string>("");
   const [currentUsername, setCurrentUsername] = useState<string>("");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
 
   // Allowed usernames for which the "About you" section will be shown
   //const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
@@ -99,6 +101,14 @@ function MyProfilePage() {
     );
   }
 
+  function updateCurrentPassword(event: React.ChangeEvent<HTMLInputElement>){
+    setCurrentPassword(event.target.value);
+  }
+
+  function updateNewPassword(event: React.ChangeEvent<HTMLInputElement>){
+    setNewPassword(event.target.value);
+  }
+
   return (
     <div className="Profile">
       <div className="header-content">
@@ -115,7 +125,22 @@ function MyProfilePage() {
             <strong>Username:</strong> {currentUsername}
           </div>
         )}
-
+        <Form>
+          <Form.Group controlId="CurrentPassword">
+            <Form.Label>Current Password:</Form.Label>
+              <Form.Control
+                value={currentPassword}
+                  onChange={updateCurrentPassword} />
+          </Form.Group>
+        </Form>
+        <Form>
+          <Form.Group controlId="NewPassword">
+            <Form.Label>New Password:</Form.Label>
+              <Form.Control
+                value={newPassword}
+                  onChange={updateNewPassword} />
+          </Form.Group>
+        </Form>
         {/* "About You" Section that is always visible */}
         <Form onSubmit={handleProfileSubmit}>
           <Form.Group className="mb-3" controlId="formBasicAbout">
