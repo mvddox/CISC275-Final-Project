@@ -125,6 +125,8 @@ function MyProfilePage() {
             <strong>Username:</strong> {currentUsername}
           </div>
         )}
+        <div className = 'passwordBoxes'>
+        <div><strong>Reset Password:</strong></div>
         <Form>
           <Form.Group controlId="CurrentPassword">
             <Form.Label>Current Password:</Form.Label>
@@ -141,6 +143,7 @@ function MyProfilePage() {
                   onChange={updateNewPassword} />
           </Form.Group>
         </Form>
+        </div>
         {/* "About You" Section that is always visible */}
         <Form onSubmit={handleProfileSubmit}>
           <Form.Group className="mb-3" controlId="formBasicAbout">

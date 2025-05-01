@@ -30,3 +30,19 @@
   border: 1px solid black; 
   text-align: center;
 }
+
+.passwordBoxes {
+  border-style: outset;
+  width: fit-content;
+  min-width: 25%;
+  color: black;
+  margin-top: 1px;
+  font-size: 18px;
+  text-wrap: balance;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 20px; 
+  font-size: calc(10px + 2vmin)
+}
