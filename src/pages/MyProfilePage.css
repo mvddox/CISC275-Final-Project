@@ -36,7 +36,7 @@
   width: fit-content;
   min-width: 25%;
   color: black;
-  margin-top: 1px;
+  margin: auto;
   font-size: 18px;
   text-wrap: balance;
   display: flex;
@@ -45,4 +45,12 @@
   justify-content: flex-start;
   padding-bottom: 20px; 
   font-size: calc(10px + 2vmin)
+}
+
+.resetFailMessage {
+  color: red;
+}
+
+.resetSuccessMessage {
+  color: green;
 }
