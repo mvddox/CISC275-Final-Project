@@ -88,10 +88,12 @@ function HomePage() {
       </div>
       <div className="PagesButtonsContainter"> 
         <div className="PagesButtons">
+          <div className="PagesButtonsLabel">Basic Question</div>
           <div className="ButtonDescription">Takes you to the "Basic Question Page" - a quicker quiz with multiple-choice questions for more general responses.</div>
           <NavigateToBasicButton /> 
         </div>
         <div className="PagesButtons">
+          <div className="PagesButtonsLabel">Detailed Question</div>
           <div className="ButtonDescription">Takes you to the "Detailed Question Page" – a longer quiz with open-ended questions for more precise responses.</div>
           <NavigationDetailedButton />
         </div>
@@ -118,13 +120,13 @@ function HomePage() {
   </Button>
   
   </Form>
-  <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
-  </div>
+ 
  
 
 
   </footer>
-  
+  <div className='AuthorText'> <br></br>
+  </div>  
   </div>)
   
   }

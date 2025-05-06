@@ -32,7 +32,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(to right, #1d5fb3, #4f94ef); /* XP blue gradient */
+  background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
   color: white;
   width: 100%;
   padding: 10px 0;
@@ -80,7 +80,7 @@ footer {
   background-color: #ffffff; /* XP-style white panel */
   border: 2px solid #0a3d91;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
-  padding: 5px;
+  padding: 0px;
   font-family: Tahoma, sans-serif;
   width: 100%;
   max-width: 800px;
@@ -103,6 +103,13 @@ footer {
   font-size: 16px;
 }
 
+.PagesButtonsLabel{
+  background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
+  width: 100%;
+  padding: 0;
+
+}
+
 .LoggedButtons {
   display: flex;
   flex-direction: row; 
@@ -114,8 +121,8 @@ footer {
   height: 10vh;
   gap: 10vh;
   flex-grow: 1; /* Ensures content expands inside the header */
-
 }
+
 
 .ButtonDescription {
   width: 75vh;
@@ -178,13 +185,22 @@ footer {
   height: 10vh;
 }
 
-.AuthorText{
+.AuthorText {
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+
   color: rgba(0, 0, 0, 0.829);
-  background-color: rgb(187, 178, 237);
-  margin-top: 5px;
-  font-size: 15px;
-  text-wrap: balance;
-} 
+  background-image: url("../../public/Windows-XP-Desktop-Taskbar.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0;
+  padding: 0;
+}
 .VideoButton{
   background-color: rgb(108, 92, 195);
   width: 10vh;
