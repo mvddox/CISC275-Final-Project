@@ -142,15 +142,8 @@ function NavigateToHomeButton(){
             </Row>
           ))}
         </Container>
-  
-        {/* Group progress bar and generate button together below questions */}
-        <div className="progress-button-wrapper">
-          <QuestionProgressBar progress={progress} />
-          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
-        </div>
-  
-        {/* Pagination buttons */}
-        <div className="button-row">
+  {/* Pagination buttons */}
+  <div className="button-row">
           <Button
             className="Button"
             disabled={viewedQuestionsCount === 0}
@@ -173,6 +166,13 @@ function NavigateToHomeButton(){
             Next
           </Button>
         </div>
+        {/* Group progress bar and generate button together below questions */}
+        <div className="progress-button-wrapper">
+          <QuestionProgressBar progress={progress} />
+          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
+        </div>
+  
+        
   
         <DebugBasic setAnswers={setAnswers} />
   

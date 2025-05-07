@@ -206,7 +206,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     
           {/* Generate button; disabled until ready */}
           <Button className="ai-button" onClick={startAi} disabled={disabled || loading}>
-            Generate Response
+            Generate Responses
           </Button>
           
           {/*Makes user not do stupid stuff*/}

@@ -60,7 +60,7 @@ function DetailedQuestionsPage() {
   function NavigationToBasic(){
     const navigate = useNavigate();
     return (<div>
-      Go to Basic Question Page: {" "}
+       {" "}
       <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Basic")}>
           Basic Question Page
       </Button>
@@ -71,7 +71,7 @@ function DetailedQuestionsPage() {
 function NavigateToHomeButton(){
     const navigate = useNavigate();
     return (<div>
-      Return home: {" "}
+       {" "}
       <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Home")}>
           Home Page
       </Button>

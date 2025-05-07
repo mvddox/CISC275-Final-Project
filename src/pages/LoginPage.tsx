@@ -121,50 +121,55 @@ function LoginPage(){
     setPassword(event.target.value);
   }
 
-
-    return (
-        <div className="Login">
-            <div className="header-content"> 
-                <h1>Login / Create Account</h1>
-                <div className="Header-Buttons">
-                    <HomeButton/>
-                </div>
-            </div>
-            <div className='accountInfo'>
-            <Form>
-                <Form.Group controlId="Username">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                        value={username}
-                        onChange={updateUsername} />
-                    </Form.Group>
-                </Form>
-                <Form>
-                    <Form.Group controlId="Password">
-                        <Form.Label>Password:</Form.Label>
-                        <Form.Control
-                            value={password}
-                            onChange={updatePassword} />
-                    </Form.Group>
-                </Form>
-                <div className="accFailText">
-                    {(createAccFail && "Account Already Exists") || (loginFail && "Account Not Found")}
-                </div>
-                <div className="accountButtons">
-                    <LoginButton/>
-                    <CreateAccountButton/>
-                </div>
-                </div>
-            <footer>
-                <Form>
-                    <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
-                    <Form.Control 
-                        id="api-key-input" type="password" placeholder="Insert API Key Here" onChange={changeKey} ></Form.Control>
-                    <br></br>
-                    <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-                </Form>
-                Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+  return (
+    <div className="Login">
+      <div className="header-content"> 
+        <h1>Login / Create Account</h1>
+        <div className="Header-Buttons">
+          <HomeButton/>
         </div>
-    );
+      </div>
+      <div className='accountInfo'>
+        <Form>
+          <Form.Group controlId="Username">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              value={username}
+              onChange={updateUsername}
+            />
+          </Form.Group>
+          <Form.Group controlId="Password" className="passwordButton">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              value={password}
+              onChange={updatePassword}
+            />
+          </Form.Group>
+        </Form>
+        <div className="accFailText">
+          {(createAccFail && "Account Already Exists") || (loginFail && "Account Not Found")}
+        </div>
+        <div className="accountButtons">
+          <LoginButton />
+          <CreateAccountButton />
+        </div>
+      </div>
+      <footer>
+        <Form>
+          <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
+          <Form.Control 
+            id="api-key-input"
+            type="password"
+            placeholder="Insert API Key Here"
+            onChange={changeKey}
+          />
+          <br />
+          <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
+        </Form>
+        Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+      </footer>
+    </div>
+  );
+  
 }
 export default LoginPage;

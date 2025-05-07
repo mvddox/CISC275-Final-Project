@@ -17,6 +17,7 @@
         background-color: rgb(108, 92, 195);
         border: 1px solid black; 
         text-align: center;
+        flex: row;
     }
     .Detailed-Body{       
         background-color: rgb(187, 178, 237);
