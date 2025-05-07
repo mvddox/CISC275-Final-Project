@@ -190,7 +190,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 5vh;
+  height: 30px;
 
   color: rgba(0, 0, 0, 0.829);
   background-image: url("../../public/Windows-XP-Desktop-Taskbar.png");
@@ -201,6 +201,7 @@ footer {
   margin: 0;
   padding: 0;
 }
+
 .VideoButton{
   background-color: rgb(108, 92, 195);
   width: 10vh;

@@ -144,7 +144,9 @@ function CurrentResultPage() {
             Submit
           </Button>
         </Form>
-        <p>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez</p>
+        <div className='AuthorText'>
+          <br />
+          </div>
       </footer>
     </div>
   );

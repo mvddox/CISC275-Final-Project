@@ -163,7 +163,10 @@ function LoginPage(){
                     <br></br>
                     <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
                 </Form>
-                Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+                <div className='AuthorText'>
+                  <br />
+                </div>
+                </footer>
         </div>
     );
 }

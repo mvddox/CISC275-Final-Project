@@ -190,7 +190,9 @@ function NavigateToHomeButton(){
               Submit
             </Button>
           </Form>
-          Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+          <div className='AuthorText'>
+          <br />
+          </div>
         </footer>
       </div>
     </div>
