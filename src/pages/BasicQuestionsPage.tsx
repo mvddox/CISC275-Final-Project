@@ -110,10 +110,7 @@ function NavigateToHomeButton(){
         return total
       }, [])
     return cols;
-  };
-
-
-  return (
+  }; return (
     <div className="Basic">
       <header className="Basic-header">
         <div className="Basic-header-title">Basic Questions</div>
@@ -124,17 +121,14 @@ function NavigateToHomeButton(){
       </header>
   
       <div className="Basic-Body">
+        {/* Questions grid */}
         <Container>
-          {/*Important to make a grid structure of the questions.
-            Second argument of questionCol gives height of each col*/}
-          {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row: BasicQuestionType[], i: number) => (
+          {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row, i) => (
             <Row key={i} className='Basic-Question-Row'>
               {row.map((col, j) => (
-                /** All the questions ARE rendered so that they remain
-                 * persistant between movement between visibility */
                 <Col
                   key={j}
-                  hidden={!viewedQuestions.find((x): boolean => x.id === col.id)}
+                  hidden={!viewedQuestions.find((x) => x.id === col.id)}
                   className="Basic-Question"
                 >
                   <BasicQuestion
@@ -149,14 +143,18 @@ function NavigateToHomeButton(){
           ))}
         </Container>
   
-        {/* Button row for pagination */}
+        {/* Group progress bar and generate button together below questions */}
+        <div className="progress-button-wrapper">
+          <QuestionProgressBar progress={progress} />
+          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
+        </div>
+  
+        {/* Pagination buttons */}
         <div className="button-row">
           <Button
             className="Button"
             disabled={viewedQuestionsCount === 0}
             onClick={() => {
-              // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
-              // properly. This is because everything renders AFTER the entire function has finished
               setViewedQuestions([...viewableQuestions[viewedQuestionsCount - 1]]);
               setViewedQuestionsCount(viewedQuestionsCount - 1);
             }}
@@ -178,12 +176,6 @@ function NavigateToHomeButton(){
   
         <DebugBasic setAnswers={setAnswers} />
   
-        <div className="Basic-Body">
-          <QuestionProgressBar progress={progress} />
-        </div>
-  
-        {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
-  
         <footer>
           <Form>
             <Form.Label>API Key:</Form.Label>
@@ -191,6 +183,7 @@ function NavigateToHomeButton(){
               type="password"
               placeholder="Insert API Key Here"
               onChange={changeKey}
+              value={key}
             />
             <br />
             <Button className="Submit-Button" onClick={handleSubmit}>
@@ -202,5 +195,5 @@ function NavigateToHomeButton(){
       </div>
     </div>
   );
-}
-  export default BasicQuestionsPage;
+  
+} export default BasicQuestionsPage;

@@ -25,7 +25,7 @@ function QuestionProgressBar({ progress }: { progress: number }) {
     fontWeight: 'bold',
     alignItems: 'center',
     display: 'flex',
-    color: 'white' // Ensures percentage text is visible on green
+    color: 'black' 
   };
 
   return (
