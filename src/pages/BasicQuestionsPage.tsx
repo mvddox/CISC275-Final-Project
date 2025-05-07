@@ -71,7 +71,7 @@ function BasicQuestionsPage() {
   function NavigateToDetailedButton(){
     const navigate = useNavigate();
     return (<div >
-      Go to Detailed Question Page: {" "}
+       {" "}
       <Button className="Button" onClick={() => navigate("/Detail")}>
           Detailed Question Page
       </Button>
@@ -82,7 +82,7 @@ function BasicQuestionsPage() {
 function NavigateToHomeButton(){
     const navigate = useNavigate();
     return (<div >
-      Return home: {" "}
+       {" "}
       <Button  className="Button" onClick={() => navigate("/Home")}>
           Home Page
       </Button>
@@ -116,63 +116,91 @@ function NavigateToHomeButton(){
   return (
     <div className="Basic">
       <header className="Basic-header">
-         <div className="Basic-header-title">Basic Questions</div>
+        <div className="Basic-header-title">Basic Questions</div>
         <div className="Header-Buttons-Basic">
-          <NavigateToDetailedButton/>
-          <NavigateToHomeButton/>
+          <NavigateToDetailedButton />
+          <NavigateToHomeButton />
         </div>
       </header>
+  
       <div className="Basic-Body">
-      <Container>
+        <Container>
           {/*Important to make a grid structure of the questions.
-          Second argument of questionCol gives height of each col*/}
-      {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row:BasicQuestionType[], i:number) => (
-        <Row key={i} className='Basic-Question-Row'>
-          {row.map((col, j) => (
-            /** All the questions ARE rendered so that they remain
-             * persistant between movement between visibility */
-              <Col key={j} hidden={ !viewedQuestions.find((x):boolean=> x.id===col.id)} className="Basic-Question">
-                <BasicQuestion question={{...col}} allAnswers={answers} setAnswers={setAnswers }
-                  key={col.id}></BasicQuestion>
-              </Col>
+            Second argument of questionCol gives height of each col*/}
+          {questionCol([...BASIC_QUESTIONS], BASIC_QUESTIONS.length / 2).map((row: BasicQuestionType[], i: number) => (
+            <Row key={i} className='Basic-Question-Row'>
+              {row.map((col, j) => (
+                /** All the questions ARE rendered so that they remain
+                 * persistant between movement between visibility */
+                <Col
+                  key={j}
+                  hidden={!viewedQuestions.find((x): boolean => x.id === col.id)}
+                  className="Basic-Question"
+                >
+                  <BasicQuestion
+                    question={{ ...col }}
+                    allAnswers={answers}
+                    setAnswers={setAnswers}
+                    key={col.id}
+                  />
+                </Col>
+              ))}
+            </Row>
           ))}
-        </Row>
-      ))}
-      </Container>
-
-      <div className='button-row'><Button className="Button" disabled={viewedQuestionsCount === 0} onClick={()=>
-        {
-          // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
-          // properly. This is because everything renders AFTER the entire function has finished
-          setViewedQuestions([...viewableQuestions[viewedQuestionsCount-1]])
-          setViewedQuestionsCount(viewedQuestionsCount-1)
-        }}>
-      Previous</Button>
-      <Button className="Button" disabled={viewedQuestionsCount === viewableQuestions.length-1} onClick={()=>
-      {
-        setViewedQuestions([...viewableQuestions[viewedQuestionsCount+1]])
-        setViewedQuestionsCount(viewedQuestionsCount+1)
-      }}>
-      Next</Button>
-          </div>
-          <DebugBasic setAnswers={setAnswers}></DebugBasic>
-          <div className='Basic-Body'><QuestionProgressBar progress={progress} /></div>
-          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
-
-
-      <footer>
-      <Form>
-        <Form.Label>API Key:</Form.Label>
-        <Form.Control type="password" placeholder="Insert API Key Here" onChange={changeKey}></Form.Control>
-        <br></br>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-      </Form>
-      Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
-
-
+        </Container>
+  
+        {/* Button row for pagination */}
+        <div className="button-row">
+          <Button
+            className="Button"
+            disabled={viewedQuestionsCount === 0}
+            onClick={() => {
+              // IMPORTANT NOTE: setViewedQuestionsCount has to be AFTER setViewedQuestions to be rendered
+              // properly. This is because everything renders AFTER the entire function has finished
+              setViewedQuestions([...viewableQuestions[viewedQuestionsCount - 1]]);
+              setViewedQuestionsCount(viewedQuestionsCount - 1);
+            }}
+          >
+            Previous
+          </Button>
+  
+          <Button
+            className="Button"
+            disabled={viewedQuestionsCount === viewableQuestions.length - 1}
+            onClick={() => {
+              setViewedQuestions([...viewableQuestions[viewedQuestionsCount + 1]]);
+              setViewedQuestionsCount(viewedQuestionsCount + 1);
+            }}
+          >
+            Next
+          </Button>
+        </div>
+  
+        <DebugBasic setAnswers={setAnswers} />
+  
+        <div className="Basic-Body">
+          <QuestionProgressBar progress={progress} />
+        </div>
+  
+        {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
+  
+        <footer>
+          <Form>
+            <Form.Label>API Key:</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Insert API Key Here"
+              onChange={changeKey}
+            />
+            <br />
+            <Button className="Submit-Button" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
+          Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+        </footer>
       </div>
     </div>
   );
 }
-
-export default BasicQuestionsPage;
+  export default BasicQuestionsPage;

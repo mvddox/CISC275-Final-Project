@@ -1,12 +1,21 @@
-  // function that created the progess bar
-  function QuestionProgressBar({ progress }: { progress: number }) {
-    const containerStyle = {
-    width: "100%",
+// function that creates the progress bar
+function QuestionProgressBar({ progress }: { progress: number }) {
+  // wrapper to center the progress bar on the page
+  const wrapperStyle = {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px", // Optional spacing from top
+  };
+
+  // red background bar (outer container)
+  const containerStyle = {
+    width: "80%",
     backgroundColor: "red",
     borderRadius: "20px",
     height: "5vh"
   };
-  //green bar that covers up red bar
+
+  // green bar that covers up red bar
   const progressBarStyles = {
     width: `${progress}%`,
     backgroundColor: "green",
@@ -16,12 +25,16 @@
     fontWeight: 'bold',
     alignItems: 'center',
     display: 'flex',
-    
+    color: 'white' // Ensures percentage text is visible on green
   };
-    return (
-      <div style={containerStyle} role = "progressbar">
+
+  return (
+    <div style={wrapperStyle}>
+      <div style={containerStyle} role="progressbar">
         <div style={progressBarStyles}>{Math.round(progress)}%</div>
       </div>
-    );
-  }
-export default QuestionProgressBar
+    </div>
+  );
+}
+
+export default QuestionProgressBar;
