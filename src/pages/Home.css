@@ -4,8 +4,14 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
+  
 }
-
+body {
+  background-image: url("../../public/xp.png"); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .App-header {
 
   text-align: center;
@@ -19,15 +25,21 @@ html, body, #root {
   width: 100%;
 }
 
-.header-content { 
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
+.header-content {
+  font-family: Tahoma, 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  background-color: rgb(52, 33, 160);
-  width: 100%; 
-  padding-bottom: 20px; 
+  justify-content: center;
+
+  background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #0c2c6b; /* XP edge line */
+  box-shadow: inset 0 -1px 0 #0a3d91;
+
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .header-content h1 {
@@ -37,7 +49,7 @@ html, body, #root {
 footer {
   text-align: center;
   padding: 12px;
-  background-color: rgb(187, 178, 237);
+  /*background-color: rgb(187, 178, 237);*/
   color: black;
   bottom: 0;
   width: 100%;
@@ -50,17 +62,51 @@ footer {
   display: inline-block;
 }
 
-.PagesButtons {
+.PagesButtonsContainter {
   display: flex;
   flex-direction: row; 
   justify-content: center; 
   align-items: center; 
-  width: 100%; 
+  width: 80%; 
   margin: 0 auto;
-  background-color: rgb(187, 178, 237);
+  /*background-color: rgb(187, 178, 237);*/
   height: 30vh;
   gap: 10vh;
   flex-grow: 1; /* Ensures content expands inside the header */
+}
+
+
+.PagesButtons {
+  background-color: #ffffff; /* XP-style white panel */
+  border: 2px solid #0a3d91;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+  padding: 0px;
+  font-family: Tahoma, sans-serif;
+  width: 100%;
+  max-width: 800px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.PagesButtonsTitle {
+  background-color: #0a3d91; /* XP blue title bar */
+  color: white;
+  padding: 8px 15px;
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.PagesButtonsLabel{
+  background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
+  width: 100%;
+  padding: 0;
 
 }
 
@@ -71,21 +117,22 @@ footer {
   align-items: center; 
   width: 100%; 
   margin: 0 auto;
-  background-color: rgb(187, 178, 237);
+  /*background-color: rgb(187, 178, 237);*/
   height: 10vh;
   gap: 10vh;
   flex-grow: 1; /* Ensures content expands inside the header */
-
 }
+
 
 .ButtonDescription {
   width: 75vh;
   color: rgba(37, 37, 37, 0.829);
-  border: 1px solid rgb(122, 115, 110);
-  background-color: rgb(187, 178, 237);
+  /*border: 1px solid rgb(122, 115, 110);*/
+  background-color: #ffffff;
   margin-top: 5px;
   font-size: 18px;
   text-wrap: balance;
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 .Submit-Button {
@@ -104,7 +151,7 @@ footer {
   max-width: 400px;
   margin: 20px auto;
   padding: 20px;
-  background: rgb(143, 130, 217);
+  /*background: rgb(143, 130, 217);*/
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -119,11 +166,15 @@ footer {
 }
 
 .PagesButtons button {
-  background-color: rgb(108, 92, 195);
-  width: 30vh;
-  border: 1px solid black; 
-  text-align: center;
-  height: 10vh;
+  background-color: #e1e1e1;
+  border: 1px solid #7f7f7f;
+  font-family: Tahoma, sans-serif;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin: 5px;
+  color: black;
+  box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
+  cursor: pointer;
 }
 
 .LoggedButtons button {
@@ -134,13 +185,22 @@ footer {
   height: 10vh;
 }
 
-.AuthorText{
+.AuthorText {
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+
   color: rgba(0, 0, 0, 0.829);
-  background-color: rgb(187, 178, 237);
-  margin-top: 5px;
-  font-size: 15px;
-  text-wrap: balance;
-} 
+  background-image: url("../../public/Windows-XP-Desktop-Taskbar.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0;
+  padding: 0;
+}
 .VideoButton{
   background-color: rgb(108, 92, 195);
   width: 10vh;

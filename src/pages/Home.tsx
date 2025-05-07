@@ -4,7 +4,6 @@ import './Home.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router";
 import { useAuth } from '../Auth';
-
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -87,12 +86,16 @@ function HomePage() {
         {!authContext.isLoggedIn && <NavigateToLoginButton/>}
       </div>
       </div>
-      <div className="PagesButtons"> 
-        <div><NavigateToBasicButton /> 
-          <div className="ButtonDescription">Takes you to the "Basic Question Page" that includes multiple choice questions. Quicker than the "Detailed Question Page" but gives more general responses.</div>
+      <div className="PagesButtonsContainter"> 
+        <div className="PagesButtons">
+          <div className="PagesButtonsLabel">Basic Question</div>
+          <div className="ButtonDescription">Takes you to the "Basic Question Page" - a quicker quiz with multiple-choice questions for more general responses.</div>
+          <NavigateToBasicButton /> 
         </div>
-        <div><NavigationDetailedButton />
-          <div className="ButtonDescription">Takes you to the "Detailed Question Page" that includes open-ended questions. Longer than the "Basic Question Page" but allows you to get more precise responses. </div>
+        <div className="PagesButtons">
+          <div className="PagesButtonsLabel">Detailed Question</div>
+          <div className="ButtonDescription">Takes you to the "Detailed Question Page" – a longer quiz with open-ended questions for more precise responses.</div>
+          <NavigationDetailedButton />
         </div>
       </div>
       {authContext.isLoggedIn && <div className="LoggedButtons">
@@ -117,13 +120,13 @@ function HomePage() {
   </Button>
   
   </Form>
-  <div className='AuthorText'>Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
-  </div>
+ 
  
 
 
   </footer>
-  
+  <div className='AuthorText'> <br></br>
+  </div>  
   </div>)
   
   }
