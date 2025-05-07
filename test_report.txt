@@ -92,7 +92,7 @@ All files                   |       0 |        0 |       0 |       0 |
   DetailedQuestion.tsx      |       0 |        0 |       0 |       0 | 10-30             
   DetailedQuestionsList.tsx |       0 |      100 |     100 |       0 | 20-66             
   DetailedQuestionsPage.tsx |       0 |        0 |       0 |       0 | 12-112            
-  Home.tsx                  |       0 |        0 |       0 |       0 | 9-100             
+  Home.tsx                  |       0 |        0 |       0 |       0 | 8-103             
   LoginPage.tsx             |       0 |        0 |       0 |       0 | 8-125             
   MyProfilePage.tsx         |       0 |        0 |       0 |       0 | 7-129             
   PreviousResultsPage.tsx   |       0 |        0 |       0 |       0 | 11-110            
@@ -108,5 +108,5 @@ All files                   |       0 |        0 |       0 |       0 |
 Test Suites: 3 failed, 3 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        6.511 s
+Time:        6.381 s
 Ran all test suites.
