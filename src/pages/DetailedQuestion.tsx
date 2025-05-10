@@ -12,7 +12,7 @@ function DetailedQuestion({question, allAnswers, setAnswers}:
         //const [answer, setAnswer] = useState<string>(test) 
     return <div data-testid={"question"}>
     <Form.Group className='form'>
-        <Form.Label> Question {question.id+1}: {question.instruction}</Form.Label>
+        <Form.Label className='form-label-detailed'> Question {question.id+1}: {question.instruction}</Form.Label>
         <Form.Control className='Input-Box' placeholder="Input Stuff Here!"
         as="textarea"
         rows={3}

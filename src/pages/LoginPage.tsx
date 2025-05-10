@@ -104,7 +104,7 @@ function LoginPage(){
   
     return (
       <div>
-        <Button className="Button" onClick={handleCreateClick}>
+        <Button className="LoginButton" onClick={handleCreateClick}>
           Create Account
         </Button>
       </div>

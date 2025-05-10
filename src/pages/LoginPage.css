@@ -10,7 +10,6 @@
     color: white;
     flex-grow: 1; /* Allows it to expand and fill space */
     width: 100%;
-    background-color: rgb(187, 178, 237);
   }
   
   .header-content { 
@@ -40,11 +39,13 @@
 }
 
     .LoginButton {
-        background-color: rgb(108, 92, 195);
-        border: 1px solid black; 
-        text-align: center;
-        width: 100px;
-        display: inline-block;
+    color: black;
+    background-color: #e1e1e1;
+    border: 1px solid #7f7f7f;
+    box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
     }
 
     .accountButtons {
@@ -52,20 +53,24 @@
         padding-top: 1vh;
     }
 
-    .accountInfo {
-        width: 75vh;
+    .accountInfo {  
+        background-color: white;
+        border-style: outset;
+        width: -moz-fit-content;
+        width: fit-content;
+        min-width: 25%;
         color: black;
-        background-color: rgb(187, 178, 237);
-        margin-top: 5px;
+        margin: auto;
         font-size: 18px;
         text-wrap: balance;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding-bottom: 20px; 
-        font-size: calc(10px + 2vmin)
+        padding-bottom: 20px;
+        font-size: calc(10px + 2vmin);
     }
+    
 
     .passwordButton {
       padding-top: 10px;

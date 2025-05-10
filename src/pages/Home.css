@@ -18,10 +18,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Aligns items to the top */
+  justify-content: flex-start; 
   font-size: calc(10px + 2vmin);
   color: white;
-  flex-grow: 1; /* Allows it to expand and fill space */
+  flex-grow: 1; 
   width: 100%;
 }
 
@@ -36,7 +36,7 @@ body {
   color: white;
   width: 100%;
   padding: 10px 0;
-  border-bottom: 1px solid #0c2c6b; /* XP edge line */
+  border-bottom: 1px solid #0c2c6b; 
   box-shadow: inset 0 -1px 0 #0a3d91;
 
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
@@ -53,6 +53,7 @@ footer {
   color: black;
   bottom: 0;
   width: 100%;
+  padding-bottom: 5vh;
 }
 
 .LoginCreateButton button{
@@ -79,14 +80,14 @@ footer {
   /*background-color: rgb(187, 178, 237);*/
   height: 30vh;
   gap: 10vh;
-  flex-grow: 1; /* Ensures content expands inside the header */
+  flex-grow: 1; 
 }
 
 
 .PagesButtons {
-  background-color: #ffffff; /* XP-style white panel */
+  background-color: #ffffff; 
   border: 2px solid #0a3d91;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
   padding: 0px;
   font-family: Tahoma, sans-serif;
   width: 100%;
@@ -128,7 +129,8 @@ footer {
   /*background-color: rgb(187, 178, 237);*/
   height: 10vh;
   gap: 10vh;
-  flex-grow: 1; /* Ensures content expands inside the header */
+  flex-grow: 1; 
+  
 }
 
 
@@ -153,7 +155,7 @@ footer {
 .API {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers everything inside the form */
+  align-items: center; 
   justify-content: center;
   width: 100%;
   max-width: 400px;
@@ -161,9 +163,9 @@ footer {
   padding: 0px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff; /* XP-style white panel */
+  background-color: #ffffff; 
   border: 2px solid #0a3d91;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
   font-family: Tahoma, sans-serif;
 }
 .API input {
@@ -190,7 +192,7 @@ footer {
 
 .LoggedButtons button {
   background-color: #e1e1e1;
-  border: 1px solid #7f7f7f;
+  border: 1px solid #000000;
   box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
   color: black;
 

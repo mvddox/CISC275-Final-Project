@@ -60,8 +60,7 @@ function DetailedQuestionsPage() {
   function NavigationToBasic(){
     const navigate = useNavigate();
     return (<div>
-      Go to Basic Question Page: {" "}
-      <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Basic")}>
+      <Button className='Button' onClick={() => navigate("/Basic")}>
           Basic Question Page
       </Button>
     </div>)
@@ -71,8 +70,7 @@ function DetailedQuestionsPage() {
 function NavigateToHomeButton(){
     const navigate = useNavigate();
     return (<div>
-      Return home: {" "}
-      <Button className='Header-Buttons-Detailed-button' onClick={() => navigate("/Home")}>
+      <Button className='Button' onClick={() => navigate("/Home")}>
           Home Page
       </Button>
     </div>)
@@ -107,8 +105,10 @@ function NavigateToHomeButton(){
         <QuestionProgressBar progress={progress} />
         <Form.Check
           id="is-debug-check"
-          label="DEBUG MODE?"
+          label=""
           checked={debugMode}
+          hidden ={true}
+
           onChange={(e)=>{setDebugMode(e.target.checked)}}
         />
         {debugMode && <DebugDetailed setAnswers={setAnswers}></DebugDetailed>}
@@ -128,7 +128,7 @@ function NavigateToHomeButton(){
       <div className='AuthorText'>
           <br />
           </div>
-      </footer>
+      </footer> 
 <div className='AuthorText'>
           <br />
           </div>
