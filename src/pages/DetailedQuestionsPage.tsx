@@ -129,7 +129,9 @@ function NavigateToHomeButton(){
           <br />
           </div>
       </footer>
-
+<div className='AuthorText'>
+          <br />
+          </div>
     </div>
   );
 }
