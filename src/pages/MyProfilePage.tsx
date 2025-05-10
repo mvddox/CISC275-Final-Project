@@ -204,9 +204,9 @@ function MyProfilePage() {
           </Button>
         </Form>
 
-        <div className="authors">
-          Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
-        </div>
+        <div className='AuthorText'>
+          <br />
+          </div>
       </footer>
     </div>
   );

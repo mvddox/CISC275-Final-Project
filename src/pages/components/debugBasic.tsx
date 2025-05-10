@@ -23,7 +23,7 @@ const [select, setSelect] = useState<string>("")
         setSelect(event.target.value)
         
     }
-    return <div>
+    return <div hidden = {true} >
         <div><Form.Group controlId="debugDropDown">
             <Form.Label>DEBUG SELECT</Form.Label>
             <Form.Select value={select} onChange={handleChange}>

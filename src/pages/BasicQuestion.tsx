@@ -14,6 +14,7 @@ function BasicQuestion({question, allAnswers, setAnswers}:
   </Form.Label>
   {question.answers.map((answer: string, index: number) => (
     <Form.Check
+      className="question-check"
       type="radio"
       name="answers"
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

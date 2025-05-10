@@ -143,13 +143,7 @@ function NavigateToHomeButton(){
           ))}
         </Container>
   
-        {/* Group progress bar and generate button together below questions */}
-        <div className="progress-button-wrapper">
-          <QuestionProgressBar progress={progress} />
-          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
-        </div>
-  
-        {/* Pagination buttons */}
+          {/* Pagination buttons */}
         <div className="button-row">
           <Button
             className="Button"
@@ -173,8 +167,15 @@ function NavigateToHomeButton(){
             Next
           </Button>
         </div>
+        {/* Group progress bar and generate button together below questions */}
+        <div className="progress-button-wrapper">
+          <QuestionProgressBar progress={progress} />
+          {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
+        </div>
   
-        <DebugBasic setAnswers={setAnswers} />
+        
+  
+        <DebugBasic  setAnswers={setAnswers} />
   
         <footer>
           <Form>
@@ -190,7 +191,9 @@ function NavigateToHomeButton(){
               Submit
             </Button>
           </Form>
-          Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
+          <div className='AuthorText'>
+          <br />
+          </div>
         </footer>
       </div>
     </div>

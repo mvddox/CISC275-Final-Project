@@ -107,7 +107,7 @@ function HomePage() {
   
   <Form className='API'>
   
-  <Form.Label>API Key:</Form.Label>
+  <Form.Label className={"PagesButtonsLabel"}>API Key:</Form.Label>
   
   <Form.Control type="password" placeholder="Insert API Key Here" onChange={changeKey} />
   

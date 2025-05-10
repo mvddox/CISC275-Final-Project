@@ -10,9 +10,10 @@
   }
   
   .Button {
-    background-color: #003366;
-    border: none;
-    color: white;
+    background-color: #e1e1e1;
+    border: 1px solid #7f7f7f;
+    box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
+    color: black;
     padding: 15px 30px;
     margin: 0 10px;
     font-size: 1.2rem;
@@ -20,6 +21,7 @@
     cursor: pointer;
     text-align: center;
     min-width: 150px;
+    
   }
   
   .button-row {
@@ -28,7 +30,6 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-    background-color: rgb(187, 178, 237);
     padding: 10px 0;
     font-size: 1rem;
   }
@@ -47,7 +48,11 @@
   }
   
   .Basic-Body {
-    background-color: rgb(187, 178, 237);
+          
+    background-image: url("../../public/xp.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
@@ -69,25 +74,43 @@
   }
   
   .Basic-Question {
-    padding: 12px;
-    border-radius: 10px;
+    padding: 0px;
+    margin-top: 15px;
+
+    border: 2px solid #0a3d91;
+    border-radius: 5px;
     font-size: 1.5rem;
-    margin: 10px 0;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); 
     width: 100%;
     max-width: 600px;
     height: auto;
-    background-color: rgb(0, 255, 251);
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    
   }
   
+
   .question-label {
+    background: linear-gradient(to top, #1d5fb3, #4f94ef);
+    margin: 0;
+    padding: 0;
     font-size: 2rem;
     font-weight: bold;
     display: block;
+    color: white;
     margin-bottom: 15px;
+    padding-left: .5em;
+
+  }
+  .question-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.9em;
+    margin-bottom: .225rem;
+    
   }
   
   /* Remove or comment out this if you use .question-label! */
