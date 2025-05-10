@@ -10,6 +10,7 @@
   width: 100%;
 }
 
+
 .header-content { 
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
   display: flex;
@@ -48,7 +49,7 @@
 }
 
 .passwordBoxes {
-  background-color: #ffffff; /* White background for the box */
+  background-color: #f0f0f0 ; /* White background for the box */
   border: 2px solid #0a3d91; /* XP blue border */
   border-radius: 5px;
   padding: 15px;
@@ -59,8 +60,8 @@
   text-wrap: balance;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align items to the start (top left) */
-  justify-content: flex-start;
+  align-items: center; /* Align items to the start (top left) */
+  justify-content: center;
   width: fit-content;
   min-width: 25%;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -74,3 +75,81 @@
 .resetSuccessMessage {
   color: green;
 }
+.user-greeting {
+  font-family: 'Tahoma', sans-serif;  /* Use Tahoma, the XP font */
+  font-size: 2rem;          /* Make it larger */
+  color: #0a3d91;              /* Dark blue, like XP */
+  margin-bottom: 10px;         /* Add some space below */
+  font-weight: bold;
+}
+.xp-form {
+  background-color: #f0f0f0; /* XP background color */
+  padding: 20px;
+  border: 2px solid #0a3d91; /* XP border color */
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* XP shadow */
+  font-family: 'Tahoma', sans-serif;
+}
+
+.xp-label {
+  font-size: 1.5rem;
+  color: #003399; /* XP label color */
+  margin-bottom: 5px;
+  display: block;
+}
+
+.xp-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #7f7f7f; /* XP input border */
+  border-radius: 3px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: 'Tahoma', sans-serif;
+  resize: vertical;
+}
+
+.xp-button {
+  background-color: #e0e0e0; /* XP button color */
+  color: black;
+  border: 2px outset #ffffff; /* XP button border */
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* XP button shadow */
+  font-family: 'Tahoma', sans-serif;
+}
+
+.xp-button:hover {
+  background-color: #dcdcdc; /* Lighter gray on hover */
+}
+
+.xp-button:active {
+  border: 2px inset #ffffff;
+  background-color: #d0d0d0;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel for pressed */
+}
+.passwordButton  {
+  background-color: #e0e0e0; /* Classic XP button gray */
+  border: 2px outset #ffffff; /* XP-style 3D border */
+  color: black;
+  font-family: Tahoma, sans-serif;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 100px;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+  text-align: center;
+}
+
+.passwordButton :hover {
+  background-color: #dcdcdc;
+}
+
+.passwordButton :active {
+  border: 2px inset #ffffff;
+  background-color: #d0d0d0;
+}
+

@@ -135,13 +135,30 @@ function MyProfilePage() {
         </div>
       </div>
 
-      <footer>
+      <footer >
         {/* Username Display right above the "About You" section */}
         {currentUsername && (
           <div className="user-greeting">
             <strong>Username:</strong> {currentUsername}
           </div>
-        )}
+          /* "About You" Section that is always visible */
+        )} <Form onSubmit={handleProfileSubmit} className="xp-form">
+        <Form.Group className="mb-3" controlId="formBasicAbout">
+          <Form.Label className="xp-label">About you:</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Tell us a little about yourself"
+            value={about}
+            onChange={changeAbout}
+            className="xp-textarea"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" className="xp-button">
+          Save Profile
+        </Button>
+      </Form>
+      
         <div className = 'passwordBoxes'>
         <div><strong>Reset Password:</strong></div>
         <Form>
@@ -170,26 +187,11 @@ function MyProfilePage() {
             <Button onClick = {handleResetPassword}>Reset</Button>
           </div>
         </div>
-        {/* "About You" Section that is always visible */}
-        <Form onSubmit={handleProfileSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicAbout">
-            <Form.Label>About you:</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Tell us a little about yourself"
-              value={about}
-              onChange={changeAbout}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Save Profile
-          </Button>
-        </Form>
+        
 
         <hr className="divider" />
 
-        <Form>
+        <Form className="api-key-form-container">
           <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
           <Form.Control
             id="api-key-input"
@@ -202,11 +204,12 @@ function MyProfilePage() {
           <Button className="Submit-Button" onClick={handleKeySubmit}>
             Save API Key
           </Button>
-        </Form>
-
-        <div className="authors">
+          <div className="authors">
           Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez
         </div>
+        </Form>
+
+        
       </footer>
     </div>
   );

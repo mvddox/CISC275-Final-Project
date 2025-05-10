@@ -173,11 +173,11 @@ function NavigateToHomeButton(){
           {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
         </div>
   
-        
+         
   
         <DebugBasic setAnswers={setAnswers} />
   
-        <footer>
+        <footer className="api-key-form-container" >
           <Form>
             <Form.Label>API Key:</Form.Label>
             <Form.Control

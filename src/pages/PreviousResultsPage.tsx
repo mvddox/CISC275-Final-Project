@@ -112,7 +112,7 @@ function PreviousResultsPage(){
           {}
             
 
-        <footer>
+        <footer className="api-key-form-container">
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
         <Form.Control 
