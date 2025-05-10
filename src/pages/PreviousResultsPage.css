@@ -30,9 +30,28 @@ html, body, #root {
   .header-content h1 {
     font-size: 2em;
   }
-
-  .Button{
-    background-color: rgb(108, 92, 195);
-    border: 1px solid black; 
+  .Header-Buttons {
+    display: flex;
+    justify-content: center; /* Or any other layout you prefer */
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .Header-Buttons button {  /* Target buttons *within* Header-Buttons-Basic */
+    background-color: #e0e0e0; /* Classic XP button gray */
+    border: 2px outset #ffffff; /* XP-style 3D border */
+    color: black;
+    font-family: Tahoma, sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 5px;
     text-align: center;
-}
+    cursor: pointer;
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+  }
+  
+  .Header-Buttons button:active {
+    border: 2px inset #ffffff;
+    background-color: #d0d0d0;
+  }
+  

@@ -105,9 +105,12 @@ function PreviousResultsPage(){
             </div>
           {prevResults.map((value)=><div>
             <PreviousResult finishedResult={{...value}} complete={false}></PreviousResult>
-            <Button onClick={()=> removeResult(value)}>Delete?</Button>
-            <Button onClick={()=> NavigateToFocus(value)}> More Details? </Button>
-            <Button onClick={()=> downloadResult(value)}> Download? </Button>
+            <div className="Header-Buttons">
+        <Button onClick={() => removeResult(value)}>Delete?</Button>
+        <Button onClick={() => NavigateToFocus(value)}>More Details?</Button>
+        <Button onClick={() => downloadResult(value)}>Download?</Button>
+      </div>
+          
             </div>)}
           {}
             
