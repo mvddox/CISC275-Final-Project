@@ -4,10 +4,10 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
-  
+
 }
 body {
-  background-image: url("../../public/xp.png"); 
+  background-image: url("../../public/xp.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -56,18 +56,19 @@ footer {
 }
 
 .LoginCreateButton button{
-  background-color: rgb(108, 92, 195);
-  border: 1px solid black; 
+  background-color: #ffffff; /* XP-style white panel */
+  border: 1px solid black;
   text-align: center;
   display: inline-block;
+  color: #000000;
 }
 
 .PagesButtonsContainter {
   display: flex;
-  flex-direction: row; 
-  justify-content: center; 
-  align-items: center; 
-  width: 80%; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
   margin: 0 auto;
   /*background-color: rgb(187, 178, 237);*/
   height: 30vh;
@@ -109,38 +110,51 @@ footer {
   padding: 0;
 
 }
-
 .LoggedButtons {
   display: flex;
-  flex-direction: row; 
-  justify-content: center; 
-  align-items: center; 
-  width: 100%; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin: 0 auto;
   /*background-color: rgb(187, 178, 237);*/
-  height: 10vh;
-  gap: 10vh;
+  height: 15vh; /* Increased height */
+  gap: 5vh; /* Slightly reduced gap if needed to fit */
   flex-grow: 1; /* Ensures content expands inside the header */
 }
 
-
 .ButtonDescription {
-  width: 75vh;
+  width: 100%; /* Make it take the full width of its parent */
   color: rgba(37, 37, 37, 0.829);
   /*border: 1px solid rgb(122, 115, 110);*/
   background-color: #ffffff;
   margin-top: 5px;
   font-size: 18px;
-  text-wrap: balance;
   font-family: Tahoma, Geneva, sans-serif;
+  word-wrap: break-word; /* Force text to break onto a new line if it exceeds the width */
+  white-space: normal; /* Allow text to wrap normally */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  padding: 10px; /* Add some padding inside the box for the text */
 }
 
 .Submit-Button {
-  background-color: rgb(108, 92, 195);
-  width: 15vh;
-  border: 1px solid black; 
+  background-color: #e0e0e0; /* Classic XP button gray */
+  border: 2px outset #ffffff; /* XP-style 3D border */
+  color: black;
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  padding: 6px 12px;
+  margin: 5px;
   text-align: center;
-  height: 7vh;
+ 
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.Submit-Button:active {
+  border: 2px inset #ffffff;
+  background-color: #d0d0d0;
 }
 .API {
   display: flex;
@@ -164,29 +178,53 @@ footer {
   transition: 0.3s;
   text-align: center;
 }
-
 .PagesButtons button {
-  background-color: #e1e1e1;
-  border: 1px solid #7f7f7f;
+  background-color: #e0e0e0; /* XP-style grey button */
+  border: 2px outset #ffffff; /* classic 3D raised look */
   font-family: Tahoma, sans-serif;
   padding: 6px 12px;
   font-size: 14px;
   margin: 5px;
   color: black;
-  box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* inner bevel */
   cursor: pointer;
+  /*background-color: #e1e1e1;*/
+  /*border: 1px solid #7f7f7f;*/
+  /*box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;*/
 }
 
-.LoggedButtons button {
-  background-color: rgb(108, 92, 195);
-  width: 30vh;
-  border: 1px solid black; 
-  text-align: center;
-  height: 10vh;
+.LoggedButtons button:active {
+  border: 2px inset #ffffff;
+  background-color: #d0d0d0;
 }
+.LoggedButtons button {
+  background-color: #e0e0e0; /* Classic XP button gray */
+  border: 2px outset #ffffff; /* XP-style 3D border */
+  color: black;
+  font-family: Tahoma, sans-serif;
+  font-size: 16px;
+  padding: 15px 30px;
+  margin: 15px;
+  width: auto; /* Adjusted to auto */
+  min-width: 150px; /* Added a minimum width */
+  height: auto; /* Adjusted to auto */
+  min-height: 50px; /* Added a minimum height */
+  text-align: center;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+  /* Keep old settings if needed for fallback: */
+  /*width: 30vh;*/
+  /*height: 10vh;*/
+  /*background-color: rgb(108, 92, 195);*/
+  /*border: 1px solid black;*/
+
+
 
 .AuthorText {
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -204,7 +242,7 @@ footer {
 .VideoButton{
   background-color: rgb(108, 92, 195);
   width: 10vh;
-  border: 1px solid black; 
+  border: 1px solid black;
   text-align: center;
   height: 5vh;
   font-size: 8px;

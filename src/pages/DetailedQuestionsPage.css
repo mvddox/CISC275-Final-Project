@@ -1,31 +1,27 @@
-    .Detailed-header {
-        background-color: rgb(52, 33, 160);
-        min-height: 12vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: calc(20px + 2vmin);
-        color: white;
-        }
-    .Detailed-header-title{
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow',sans-serif;
-        font-size: calc(30px + 2vmin);
-        
-        }
+.Detailed-header {
+    background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
+    min-height: 12vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Match Basic-header's justify-content */
+    font-size: calc(20px + 2vmin); /* Keep the font size */
+    color: white;
+    font-family: "Tahoma", sans-serif; /* Match Basic-header's font-family */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* XP-style drop shadow */
+  }
+  
+  .Detailed-header-title {
+    font-family: "Tahoma", sans-serif; /* Use Tahoma for consistency */
+    font-size: calc(30px + 2vmin); /* Keep the title size */
+  }
     .Header-Buttons-Detailed-button{
         background-color: rgb(108, 92, 195);
         border: 1px solid black; 
         text-align: center;
         flex: row;
     }
-    .Detailed-Body{       
-        background-color: rgb(187, 178, 237);
-    }
-
-    .Detailed{
-        background-color: rgb(187, 178, 237);
-    }
+    
 
     .Header-Buttons-Detailed{
         font-size: calc(1px + 2vmin);

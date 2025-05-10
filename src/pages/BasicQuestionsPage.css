@@ -1,5 +1,8 @@
-.Basic-header {
-    background: linear-gradient(to top, #1d5fb3, #4f94ef);
+/* ===============================
+   Header Section
+   =============================== */
+   .Basic-header {
+    background: linear-gradient(to top, #1d5fb3, #4f94ef); /* XP blue gradient */
     min-height: 12vh;
     display: flex;
     flex-direction: column;
@@ -7,19 +10,36 @@
     justify-content: flex-start;
     font-size: calc(20px + 2vmin);
     color: white;
+    font-family: "Tahoma", sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* XP-style drop shadow */
   }
   
+  .Basic-header-title {
+    font-family: 'Tahoma', sans-serif;
+    font-size: calc(30px + 2vmin);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px #000; /* XP title shadow effect */
+  }
+  
+  /* ===============================
+     Buttons (XP Style)
+     =============================== */
   .Button {
-    background-color: #003366;
-    border: none;
-    color: white;
+    background-color: #c0c0c0; /* XP gray button */
+    color: black;
+    border: 2px outset white;
     padding: 15px 30px;
     margin: 0 10px;
     font-size: 1.2rem;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    text-align: center;
     min-width: 150px;
+    font-family: 'Tahoma', sans-serif;
+    box-shadow: 2px 2px 5px #888; /* XP button shadow */
+  }
+  
+  .Button:hover {
+    background-color: #dcdcdc; /* Lighter gray on hover */
   }
   
   .button-row {
@@ -28,61 +48,65 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-    background-color: none;
+    background-color: transparent;
     padding: 10px 0;
     font-size: 1rem;
   }
   
-  .Basic-header-title {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
-    font-size: calc(30px + 2vmin);
-    margin-bottom: 10px;
-  }
-  
-  .Header-Buttons-Basic {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    font-size: 1rem;
-  }
-  
+  /* ===============================
+     Body Section
+     =============================== */
   .Basic-Body {
-    background-image: url("../../public/xp.png"); 
+    background-image: url("../../public/xp.png"); /* Windows XP Bliss background */
+    background-size: cover;
+    background-position: center;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
     overflow: auto;
     min-height: 60vh;
-    padding: 0 10px; /* Optional: some horizontal padding */
+    padding: 0 10px;
+    font-family: "Tahoma", sans-serif;
   }
   
+  /* ===============================
+     Links
+     =============================== */
   .App-link {
-    color: #61dafb;
+    color: #0078d7; /* Classic Windows link blue */
     font-size: 1rem;
+    text-decoration: underline;
   }
   
+  /* ===============================
+     Question Layout
+     =============================== */
   .Basic-Question-Row {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 10px; /* Reduced from 20px */
+    margin-bottom: 10px;
     gap: 20px;
   }
   
   .Basic-Question {
-    padding: 12px; /* Reduced from 20px */
+    padding: 12px;
     border-radius: 10px;
     font-size: 1.5rem;
-    margin: 10px 0; /* Reduced, only vertical margin */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 600px;
     height: auto;
-    background-color: rgb(0, 255, 251);
+    background-color: #d4f4ff; /* Light XP-style blue */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    border: 1px solid #7aa1d2; /* Subtle border */
   }
   
+  /* ===============================
+     Question Text
+     =============================== */
   .question-label {
     font-size: 2rem;
     font-weight: bold;
@@ -90,32 +114,36 @@
     margin-bottom: 15px;
   }
   
-  /* Optional: make sure radio/checkbox answer labels are normal weight */
   .Basic-Question label:not(.question-label) {
     font-weight: normal;
     font-size: 1.1rem;
   }
   
-  /* Optional: style for progress bar if you have one */
+  /* ===============================
+     Optional Progress Bar Styling
+     =============================== */
   .progress-bar {
     margin-bottom: 10px;
   }
+  
+  /* ===============================
+     Generate Response Button (XP Style)
+     =============================== */
   .generate-response-button {
-    background-color: none; /* Your preferred button color */
-    color: rgb(255, 255, 255);
-    border: none;             /* Remove border */
-    box-shadow: none;         /* Remove shadow */
+    background-color: #c0c0c0;
+    color: black;
+    border: 2px outset #fff;
     padding: 12px 30px;
     font-size: 1.2rem;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    outline: none;            /* Remove focus outline */
-    transition: background-color 0.3s ease;
+    font-family: "Tahoma", sans-serif;
+    box-shadow: 2px 2px 5px #888;
   }
   
   .generate-response-button:hover,
   .generate-response-button:focus {
-    background-color: #93b6d9; /* Darker shade on hover/focus */
-    outline: none;             /* Ensure no outline on focus */
+    background-color: #dcdcdc;
+    outline: none;
   }
   
