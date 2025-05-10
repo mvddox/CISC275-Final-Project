@@ -1,43 +1,55 @@
 .ai-container {
-    margin: 20px;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    background-color: none;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .loading {
-    color: #007bff;
-    font-weight: bold;
-  }
-  
-  .results {
-    margin-top: 10px;
-    
-  }
- 
+  margin: 20px auto; /* Changed margin to auto for horizontal centering */
+  padding: 15px;
+  font-family: Tahoma, sans-serif;
+  background-color: #f0f0f0; 
+  border: 2px solid #0a3d91;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  display: flex; /* Added flexbox for centering items */
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally within the container */
+  text-align: center; /* Centers text within the container */
+}
 
-  .final-result {
-    margin-top: 20px;
-    color: #2d2d2d;
-    font-weight: bold;
-    font-size: 1.5rem;
-    border-top: 2px solid #007bff;
-    padding-top: 10px;
-  }
-  
-  
-  .ai-button {
-    background-color: #15782a;
-    color: rgb(236, 236, 236);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    flex-wrap: wrap;
-  }
-  
-  
-  
+.loading {
+  color: #0a3d91;
+  font-weight: bold;
+}
+
+.results {
+  margin-top: 10px;
+  color: #000000;
+  text-align: center; /* Center the results text */
+}
+
+.final-result {
+  margin-top: 20px;
+  color: #2d2d2d;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-top: 2px solid #0a3d91;
+  padding-top: 10px;
+  text-align: center; /* Center the final result text */
+}
+
+.ai-button {
+  background-color: #e0e0e0;
+  border: 2px outset #ffffff;
+  color: black;
+  font-family: Tahoma, sans-serif;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  flex-wrap: wrap;
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+  transition: all 0.1s ease-in-out;
+  margin: 10px auto; /* Add auto margins to the button */
+  display: block;
+}
+
+.ai-button:active {
+  border: 2px inset #ffffff;
+  background-color: #d0d0d0;
+}

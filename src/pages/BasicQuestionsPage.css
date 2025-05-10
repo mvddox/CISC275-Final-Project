@@ -21,37 +21,59 @@
     text-shadow: 1px 1px 2px #000; /* XP title shadow effect */
   }
   
+  .Header-Buttons-Basic {
+    display: flex;
+    justify-content: center; /* Or any other layout you prefer */
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .Header-Buttons-Basic button {  /* Target buttons *within* Header-Buttons-Basic */
+    background-color: #e0e0e0; /* Classic XP button gray */
+    border: 2px outset #ffffff; /* XP-style 3D border */
+    color: black;
+    font-family: Tahoma, sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+  }
+  
+  .Header-Buttons-Basic button:active {
+    border: 2px inset #ffffff;
+    background-color: #d0d0d0;
+  }
+  
   /* ===============================
      Buttons (XP Style)
      =============================== */
-  .Button {
-    background-color: #c0c0c0; /* XP gray button */
-    color: black;
-    border: 2px outset white;
-    padding: 15px 30px;
-    margin: 0 10px;
-    font-size: 1.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-    min-width: 150px;
-    font-family: 'Tahoma', sans-serif;
-    box-shadow: 2px 2px 5px #888; /* XP button shadow */
-  }
-  
-  .Button:hover {
-    background-color: #dcdcdc; /* Lighter gray on hover */
-  }
-  
-  .button-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-    background-color: transparent;
-    padding: 10px 0;
-    font-size: 1rem;
-  }
+     .Header-Buttons-Basic-button {
+        background-color: #e0e0e0; /* XP gray button */
+        color: black;
+        border: 2px outset white;
+        padding: 15px 30px;
+        margin: 0 10px;
+        font-size: 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        min-width: 150px;
+        font-family: 'Tahoma', sans-serif;
+        box-shadow: 2px 2px 5px #888; /* XP button shadow */
+      }
+      .Header-Buttons-Basic-button:hover {
+        background-color: #dcdcdc; /* Lighter gray on hover, like XP */
+      }
+      
+      .Header-Buttons-Basic-button:active {
+        border: 2px inset #ffffff; /* Pressed effect */
+        background-color: #d0d0d0;
+        box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel for pressed */
+      }
+      
+      
+    
   
   /* ===============================
      Body Section
@@ -145,5 +167,61 @@
   .generate-response-button:focus {
     background-color: #dcdcdc;
     outline: none;
+  }
+  .button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    background-color: transparent;
+    padding: 10px 0;
+    font-size: 1rem;
+}
+.api-key-form-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .api-key-form-container form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+  }
+  
+  .api-key-form-container label {
+      font-family: Tahoma, sans-serif;
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #333;
+      width: 100%;
+      text-align: center;
+  }
+  
+  .api-key-form-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #7f7f7f;
+    border-radius: 3px;
+    font-family: Tahoma, sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .api-key-form-container .Submit-Button{
+      margin-top: 10px;
   }
   

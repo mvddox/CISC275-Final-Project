@@ -15,14 +15,24 @@
     font-family: "Tahoma", sans-serif; /* Use Tahoma for consistency */
     font-size: calc(30px + 2vmin); /* Keep the title size */
   }
-    .Header-Buttons-Detailed-button{
-        background-color: rgb(108, 92, 195);
-        border: 1px solid black; 
-        text-align: center;
-        flex: row;
-    }
-    
 
+  .Header-Buttons-Detailed-button {
+    background-color: #e0e0e0; /* Classic XP button gray */
+    border: 2px outset #ffffff; /* XP-style 3D border */
+    color: black;
+    font-family: Tahoma, sans-serif;  /* XP font */
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+  }
+  
+  .Header-Buttons-Detailed-button:active {
+    border: 2px inset #ffffff;
+    background-color: #d0d0d0;
+  }
     .Header-Buttons-Detailed{
         font-size: calc(1px + 2vmin);
     }
@@ -42,9 +52,4 @@
             width:75%;
             height:187px;
     }
-    .button-row{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(187, 178, 237);
-    }
+    

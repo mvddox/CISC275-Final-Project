@@ -104,7 +104,7 @@ function NavigateToHomeButton(){
         Next</Button>
       </div>
       <div className ='Detailed-Body'>
-        <QuestionProgressBar progress={progress} />
+      <QuestionProgressBar progress={progress}  />
         <Form.Check
           id="is-debug-check"
           label="DEBUG MODE?"
@@ -117,7 +117,7 @@ function NavigateToHomeButton(){
       </div>
       
 
-      <footer>
+      <footer className="api-key-form-container">
       <Form>
         <Form.Label htmlFor="api-key-input">API Key: </Form.Label>
         <Form.Control

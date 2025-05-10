@@ -45,7 +45,7 @@ function BasicQuestionsPage() {
   const [viewedQuestions, setViewedQuestions] = useState<BasicQuestionType[]>([...viewableQuestions[viewedQuestionsCount]])
   const [key, setKey] = useState<string>(keyData); //for api key input
   const answeredQuestionCount : number = Object.keys(answers).length;  // question the user answered
-  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100; //percent completed
+  const progress: number = (answeredQuestionCount / BASIC_QUESTIONS.length) * 100;  //percent completed
   const [canGenerate, setCanGenerate] = useState<boolean>(false);
 
   useEffect(() => {
@@ -145,7 +145,7 @@ function NavigateToHomeButton(){
   {/* Pagination buttons */}
   <div className="button-row">
           <Button
-            className="Button"
+            className="Header-Buttons-Basic-button"
             disabled={viewedQuestionsCount === 0}
             onClick={() => {
               setViewedQuestions([...viewableQuestions[viewedQuestionsCount - 1]]);
@@ -156,7 +156,7 @@ function NavigateToHomeButton(){
           </Button>
   
           <Button
-            className="Button"
+            className="Header-Buttons-Basic-button"
             disabled={viewedQuestionsCount === viewableQuestions.length - 1}
             onClick={() => {
               setViewedQuestions([...viewableQuestions[viewedQuestionsCount + 1]]);
@@ -168,7 +168,8 @@ function NavigateToHomeButton(){
         </div>
         {/* Group progress bar and generate button together below questions */}
         <div className="progress-button-wrapper">
-          <QuestionProgressBar progress={progress} />
+        <QuestionProgressBar progress={progress}  />
+
           {(keyData) && <OpenAiComponentB BasicResults={answers} disabled={!canGenerate} />}
         </div>
   

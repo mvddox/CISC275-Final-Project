@@ -10,7 +10,6 @@ html, body, #root {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(187, 178, 237);
   }
 
 .results-container{
@@ -82,12 +81,29 @@ html, body, #root {
     font-size: 2em;
   }
   
-
-  .Button{
-    background-color: rgb(108, 92, 195);
-    border: 1px solid black; 
-    text-align: center;
-}
+  .Button {
+    background-color: #e0e0e0; /* Classic XP button gray */
+    border: 2px outset #ffffff; /* XP-style 3D border */
+    color: black;
+    font-family: Tahoma, sans-serif;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 100px; /* Add a minimum width for consistency */
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+    text-align: center; /* Center the text */
+  }
+  
+  .Button:hover {
+    background-color: #dcdcdc; /* Lighter gray on hover */
+  }
+  
+  .Button:active {
+    border: 2px inset #ffffff; /* Pressed effect */
+    background-color: #d0d0d0;
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel for pressed */
+  }
 
 .ai-disclaimer{
   background-color: yellow;
