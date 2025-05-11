@@ -34,22 +34,27 @@
 }
 
 .ai-button {
-  background-color: #e0e0e0;
-  border: 2px outset #ffffff;
+  background-color: #e0e0e0; /* Classic XP button gray */
+  border: 2px outset #ffffff; /* XP-style 3D border */
   color: black;
   font-family: Tahoma, sans-serif;
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  flex-wrap: wrap;
-  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+  flex-wrap: wrap; /* changed from wrap to nowrap */
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
   transition: all 0.1s ease-in-out;
-  margin: 10px auto; /* Add auto margins to the button */
-  display: block;
 }
 
 .ai-button:active {
   border: 2px inset #ffffff;
   background-color: #d0d0d0;
+}
+.ai-button:disabled {
+  background-color: #c0c0c0; /* Light gray */
+  color: #6a6a6a;            /* Dimmed text color */
+  border: 2px outset #ccc;
+  cursor: not-allowed;
+  box-shadow: none;          /* Optional: remove inner bevel */
 }

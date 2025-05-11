@@ -9,11 +9,13 @@
     color: white;
     font-family: "Tahoma", sans-serif; /* Match Basic-header's font-family */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* XP-style drop shadow */
+    
   }
   
   .Detailed-header-title {
     font-family: "Tahoma", sans-serif; /* Use Tahoma for consistency */
     font-size: calc(30px + 2vmin); /* Keep the title size */
+    
   }
 
   .Header-Buttons-Detailed-button {
@@ -27,6 +29,7 @@
     text-align: center;
     cursor: pointer;
     box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+    
   }
   
   .Header-Buttons-Detailed-button:active {
@@ -35,6 +38,10 @@
   }
     .Header-Buttons-Detailed{
         font-size: calc(1px + 2vmin);
+        display: flex; /* Make Header-Buttons a flex container */
+        justify-content: center; /* Center the buttons horizontally */
+        align-items: center; /* Vertically align items if needed */
+        gap: 10px; /* Space between buttons */
     }
         
     .form{
@@ -52,4 +59,7 @@
             width:75%;
             height:187px;
     }
-    
+    .detailed-question-text {
+        font-size: 1.5rem; /* Adjust size as needed */
+        font-weight: bold;
+      }

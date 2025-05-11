@@ -104,7 +104,7 @@ function LoginPage(){
   
     return (
       <div>
-        <Button className="Button" onClick={handleCreateClick}>
+        <Button className="Button-CA" onClick={handleCreateClick}>
           Create Account
         </Button>
       </div>
@@ -131,7 +131,7 @@ function LoginPage(){
       </div>
       <div className='accountInfo'>
         <Form>
-          <Form.Group controlId="Username">
+          <Form.Group controlId="Username" className="passwordButton">
             <Form.Label>Username:</Form.Label>
             <Form.Control
               value={username}

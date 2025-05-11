@@ -36,7 +36,7 @@
 }
 
 /* Unified button style for Login and Create Account (XP Style - Bigger) */
-.Button {
+.Button-CA {
   background-color: #e0e0e0; /* Classic XP button gray */
   border: 2px outset #ffffff; /* XP-style 3D border */
   color: black;
@@ -52,20 +52,39 @@
   box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
 }
 
-.Button:hover {
+.Button-CA:hover {
   background-color: #dcdcdc; /* Lighter gray on hover */
 }
 
-.Button:active {
+.Button-CA:active {
   border: 2px inset #ffffff; /* Pressed effect */
   background-color: #d0d0d0;
 }
 
-/* If you want to keep LoginButton for layout, don't override color/font/size */
 .LoginButton {
-  width: auto; /* Adjust width based on content */
+  background-color: #e0e0e0; /* Classic XP button gray */
+  border: 2px outset #ffffff; /* XP-style 3D border */
+  color: black;
+  font-family: Tahoma, sans-serif;
+  font-size: 1.4rem; /* Larger font size */
+  border-radius: 4px; /* Slight rounding */
+  padding: 10px 20px; /* Increased padding */
+  min-width: 150px; /* Minimum width for better size */
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 10px; /* Increased margin */
+  box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
 }
 
+.LoginButton:hover {
+  background-color: #dcdcdc; /* Lighter gray on hover */
+}
+
+.LoginButton:active {
+  border: 2px inset #ffffff; /* Pressed effect */
+  background-color: #d0d0d0;
+}
 /* Container for both buttons (Bigger spacing) */
 .accountButtons {
   display: flex;
@@ -93,8 +112,8 @@
 }
 
 /* Password button wrapper (More padding) */
-.passwordButton {
-  padding-top: 20px;
+ .loginBox{
+  padding-top: 20px; 
 }
 
 /* Error text (Bigger font) */
@@ -172,4 +191,31 @@ footer {
   bottom: 0;
   width: 100%;
   font-size: 1rem; /* Adjust footer font size if needed */
+}
+.passwordButton { /* Changed selector to .passwordButton */
+  background-color: #e0e0e0; 
+  border: 2px solid #0a3d91; /* XP blue border */
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px auto;
+  font-family: Tahoma, sans-serif;
+  color: black;
+  font-size: 1.2rem; /* Increased font size */
+  text-wrap: balance;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start (top left) */
+  justify-content: flex-start;
+  width: 80%; /* Make it wider */
+  min-width: 300px; /* Add a minimum width */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.passwordButton input { /* Targets input elements within .passwordButton */
+    padding: 10px;
+    font-size: 1.2rem;
+    height: auto;
+}
+.passwordButton input:hover {
+  background-color: #ffffff; /* Keep the background white on hover */
 }

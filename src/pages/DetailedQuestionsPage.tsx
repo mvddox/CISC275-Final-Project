@@ -91,8 +91,8 @@ function NavigateToHomeButton(){
       </header>
       <div className='Detailed-Body'>
         {/* maps every question into the document but hides the undesirable ones */}
-        {DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
-          <div hidden={question.id !== viewedQuestion} key={question.id}>
+        { DETAILED_QUESTIONS.map((question: DetailedQuestionType)=>
+          <div className="detailed-question-text" hidden={question.id !== viewedQuestion} key={question.id}>
             {/* NOTE: cannot pass anything in between the html elements or it gives an error */}
             <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
       </div>

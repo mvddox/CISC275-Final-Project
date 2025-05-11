@@ -37,8 +37,31 @@
     justify-content: center;
     align-items: center;
 
+  }.ai-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
   }
   
+  .ai-button {
+    background-color: #e0e0e0; /* Classic XP button gray */
+    border: 2px outset #ffffff; /* XP-style 3D border */
+    color: black;
+    font-family: Tahoma, sans-serif;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-wrap: nowrap; /* changed from wrap to nowrap */
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff; /* Inner bevel */
+    transition: all 0.1s ease-in-out;
+  }
   
-  
+  .ai-button:active {
+    border: 2px inset #ffffff;
+    background-color: #d0d0d0;
+  }
   
