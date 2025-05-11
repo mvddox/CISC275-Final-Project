@@ -85,9 +85,9 @@ All files                   |       0 |        0 |       0 |       0 |
   index.tsx                 |       0 |      100 |     100 |       0 | 7-19              
   reportWebVitals.ts        |       0 |        0 |       0 |       0 | 3-10              
  src/pages                  |       0 |        0 |       0 |       0 |                   
-  BasicQuestion.tsx         |       0 |      100 |       0 |       0 | 9-25              
+  BasicQuestion.tsx         |       0 |      100 |       0 |       0 | 9-26              
   BasicQuestionsList.tsx    |       0 |      100 |     100 |       0 | 18-44             
-  BasicQuestionsPage.tsx    |       0 |        0 |       0 |       0 | 14-170            
+  BasicQuestionsPage.tsx    |       0 |        0 |       0 |       0 | 14-164            
   CurrentResultPage.tsx     |       0 |        0 |       0 |       0 | 10-102            
   DetailedQuestion.tsx      |       0 |        0 |       0 |       0 | 10-30             
   DetailedQuestionsList.tsx |       0 |      100 |     100 |       0 | 20-66             
@@ -108,5 +108,5 @@ All files                   |       0 |        0 |       0 |       0 |
 Test Suites: 3 failed, 3 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        6.892 s
+Time:        6.419 s
 Ran all test suites.
