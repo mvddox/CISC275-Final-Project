@@ -104,7 +104,7 @@ function LoginPage(){
   
     return (
       <div>
-        <Button className="Button" onClick={handleCreateClick}>
+        <Button className="LoginButton" onClick={handleCreateClick}>
           Create Account
         </Button>
       </div>
@@ -163,7 +163,10 @@ function LoginPage(){
                     <br></br>
                     <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
                 </Form>
-                Authors: Ethan Rigor, John Shaw, Elijah Jeudy, Maddox Florez </footer>
+                <div className='AuthorText'>
+                  <br />
+                </div>
+                </footer>
         </div>
     );
 }

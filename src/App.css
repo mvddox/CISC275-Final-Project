@@ -17,3 +17,19 @@
 .header-content h1 {
   font-size: 2em;
 }
+.AuthorText {
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+
+  color: rgba(0, 0, 0, 0.829);
+  background-image: url("../public/Windows-XP-Desktop-Taskbar.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0;
+  padding: 0;
+}
