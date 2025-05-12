@@ -95,9 +95,9 @@ function NavigateToHomeButton(){
             <DetailedQuestion question={{...question}} allAnswers={answers} setAnswers={setAnswers}></DetailedQuestion></div>)}
       </div>
       <div className='button-row'>
-        <Button className='Header-Buttons-Detailed-button' disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
+        <Button className='Submit-Button' disabled={viewedQuestion === 0} onClick={()=> (setViewedQuestion(viewedQuestion-1))}>
         Previous</Button>
-        <Button className='Header-Buttons-Detailed-button' disabled={DETAILED_QUESTIONS.length - 1 ===
+        <Button className='Submit-Button' disabled={DETAILED_QUESTIONS.length - 1 ===
           viewedQuestion}onClick={()=> (setViewedQuestion(viewedQuestion+1))}>
         Next</Button>
       </div>
