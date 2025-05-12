@@ -166,8 +166,8 @@ function MyProfilePage() {
           <div className = 'resetSuccessMessage'>
             {(changePassSuccess && "Password Successfully Reset")}
           </div>
-          <div className = 'passwordButton'>
-            <Button onClick = {handleResetPassword}>Reset</Button>
+          <div >
+            <Button className = 'passwordButton' onClick = {handleResetPassword}>Reset</Button>
           </div>
         </div>
         {/* "About You" Section that is always visible */}
@@ -182,7 +182,7 @@ function MyProfilePage() {
               onChange={changeAbout}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className = 'passwordButton' variant="primary" type="submit">
             Save Profile
           </Button>
         </Form>
