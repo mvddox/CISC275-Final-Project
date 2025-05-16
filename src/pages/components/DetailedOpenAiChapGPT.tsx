@@ -88,7 +88,7 @@ function OpenAiComponent({DetailedResults, disabled}:
             
             await Promise.all(userResponses).then(async (userResponses)=>    
                 {
-                setProgressMessage("Finding your perfect career...")
+                setProgressMessage("Finding your future career...")
                 const response = await openai.responses.create({
                 model: "gpt-4o",
                 instructions: "use second tense",
