@@ -95,6 +95,10 @@ function CurrentResultPage() {
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
           {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
         </div>
+        {/* Shows the career's salary range */}
+        <div className="salary">
+          <strong>Salary Range:</strong> {finishedResult.salary}
+        </div>
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
           <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>

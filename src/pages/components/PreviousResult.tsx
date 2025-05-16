@@ -40,7 +40,7 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         {isDetailed(finishedResult) ? <div>Detailed Result</div>: <div>Basic Result</div>}
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
-          {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
+          {finishedResult.finalDeclaredFuture +" ~~ "+ finishedResult.finalCareer}
         </div>
         {/* Shows individual insights if finished loading */}
         {complete ? <div className="results-list">
@@ -50,6 +50,10 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
             ))}
           </ul>
         </div>: <></>}
+        {/* Shows the career's salary range */}
+        <div className="salary">
+          {"Salary Range: " + finishedResult.salary}
+        </div>
         {/* Shows character analysis */}
         <div className="final-results">
           <h3>Character Analysis:</h3>
