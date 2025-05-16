@@ -47,7 +47,16 @@
   padding-bottom: 20px; 
   font-size: calc(10px + 2vmin)
 }
-
+.passwordButton{
+  background-color: #e0e0e0;
+    border: 2px outset #ffffff;
+    color: black;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+    box-shadow: inset -1px -1px #a0a0a0, inset 1px 1px #ffffff;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
 .resetFailMessage {
   color: red;
 }

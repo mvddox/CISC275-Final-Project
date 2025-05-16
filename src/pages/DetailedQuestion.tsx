@@ -31,8 +31,8 @@ function DetailedQuestion({question, allAnswers, setAnswers}:
                     }
                 }
             }} />
-        <Form.Text>{answerLength}/250 characters remaining</Form.Text>
-        {(answerLength) < 10 && <div>Needs {10 - (answerLength)} more characters</div>}
+        <Form.Text className='detailed-character-text'>{answerLength}/250 characters remaining</Form.Text>
+        {(answerLength) < 10 && <div className='detailed-character-text'>Needs {10 - (answerLength)} more characters</div>}
     </Form.Group>
     </div>
 }
