@@ -27,6 +27,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [date, setDate] = useState<string>("")
     const [resultValues, setResultValues] = useState<resultValues>({empathy:50,workLifeBalance:50,ambition:50})
     const openai = new OpenAI({apiKey: keyData, dangerouslyAllowBrowser: true}) // because the user inputs in,
+    const [salary, setSalary] = useState<string>("") // used for salary range of career
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
     const navigate = useNavigate();
@@ -87,7 +88,7 @@ function OpenAiComponent({DetailedResults, disabled}:
             
             await Promise.all(userResponses).then(async (userResponses)=>    
                 {
-                setProgressMessage("Arbitrating your final judgment...")
+                setProgressMessage("Finding your perfect career...")
                 const response = await openai.responses.create({
                 model: "gpt-4o",
                 instructions: "use second tense",
@@ -104,6 +105,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                         + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                         + "what is the hexidecimal color based on vibes?"
+                        + "Give me a range of salaries for this career (for example: '$2000-$5000')"
                     },
                 ],
                 temperature: 1.2, //1.5 and above breaks it to random characters
@@ -131,6 +133,9 @@ function OpenAiComponent({DetailedResults, disabled}:
                           color_vibe: { 
                             type: "string", 
                           },
+                          salary_range: {
+                            type: "string",
+                          },
                           values: {
                             type: "object",
                             properties: {
@@ -152,7 +157,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         
                           }
                         },
-                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values"],
+                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values", "salary_range"],
                         additionalProperties: false,
                       },
                     }
@@ -164,6 +169,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setFinalCareer(JSON.parse(response.output_text).future_career)
                 setColorVibe(JSON.parse(response.output_text).color_vibe)
                 setResultValues(JSON.parse(response.output_text).values)
+                setSalary(JSON.parse(response.output_text).salary_range)
                 let currentDate = Date()
                 setDate(currentDate)
                 console.log(response.usage)
@@ -175,7 +181,8 @@ function OpenAiComponent({DetailedResults, disabled}:
                   finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
                   colorVibe:JSON.parse(response.output_text).color_vibe,
                   date: currentDate,
-                  values: (JSON.parse(response.output_text).values) 
+                  values: (JSON.parse(response.output_text).values),
+                  salary: (JSON.parse(response.output_text).salary_range) 
                 }
                 result.setResult( currentResult)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
@@ -199,9 +206,14 @@ function OpenAiComponent({DetailedResults, disabled}:
       {/* Shows progress message if currently loading */}
       {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
 
-      {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
+      {/* Shows a defined, simple, determined result */}
       <div className="final-career" style={{"color":colorVibe}}hidden={loading || !finalResult}>
-        {finalDeclaredFuture +"~~"+ finalCareer}
+        {finalDeclaredFuture +" ~~ "+ finalCareer}
+      </div>
+
+      {/* Shows the career's salary range */}
+      <div className="salary" hidden={loading || !salary}>
+        {"Salary Range: " + salary}
       </div>
 
       {/* Shows individual insights if finished loading */}
