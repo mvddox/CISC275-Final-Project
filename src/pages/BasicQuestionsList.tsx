@@ -10,13 +10,9 @@ export interface BasicQuestionType {
 export type BasicAnswerRecord = Record<string, string>
 export type actualMeaning = Record<number, string>
 
-
-//placeholder example
-//const QUESTION_ZERO: BasicQuestionType = {instruction: "This is a plaeholder", answers:["placeholder 1", "placeholder 2"], id: 0}
-
 //QUESTIONS
 const QUESTION_1: BasicQuestionType = {instruction: "Are you an extroverted person?", answers:["Yes", "Mayhaps", "No"], id: 0}
-const QUESTION_2: BasicQuestionType = {instruction: "Are people are of any value to you?", answers:["Yes", "Mayhaps", "No"], id: 1}
+const QUESTION_2: BasicQuestionType = {instruction: "Are people of any value to you?", answers:["Yes", "Mayhaps", "No"], id: 1}
 const QUESTION_3: BasicQuestionType = {instruction: "Do you want to make the world a better place?", answers:["Yes", "Mayhaps", "No"], id: 2}
 const QUESTION_4: BasicQuestionType = {instruction: "Can you work in a team?", answers:["Yes", "Mayhaps", "No"], id: 3}
 const QUESTION_5: BasicQuestionType = {instruction: "Are you your own boss?", answers:["Yes", "Mayhaps", "No"], id: 4}
@@ -34,7 +30,7 @@ const QUESTION_16: BasicQuestionType = {instruction: "Does it matter if your car
 const QUESTION_17: BasicQuestionType = {instruction: "Is there always a mountain to climb higher, a peak to reach?", answers:["Nah, I'm content", "There are limits", "One could always achieve more", "Among the hierarchy, I alone will take precedence"], id: 16}
 const QUESTION_18: BasicQuestionType = {instruction: "How do you want to spend your workday?", answers:["Contributing to large-scale projects in a team","Helping clients on the phone", "Finishing tasks with a partner", "Working busy work remotely"], id: 17}
 const QUESTION_19: BasicQuestionType = {instruction: "How should work be scheduled?", answers:["Whenever work demands it", "However the client schedules it", "Every week is scheduled by me", "Only during a routine schedule"], id: 18}
-const QUESTION_20: BasicQuestionType = {instruction: "How flexible are you in emergancies?", answers:["It does not matter if an emergancy happens, not my problem", "My safety takes priority", "It has to be really dire", "It is my duty to help in spite of the circumstances"], id: 19}
+const QUESTION_20: BasicQuestionType = {instruction: "How flexible are you in emergencies?", answers:["It does not matter if an emergancy happens, not my problem", "My safety takes priority", "It has to be really dire", "It is my duty to help in spite of the circumstances"], id: 19}
 const QUESTION_21: BasicQuestionType = {instruction: "Why do you exist?", answers:["To live life as I see it", "To create value for the world", "To serve humanity", "I don't need a reason"], id: 20}
 
 

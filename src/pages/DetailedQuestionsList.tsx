@@ -7,12 +7,6 @@ export interface DetailedQuestionType {
 
 export type DetailedQuestionRecord = Record<string, string>
 
-//plqholder example 
-// const QUESTION_ZERO: DetailedQuestionType = {instruction: 
-//     "Who would win in a fight, a man with everything on the line, or a man with nothing to lose?", id: 0}
-// const QUESTION_NEGATIVEONE: DetailedQuestionType = {instruction: 
-//     "Who would you turn the trolley?", id: 1}
-
 // Question 1: Basic litmus test (how hopeful one is)
 // justification: This question asks idealistic someone is. If they answer the who
 // would win with a man with everything on the line, they tend to believe there
@@ -31,7 +25,7 @@ const QUESTION_2: DetailedQuestionType = {instruction:
 // Question 3: Basic compentency test 
 // justification: tells if they are cut out for high stress jobs
 const QUESTION_3: DetailedQuestionType = {instruction:
-    "A Zombie apocoplyse happens now where you are right now, what do you do?", id: 2}
+    "A zombie apocalypse has started! What do you do?", id: 2}
 
 // Question 4: Basic caretaking test
 // justification: tests if they can take care of a worm (nurses, doctors, etc)
