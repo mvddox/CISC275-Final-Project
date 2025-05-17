@@ -19,12 +19,13 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const [results, setResults] = useState<string[]>([]);
     const [finalResult, setFinalResult] = useState<string>("");
-    const [progressMessage, setProgressMessage] = useState<string>("");
+    const [progressMessage, setProgressMessage] = useState<string>(""); //used for progress message
     const [finalSentence, setFinalSentence] = useState<string>("") // used for their final sentence
-    const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("") // final phasse
+    const [finalDeclaredFuture, setFinalDeclaredFuture] = useState<string>("") // final phrase
     const [finalCareer, setFinalCareer] = useState<string>("") // final career
-    const [colorVibe, setColorVibe] = useState<string>("")
+    const [colorVibe, setColorVibe] = useState<string>("") // sets color for header
     const [date, setDate] = useState<string>("")
+    const [salary, setSalary] = useState<string>("") // used for salary range of career
 
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
     
@@ -91,7 +92,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                 
                 await Promise.all(userResponses).then(async (userResponses)=>    
                     {
-                    setProgressMessage("Arbitrating your final judgment...")
+                    setProgressMessage("Finding your future career...")
                     const response = await openai.responses.create({
                     model: "gpt-4o",
                     instructions: "use second tense",
@@ -108,6 +109,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                             + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                             + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                             + "what is the hexidecimal color based on vibes?"
+                            + "Give me a range of salaries for this career (for example: '$2000-$5000')"
                         },
                     ],
                     temperature: 1.2, //1.5 and above breaks it to random characters
@@ -133,8 +135,11 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                               color_vibe: { 
                                 type: "string", 
                               },
+                              salary_range: {
+                                type: "string",
+                              }
                             },
-                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe"],
+                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range"],
                             additionalProperties: false,
                           },
                         }
@@ -145,6 +150,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     setFinalDeclaredFuture(JSON.parse(response.output_text).touhou_future_phrase)
                     setFinalCareer(JSON.parse(response.output_text).future_career)
                     setColorVibe(JSON.parse(response.output_text).color_vibe)
+                    setSalary(JSON.parse(response.output_text).salary_range)
                     console.log(response.usage)
                     const currentDate = Date()
                     setDate(currentDate)
@@ -155,6 +161,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                       finalCareer: JSON.parse(response.output_text).future_career, 
                       finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
                       colorVibe:JSON.parse(response.output_text).color_vibe,
+                      salary:JSON.parse(response.output_text).salary_range,
                       date: currentDate,
                     }
                     result.setResult( currentResult)
@@ -180,11 +187,16 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
           {/* Shows progress message if currently loading */}
           {loading && <div className="loading">{progressMessage || "Loading..."}</div>}
     
-          {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
+          {/* Shows a defined, simple, determined result */}
           <div className="final-career" style={{"color":colorVibe}}hidden={loading || !finalResult}>
-            {finalDeclaredFuture +"~~"+ finalCareer}
+            {finalDeclaredFuture +" ~~ "+ finalCareer}
           </div>
     
+          {/* Shows the career's salary range */}
+          <div className="salary" hidden={loading || !salary}>
+            {"Salary Range: " + salary}
+          </div>
+
           {/* Shows individual insights if finished loading */}
           <div className="results" hidden={!results.length || loading}>
             <strong>Individual Insights:</strong>

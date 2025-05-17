@@ -47,7 +47,8 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
     finalCareer: "",
     colorVibe: "",
     date: "",
-    values: {empathy:50, ambition: 50, workLifeBalance: 50}
+    values: {empathy:50, ambition: 50, workLifeBalance: 50},
+    salary: ""
   })
 
   return (

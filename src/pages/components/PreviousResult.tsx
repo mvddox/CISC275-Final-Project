@@ -16,7 +16,8 @@ export interface DetailedResultType{
     finalCareer: string // what they are going to do in future
     colorVibe: string, // color vibe
     date: string
-    values: resultValues   
+    values: resultValues
+    salary: string // salary range for the career   
 }
 export interface BasicResultType{
   results: string[]; // list of results for each question
@@ -24,7 +25,8 @@ export interface BasicResultType{
   finalSentence: string; // final job title
   finalDeclaredFuture: string // fun stuff
   finalCareer: string // what they are going to do in future
-  colorVibe: string, // color vibe   
+  colorVibe: string, // color vibe  
+  salary: string, //salary range 
   date: string
 }
 
@@ -38,7 +40,7 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         {isDetailed(finishedResult) ? <div>Detailed Result</div>: <div>Basic Result</div>}
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
-          {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
+          {finishedResult.finalDeclaredFuture +" ~~ "+ finishedResult.finalCareer}
         </div>
         {/* Shows individual insights if finished loading */}
         {complete ? <div className="results-list">
@@ -48,6 +50,10 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
             ))}
           </ul>
         </div>: <></>}
+        {/* Shows the career's salary range */}
+        <div className="salary">
+          {"Salary Range: " + finishedResult.salary}
+        </div>
         {/* Shows character analysis */}
         <div className="final-results">
           <h3>Character Analysis:</h3>
