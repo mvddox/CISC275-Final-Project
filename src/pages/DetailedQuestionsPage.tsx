@@ -5,7 +5,7 @@ import { DETAILED_QUESTIONS, DetailedQuestionRecord, DetailedQuestionType} from 
 import DetailedQuestion from './DetailedQuestion';
 import "./DetailedQuestionsPage.css"
 import QuestionProgressBar from './components/ProgressBar';
-import OpenAiComponent from './components/DetailedOpenAiChapGPT';
+import OpenAiComponent from './components/DetailedOpenAiChatGPT';
 import DebugDetailed from './components/debugDetailed';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
