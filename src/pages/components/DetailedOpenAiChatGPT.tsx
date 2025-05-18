@@ -269,6 +269,9 @@ function OpenAiComponent({DetailedResults, disabled}:
         Generate Response
       </Button>
 
+      <div hidden={!loading}>
+        <img src="Ajax_loader_metal_512.gif" alt="loading" style={{width:"48px",height:"48px"}}/>
+      </div>
       
       {/*Makes user not do stupid stuff*/}
       <div className="ai-disclaimer" hidden={loading || !finalSentence}>
