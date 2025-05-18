@@ -49,13 +49,6 @@ describe('Questions', () => {
         expect(secondQuestion).toBeVisible();
     });
 })
-// describe('Generated Report', () => {
-//     // beforeEach(() => render(<BasicQuestion/>))
-
-//     // TO DO!!!!!
-// })
-
-
 
 describe('DetailedQuestionsPage', () => {
     test('renders the API key input on detailed page', () => {
