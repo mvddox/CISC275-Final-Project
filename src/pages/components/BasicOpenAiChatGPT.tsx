@@ -234,7 +234,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
             <ul style={{listStyleType: "none"}}>{getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
           </div>
 
+          <div className="personalityAnalysis" hidden={loading || !getStarted}>
           <h2>Personality Analysis:</h2>
+          </div>
 
           {/* Shows individual insights if finished loading */}
           <div className="results" hidden={!results.length || loading}>
@@ -270,7 +272,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
           {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
           
           <Button className="ai-button" onClick={()=>navigate("/CurrentResultPage")} disabled={disabled || loading || finalCareer === ""}>
-            More results?  
+            Go to download page?  
           </Button>
     
     </div>

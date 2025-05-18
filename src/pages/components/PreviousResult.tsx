@@ -20,6 +20,8 @@ export interface DetailedResultType{
     salary: string // salary range for the career
     description: string // description of career   
     education: string // education level for job
+    getStarted: string // how to get started on career path
+
 }
 export interface BasicResultType{
   results: string[]; // list of results for each question
@@ -66,6 +68,11 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         {/* Shows the average education needed for career */}
         <div className="education">
           <br /><h3>Education Requirement: </h3>{finishedResult.education}
+        </div>
+        {/* Shows the user how to get started on the career path */}
+        <div className="gettingStarted">
+          <br /><h3>Getting Started: </h3>
+          <ul style={{listStyleType: "none"}}>{finishedResult.getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
         </div>
         {/* Shows character analysis */}
         <div className="final-results">

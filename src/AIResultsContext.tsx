@@ -51,6 +51,7 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
     salary: "",
     description: "",
     education: "",
+    getStarted: "",
   })
 
   return (

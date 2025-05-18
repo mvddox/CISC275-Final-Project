@@ -107,6 +107,14 @@ function CurrentResultPage() {
         <div className="education">
           <br /><h3>Education Requirement: </h3>{finishedResult.education}
         </div>
+        {/* Shows the user how to get started on the career path */}
+        <div className="gettingStarted">
+          <br /><h3>Getting Started: </h3>
+          <ul style={{listStyleType: "none"}}>{finishedResult.getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
+        </div>
+        <div className="personalityAnalysis">
+          <h2>Personality Analysis:</h2>
+        </div>
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
           <br /><h3>Individual Insights:</h3>

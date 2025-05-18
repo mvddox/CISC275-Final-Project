@@ -30,6 +30,7 @@ function OpenAiComponent({DetailedResults, disabled}:
     const [salary, setSalary] = useState<string>("") // used for salary range of career
     const [description, setDescription] = useState<string>("") // used for description of career
     const [education, setEducation] = useState<string>("") // used for education needed for career
+    const [getStarted, setGetStarted] = useState<string>("") // used to tell user how to start on that career path
 
     const result = useAIResults(); //IMPORTANT CONSIDER AND ASK IF THIS'S OOP AND NOT FUNCTIONAL PROGRAMMING
     const navigate = useNavigate();
@@ -110,6 +111,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         + "Give me a range of salaries for this career (for example: '$2000-$5000')"
                         + "Provide a short description of this career. Give information on what the user will do in this position, tasks they would do, how flexible their schedule is, and where they could work in this position (at home, schools, etc.)."
                         + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
+                        + "Provide the user with a list of steps to get started on this career path where each item is delimited with a '|' character and each item starts with an incrementing number and period."
                     },
                 ],
                 temperature: 1.2, //1.5 and above breaks it to random characters
@@ -146,6 +148,9 @@ function OpenAiComponent({DetailedResults, disabled}:
                           education_level: {
                             type: "string",
                           },
+                          get_started: {
+                            type: "string",
+                          },
                           values: {
                             type: "object",
                             properties: {
@@ -167,7 +172,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         
                           }
                         },
-                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values", "salary_range", "career_description", "education_level"],
+                        required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "values", "salary_range", "career_description", "education_level", "get_started"],
                         additionalProperties: false,
                       },
                     }
@@ -182,6 +187,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                 setSalary(JSON.parse(response.output_text).salary_range)
                 setDescription(JSON.parse(response.output_text).career_description)
                 setEducation(JSON.parse(response.output_text).education_level)
+                setGetStarted(JSON.parse(response.output_text).get_started)
                 let currentDate = Date()
                 setDate(currentDate)
                 console.log(response.usage)
@@ -197,6 +203,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                   salary: (JSON.parse(response.output_text).salary_range),
                   description: (JSON.parse(response.output_text).career_description),
                   education: (JSON.parse(response.output_text).education_level),
+                  getStarted: (JSON.parse(response.output_text).get_started)
                 }
                 result.setResult( currentResult)
                 let storedAcount: Account = JSON.parse(localStorage.getItem(authContext.username) || "{}")
@@ -227,7 +234,7 @@ function OpenAiComponent({DetailedResults, disabled}:
 
       {/* Shows the career's salary range */}
       <div className="salary" hidden={loading || !salary}>
-        {"Salary Range: " + salary}
+        <strong>Salary Range: </strong>{salary}
       </div>
 
       {/* Shows a description of the career */}
@@ -238,6 +245,16 @@ function OpenAiComponent({DetailedResults, disabled}:
       {/* Shows the average education needed for career */}
       <div className="education" hidden={loading || !education}>
         <br /><h3>Education Requirement: </h3>{education}
+      </div>
+
+      {/* Shows the user how to get started on the career path */}
+      <div className="gettingStarted" hidden={loading || !getStarted}>
+        <br /><h3>Getting Started: </h3>
+        <ul style={{listStyleType: "none"}}>{getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
+      </div>
+
+      <div className="personalityAnalysis" hidden={loading || !getStarted}>
+        <h2>Personality Analysis:</h2>
       </div>
 
       {/* Shows individual insights if finished loading */}
@@ -279,7 +296,7 @@ function OpenAiComponent({DetailedResults, disabled}:
       {disabled && <p className="disabled-message">Please answer all detailed questions to enable a response.</p>}
       
       <Button className="ai-button" onClick={()=>navigate("/CurrentResultPage")} disabled={disabled || loading || finalCareer === ""}>
-        More results?  
+        Go to download page?  
       </Button>
 
     </div>

@@ -29,13 +29,17 @@
   
   
   .ai-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+    background-color: #e1e1e1;
+    border: 1px solid #7f7f7f;
+    box-shadow: inset 1px 1px white, inset -1px -1px #c0c0c0;
+    color: black;
+    padding: 15px 30px;
+    margin: 0 10px;
+    font-size: 1.2rem;
     border-radius: 5px;
-    font-size: 1rem;
     cursor: pointer;
+    text-align: center;
+    min-width: 150px;
   }
   
   
