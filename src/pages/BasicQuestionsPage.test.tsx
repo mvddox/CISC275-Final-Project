@@ -41,15 +41,6 @@ describe('Questions', () => {
         })
         });
 })
-// describe('Generated Report', () => {
-//     // beforeEach(() => render(<BasicQuestion/>))
-
-//     // TO DO!!!!!
-// })
-
-// Mock the OpenAiComponentB component to avoid side effects
-
-// Mock the BasicQuestionsList
 
 describe('BasicQuestionsPage', () => {
     test('renders the API key input', () => {
