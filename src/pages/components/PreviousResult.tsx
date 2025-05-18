@@ -31,6 +31,7 @@ export interface BasicResultType{
   salary: string, //salary range 
   description: string, // description of career
   education: string // education level for career
+  getStarted: string // how to get started on career path
   date: string
 }
 

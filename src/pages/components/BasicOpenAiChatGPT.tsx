@@ -28,6 +28,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [salary, setSalary] = useState<string>("") // used for salary range of career
     const [description, setDescription] = useState<string>("") // used for the description of the career
     const [education, setEducation] = useState<string>("") // used to show education required for career
+    const [getStarted, setGetStarted] = useState<string>("") // used to tell user how to start on that career path
 
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
     
@@ -114,6 +115,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                             + "Give me a range of salaries for this career (for example: '$2000-$5000')."
                             + "Provide a short description of this career. Give information on what the user will do in this position."
                             + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
+                            + "Provide the user with a list of steps to get started on this career path where each item is delimited with a '|' character and each item starts with an incrementing number and period."
                         },
                     ],
                     temperature: 1.2, //1.5 and above breaks it to random characters
@@ -148,8 +150,11 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                               education_level: {
                                 type: "string",
                               },
+                              get_started: {
+                                type: "string",
+                              },
                             },
-                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range", "career_description", "education_level",],
+                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range", "career_description", "education_level", "get_started"],
                             additionalProperties: false,
                           },
                         }
@@ -163,6 +168,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     setSalary(JSON.parse(response.output_text).salary_range)
                     setDescription(JSON.parse(response.output_text).career_description)
                     setEducation(JSON.parse(response.output_text).education_level)
+                    setGetStarted(JSON.parse(response.output_text).get_started)
                     console.log(response.usage)
                     const currentDate = Date()
                     setDate(currentDate)
@@ -176,6 +182,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                       salary:JSON.parse(response.output_text).salary_range,
                       description:JSON.parse(response.output_text).career_description,
                       education:JSON.parse(response.output_text).education_level,
+                      getStarted:JSON.parse(response.output_text).get_started,
                       date: currentDate,
                     }
                     result.setResult( currentResult)
@@ -208,7 +215,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     
           {/* Shows the career's salary range */}
           <div className="salary" hidden={loading || !salary}>
-            {"Salary Range: " + salary}
+            <strong>Salary Range: </strong> {salary}
           </div>
 
           {/* Shows a description of the career */}
@@ -221,10 +228,18 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
             <br /><h3>Education Requirement: </h3>{education}
           </div>
 
+          {/* Shows the user how to get started on the career path */}
+          <div className="gettingStarted" hidden={loading || !getStarted}>
+            <br /><h3>Getting Started: </h3>
+            <ul style={{listStyleType: "none"}}>{getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
+          </div>
+
+          <h2>Personality Analysis:</h2>
+
           {/* Shows individual insights if finished loading */}
           <div className="results" hidden={!results.length || loading}>
-            <br /><h3>Individual Insights:</h3>
-            <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
+            <h3>Individual Insights:</h3>
+            <ul style={{listStyleType: "none"}}>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
           </div>
     
           {/* Shows character analysis */}
