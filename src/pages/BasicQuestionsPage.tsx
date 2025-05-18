@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import BasicQuestion from './BasicQuestion';
 import { BasicQuestionType, BasicAnswerRecord, BASIC_QUESTIONS } from './BasicQuestionsList'
 import QuestionProgressBar from './components/ProgressBar';
-import OpenAiComponentB from './components/BasicOpenAiChapGPT';
+import OpenAiComponentB from './components/BasicOpenAiChatGPT';
 import DebugBasic from './components/debugBasic';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)

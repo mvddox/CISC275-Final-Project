@@ -17,7 +17,11 @@ export interface DetailedResultType{
     colorVibe: string, // color vibe
     date: string
     values: resultValues
-    salary: string // salary range for the career   
+    salary: string // salary range for the career
+    description: string // description of career   
+    education: string // education level for job
+    getStarted: string // how to get started on career path
+
 }
 export interface BasicResultType{
   results: string[]; // list of results for each question
@@ -27,6 +31,9 @@ export interface BasicResultType{
   finalCareer: string // what they are going to do in future
   colorVibe: string, // color vibe  
   salary: string, //salary range 
+  description: string, // description of career
+  education: string // education level for career
+  getStarted: string // how to get started on career path
   date: string
 }
 
@@ -52,11 +59,24 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         </div>: <></>}
         {/* Shows the career's salary range */}
         <div className="salary">
-          {"Salary Range: " + finishedResult.salary}
+          <strong>Salary Range: </strong>{finishedResult.salary}
+        </div>
+        {/* Shows a description of the career */}
+        <div className="description">
+          <br /><h3>Career Description: </h3>{finishedResult.description}
+        </div>
+        {/* Shows the average education needed for career */}
+        <div className="education">
+          <br /><h3>Education Requirement: </h3>{finishedResult.education}
+        </div>
+        {/* Shows the user how to get started on the career path */}
+        <div className="gettingStarted">
+          <br /><h3>Getting Started: </h3>
+          <ul style={{listStyleType: "none"}}>{finishedResult.getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
         </div>
         {/* Shows character analysis */}
         <div className="final-results">
-          <h3>Character Analysis:</h3>
+          <br /><h3>Character Analysis:</h3>
           <p>{finishedResult.finalResult}</p>
         </div>
         {/* Shows career prediction */}

@@ -54,11 +54,13 @@
         justify-content: center;
     }
     .form-label-detailed{
-        color: black;
+        color: white;
         padding-left: 10vh;
         padding-right: 10vh;
         font-size: 1.5rem;
         font-weight: bold;
+        -webkit-text-stroke: black;
+        -webkit-text-stroke-width: .6px;
         
     }
     .detailed-character-text{

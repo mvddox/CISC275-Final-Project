@@ -48,7 +48,10 @@ export const AIResultsProvider = ({ children }: { children: ReactNode }) => {
     colorVibe: "",
     date: "",
     values: {empathy:50, ambition: 50, workLifeBalance: 50},
-    salary: ""
+    salary: "",
+    description: "",
+    education: "",
+    getStarted: "",
   })
 
   return (

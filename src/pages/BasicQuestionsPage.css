@@ -113,14 +113,6 @@
     
   }
   
-  /* Remove or comment out this if you use .question-label! */
-  /*.Basic-Question > div > label {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 15px;
-  }*/
-  
   .Basic-Question label:not(.question-label) {
     font-weight: normal;
     font-size: 1.1rem;

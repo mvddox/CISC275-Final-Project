@@ -26,6 +26,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [colorVibe, setColorVibe] = useState<string>("") // sets color for header
     const [date, setDate] = useState<string>("")
     const [salary, setSalary] = useState<string>("") // used for salary range of career
+    const [description, setDescription] = useState<string>("") // used for the description of the career
+    const [education, setEducation] = useState<string>("") // used to show education required for career
+    const [getStarted, setGetStarted] = useState<string>("") // used to tell user how to start on that career path
 
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
     
@@ -48,37 +51,19 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                 async ([instruction,answer]: [string ,string], index): Promise<string> => 
                 {
                     try{
-                        if (index === 0){
-                            const response = await openai.responses.create({
-                                model: "gpt-4o",
-                                instructions: "use second tense",
-                                input: [
-                                    {role: "system", content: instruction},
-                                    {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
-                                ],
-                                max_output_tokens: 18
-                            });
-                            finishedQuestions += 1
-                            setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
-                            return (index +1)+ ": " + response.output_text
-                            }
-                        else{
-                            const response = await openai.responses.create({
-                                model: "gpt-4o",
-                                instructions: "use second tense",
-                                input: [
-                                    {role: "system", content: instruction},
-                                    {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
-
-                                ],
-                                max_output_tokens: 18
-                            });
-                            finishedQuestions += 1
-                            setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
-                            return (index + 1) + ": " + response.output_text
-                        }
+                          const response = await openai.responses.create({
+                              model: "gpt-4o",
+                              instructions: "use second tense",
+                              input: [
+                                  {role: "system", content: instruction},
+                                  {role: "user", content: answer},
+                                  {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
+                              ],
+                              max_output_tokens: 18
+                          });
+                          finishedQuestions += 1
+                          setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
+                          return (index + 1) + ": " + response.output_text
                 }
                     catch (e){
                         setAiError("It seems that there was an error.....")
@@ -109,7 +94,10 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                             + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                             + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                             + "what is the hexidecimal color based on vibes?"
-                            + "Give me a range of salaries for this career (for example: '$2000-$5000')"
+                            + "Give me a range of salaries for this career (for example: '$2000-$5000')."
+                            + "Provide a short description of this career. Give information on what the user will do in this position, tasks they would do, how flexible their schedule is, and where they could work in this position (at home, schools, etc.)."
+                            + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
+                            + "Provide the user with a list of steps to get started on this career path where each item is delimited with a '|' character and each item starts with an incrementing number and period."
                         },
                     ],
                     temperature: 1.2, //1.5 and above breaks it to random characters
@@ -137,9 +125,18 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                               },
                               salary_range: {
                                 type: "string",
-                              }
+                              },
+                              career_description: {
+                                type: "string",
+                              },
+                              education_level: {
+                                type: "string",
+                              },
+                              get_started: {
+                                type: "string",
+                              },
                             },
-                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range"],
+                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range", "career_description", "education_level", "get_started"],
                             additionalProperties: false,
                           },
                         }
@@ -151,6 +148,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     setFinalCareer(JSON.parse(response.output_text).future_career)
                     setColorVibe(JSON.parse(response.output_text).color_vibe)
                     setSalary(JSON.parse(response.output_text).salary_range)
+                    setDescription(JSON.parse(response.output_text).career_description)
+                    setEducation(JSON.parse(response.output_text).education_level)
+                    setGetStarted(JSON.parse(response.output_text).get_started)
                     console.log(response.usage)
                     const currentDate = Date()
                     setDate(currentDate)
@@ -162,6 +162,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                       finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
                       colorVibe:JSON.parse(response.output_text).color_vibe,
                       salary:JSON.parse(response.output_text).salary_range,
+                      description:JSON.parse(response.output_text).career_description,
+                      education:JSON.parse(response.output_text).education_level,
+                      getStarted:JSON.parse(response.output_text).get_started,
                       date: currentDate,
                     }
                     result.setResult( currentResult)
@@ -194,13 +197,33 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     
           {/* Shows the career's salary range */}
           <div className="salary" hidden={loading || !salary}>
-            {"Salary Range: " + salary}
+            <strong>Salary Range: </strong> {salary}
+          </div>
+
+          {/* Shows a description of the career */}
+          <div className="description" hidden={loading || !description}>
+            <br /><h3>Career Description: </h3>{description}
+          </div>
+
+          {/* Shows the average education needed for career */}
+          <div className="education" hidden={loading || !education}>
+            <br /><h3>Education Requirement: </h3>{education}
+          </div>
+
+          {/* Shows the user how to get started on the career path */}
+          <div className="gettingStarted" hidden={loading || !getStarted}>
+            <br /><h3>Getting Started: </h3>
+            <ul style={{listStyleType: "none"}}>{getStarted.split("|").map((res, i) => <li key={i}>{res}</li>)}</ul>
+          </div>
+
+          <div className="personalityAnalysis" hidden={loading || !getStarted}>
+          <h2>Personality Analysis:</h2>
           </div>
 
           {/* Shows individual insights if finished loading */}
           <div className="results" hidden={!results.length || loading}>
-            <strong>Individual Insights:</strong>
-            <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
+            <h3>Individual Insights:</h3>
+            <ul style={{listStyleType: "none"}}>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
           </div>
     
           {/* Shows character analysis */}
@@ -220,6 +243,10 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
           <Button className="ai-button" onClick={startAi} disabled={disabled || loading}>
             Generate Response
           </Button>
+
+          <div hidden={!loading}>
+          <img src="Ajax_loader_metal_512.gif" alt="loading" style={{width:"48px",height:"48px"}}/>
+          </div>
           
           {/*Makes user not do stupid stuff*/}
           <div className="ai-disclaimer" hidden={loading || !finalSentence}>
@@ -231,7 +258,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
           {disabled && <p className="disabled-message">Please answer all basic questions to enable a response.</p>}
           
           <Button className="ai-button" onClick={()=>navigate("/CurrentResultPage")} disabled={disabled || loading || finalCareer === ""}>
-            More results?  
+            Go to download page?  
           </Button>
     
     </div>
