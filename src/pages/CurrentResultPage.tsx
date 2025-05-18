@@ -93,14 +93,19 @@ function CurrentResultPage() {
 
         {/* Just like my heckin fortune!!! Shows a defined, simple, determined result */}
         <div className="final-career" style={{"color":finishedResult.colorVibe}}>
-          {finishedResult.finalDeclaredFuture +"~~"+ finishedResult.finalCareer}
+          {finishedResult.finalDeclaredFuture +" ~~ "+ finishedResult.finalCareer}
         </div>
         {/* Shows the career's salary range */}
         <div className="salary">
           <strong>Salary Range:</strong> {finishedResult.salary}
         </div>
+        {/* Shows a description of the career */}
+        <div className="description">
+          <br /><h3>Career Description: </h3> {finishedResult.description}
+        </div>
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
+          <br /><h3>Individual Insights:</h3>
           <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
             {finishedResult.results.map((res, i) => (
               <li key={i}>{res}</li>
@@ -109,7 +114,7 @@ function CurrentResultPage() {
         </div>
         {/* Shows character analysis */}
         <div className="final-results">
-          <h3>Character Analysis:</h3>
+          <br /><h3>Character Analysis:</h3>
           <p>{finishedResult.finalResult}</p>
         </div>
         {/* Shows career prediction */}

@@ -17,7 +17,9 @@ export interface DetailedResultType{
     colorVibe: string, // color vibe
     date: string
     values: resultValues
-    salary: string // salary range for the career   
+    salary: string // salary range for the career
+    description: string // description of career   
+    education: string // education level for job
 }
 export interface BasicResultType{
   results: string[]; // list of results for each question
@@ -27,6 +29,8 @@ export interface BasicResultType{
   finalCareer: string // what they are going to do in future
   colorVibe: string, // color vibe  
   salary: string, //salary range 
+  description: string, // description of career
+  education: string // education level for career
   date: string
 }
 
@@ -53,6 +57,10 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         {/* Shows the career's salary range */}
         <div className="salary">
           {"Salary Range: " + finishedResult.salary}
+        </div>
+        {/* Shows a description of the career */}
+        <div className="description">
+          <strong>Career Description: </strong> <br /> {finishedResult.description}
         </div>
         {/* Shows character analysis */}
         <div className="final-results">

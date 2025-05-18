@@ -26,6 +26,8 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
     const [colorVibe, setColorVibe] = useState<string>("") // sets color for header
     const [date, setDate] = useState<string>("")
     const [salary, setSalary] = useState<string>("") // used for salary range of career
+    const [description, setDescription] = useState<string>("") // used for the description of the career
+    const [education, setEducation] = useState<string>("") // used to show education required for career
 
     const openai = new OpenAI({ apiKey: keyData, dangerouslyAllowBrowser: true });
     
@@ -109,7 +111,9 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                             + "In one 'Touhou song name'-esque phrase, what is their future? Make sure to include the little note chararcters; no names."
                             + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                             + "what is the hexidecimal color based on vibes?"
-                            + "Give me a range of salaries for this career (for example: '$2000-$5000')"
+                            + "Give me a range of salaries for this career (for example: '$2000-$5000')."
+                            + "Provide a short description of this career. Give information on what the user will do in this position."
+                            + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
                         },
                     ],
                     temperature: 1.2, //1.5 and above breaks it to random characters
@@ -137,9 +141,15 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                               },
                               salary_range: {
                                 type: "string",
-                              }
+                              },
+                              career_description: {
+                                type: "string",
+                              },
+                              education_level: {
+                                type: "string",
+                              },
                             },
-                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range"],
+                            required: ["user_definition", "final_sentence", "touhou_future_phrase", "future_career", "color_vibe", "salary_range", "career_description", "education_level",],
                             additionalProperties: false,
                           },
                         }
@@ -151,6 +161,8 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                     setFinalCareer(JSON.parse(response.output_text).future_career)
                     setColorVibe(JSON.parse(response.output_text).color_vibe)
                     setSalary(JSON.parse(response.output_text).salary_range)
+                    setDescription(JSON.parse(response.output_text).career_description)
+                    setEducation(JSON.parse(response.output_text).education_level)
                     console.log(response.usage)
                     const currentDate = Date()
                     setDate(currentDate)
@@ -162,6 +174,8 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                       finalDeclaredFuture:JSON.parse(response.output_text).touhou_future_phrase,
                       colorVibe:JSON.parse(response.output_text).color_vibe,
                       salary:JSON.parse(response.output_text).salary_range,
+                      description:JSON.parse(response.output_text).career_description,
+                      education:JSON.parse(response.output_text).education_level,
                       date: currentDate,
                     }
                     result.setResult( currentResult)
@@ -197,9 +211,19 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
             {"Salary Range: " + salary}
           </div>
 
+          {/* Shows a description of the career */}
+          <div className="description" hidden={loading || !description}>
+            <br /><h3>Career Description: </h3>{description}
+          </div>
+
+          {/* Shows the average education needed for career */}
+          <div className="education" hidden={loading || !education}>
+            <br /><h3>Education Requirement: </h3>{education}
+          </div>
+
           {/* Shows individual insights if finished loading */}
           <div className="results" hidden={!results.length || loading}>
-            <strong>Individual Insights:</strong>
+            <br /><h3>Individual Insights:</h3>
             <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
           </div>
     
