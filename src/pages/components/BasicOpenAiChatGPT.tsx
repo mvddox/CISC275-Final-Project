@@ -51,37 +51,19 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                 async ([instruction,answer]: [string ,string], index): Promise<string> => 
                 {
                     try{
-                        if (index === 0){
-                            const response = await openai.responses.create({
-                                model: "gpt-4o",
-                                instructions: "use second tense",
-                                input: [
-                                    {role: "system", content: instruction},
-                                    {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
-                                ],
-                                max_output_tokens: 18
-                            });
-                            finishedQuestions += 1
-                            setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
-                            return (index +1)+ ": " + response.output_text
-                            }
-                        else{
-                            const response = await openai.responses.create({
-                                model: "gpt-4o",
-                                instructions: "use second tense",
-                                input: [
-                                    {role: "system", content: instruction},
-                                    {role: "user", content: answer},
-                                    {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
-
-                                ],
-                                max_output_tokens: 18
-                            });
-                            finishedQuestions += 1
-                            setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
-                            return (index + 1) + ": " + response.output_text
-                        }
+                          const response = await openai.responses.create({
+                              model: "gpt-4o",
+                              instructions: "use second tense",
+                              input: [
+                                  {role: "system", content: instruction},
+                                  {role: "user", content: answer},
+                                  {role: "developer", content: "Based on the question, in a 'the user is' format, how would you describe the user?"}
+                              ],
+                              max_output_tokens: 18
+                          });
+                          finishedQuestions += 1
+                          setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(BasicResults).length)
+                          return (index + 1) + ": " + response.output_text
                 }
                     catch (e){
                         setAiError("It seems that there was an error.....")
@@ -113,7 +95,7 @@ function OpenAiComponentB({ BasicResults, disabled }: OpenAiComponentBProps) {
                             + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                             + "what is the hexidecimal color based on vibes?"
                             + "Give me a range of salaries for this career (for example: '$2000-$5000')."
-                            + "Provide a short description of this career. Give information on what the user will do in this position."
+                            + "Provide a short description of this career. Give information on what the user will do in this position, tasks they would do, how flexible their schedule is, and where they could work in this position (at home, schools, etc.)."
                             + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
                             + "Provide the user with a list of steps to get started on this career path where each item is delimited with a '|' character and each item starts with an incrementing number and period."
                         },

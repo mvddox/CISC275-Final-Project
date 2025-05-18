@@ -20,9 +20,6 @@ function MyProfilePage() {
   const [changePassFail, setChangePassFail] = useState<boolean>(false); // true if setting password failed
   const [changePassSuccess, setChangePassSuccess] = useState<boolean>(false); // true if setting password was successful
 
-  // Allowed usernames for which the "About you" section will be shown
-  //const allowedUsernames = ["elijah", "ethan"]; // Replace with actual allowed usernames
-
   // Load the username and "About you" content from localStorage when the component mounts
   useEffect(() => {
     const storedUsername = localStorage.getItem("currentUsername")?.replace(/"/g, "") || "";
@@ -43,32 +40,7 @@ function MyProfilePage() {
       }
     }
   }, []);
-/*
-  // Update the username and localStorage on login
-  function handleLogin(username: string) {
-    setCurrentUsername(username);
-    localStorage.setItem("currentUsername", JSON.stringify(username));
 
-    // When logging in, load or create default "About you" content
-    const storedAbout = localStorage.getItem(`about-${username}`);
-    if (!storedAbout) {
-      const defaultAbout = username === "elijah" ? "Elijah is awesome" : "Ethan is awesome";
-      setAbout(defaultAbout);
-      localStorage.setItem(`about-${username}`, defaultAbout);
-    } else {
-      setAbout(storedAbout);
-    }
-  }
-
-  // Handle logging out
-  function handleLogout() {
-    setCurrentUsername("");
-    localStorage.removeItem("currentUsername");
-    setAbout(""); // Clear the "About you" field on logout
-    // Optionally, clear the "About you" data from localStorage if needed
-    // localStorage.removeItem(`about-${currentUsername}`);
-  }
-*/
   // Save the API key
   function handleKeySubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));

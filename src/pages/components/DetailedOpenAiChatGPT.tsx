@@ -50,34 +50,18 @@ function OpenAiComponent({DetailedResults, disabled}:
             async ([instruction,answer]: [string ,string], index): Promise<string> => 
             {
                 try{
-                    if (index === 0){
-                        const response = await openai.responses.create({
-                            model: "gpt-4o",
-                            instructions: "use second tense",
-                            input: [
-                                {role: "system", content: instruction},
-                                {role: "user", content: answer},
-                                {role: "developer", content: "Based on the question, in two sentences how would you define the user who answered?"}
-                            ]
-                        });
-                        finishedQuestions += 1
-                        setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(DetailedResults).length)
-                        return (index +1)+ ": " + response.output_text
-                        }
-                    else{
-                        const response = await openai.responses.create({
-                            model: "gpt-4o",
-                            instructions: "use second tense",
-                            input: [
-                                {role: "system", content: instruction},
-                                {role: "user", content: answer},
-                                {role: "developer", content: "Based on the question, in two or less sentences how would you define the user who answered?"}
-                            ]
-                        });
-                        finishedQuestions += 1
-                        setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(DetailedResults).length)
-                        return (index + 1) + ": " + response.output_text
-                    }
+                      const response = await openai.responses.create({
+                          model: "gpt-4o",
+                          instructions: "use second tense",
+                          input: [
+                              {role: "system", content: instruction},
+                              {role: "user", content: answer},
+                              {role: "developer", content: "Based on the question, in two sentences how would you define the user who answered?"}
+                          ]
+                      });
+                      finishedQuestions += 1
+                      setProgressMessage("Understanding individual questions:" + finishedQuestions +"/"+Object.keys(DetailedResults).length)
+                      return (index + 1) + ": " + response.output_text
             }
                 catch (e){
                     setAiError("It seems that there was an error.....")
@@ -259,8 +243,8 @@ function OpenAiComponent({DetailedResults, disabled}:
 
       {/* Shows individual insights if finished loading */}
       <div className="results" hidden={!results.length || loading}>
-        <br /><h3>Individual Insights:</h3>
-        <ul>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
+        <h3>Individual Insights:</h3>
+        <ul style={{listStyleType: "none"}}>{results.map((res, i) => <li key={i}>{res}</li>)}</ul>
       </div>
 
       {/* Shows character analysis */}
