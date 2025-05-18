@@ -108,7 +108,7 @@ function OpenAiComponent({DetailedResults, disabled}:
                         + "In one simple phrase, what is their future job (give it in the form of a real job title)?"
                         + "what is the hexidecimal color based on vibes?"
                         + "Give me a range of salaries for this career (for example: '$2000-$5000')"
-                        + "Provide a short description of this career. Give information on what the user will do in this position and where they could work in this position (at home, schools, etc.)."
+                        + "Provide a short description of this career. Give information on what the user will do in this position, tasks they would do, how flexible their schedule is, and where they could work in this position (at home, schools, etc.)."
                         + "Provide the user with information regarding what level of education they need (for example, if the job needs a master's degree, say so)."
                     },
                 ],
@@ -235,6 +235,7 @@ function OpenAiComponent({DetailedResults, disabled}:
         <br /><h3>Career Description: </h3>{description}
       </div>
 
+      {/* Shows the average education needed for career */}
       <div className="education" hidden={loading || !education}>
         <br /><h3>Education Requirement: </h3>{education}
       </div>

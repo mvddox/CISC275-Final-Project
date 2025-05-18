@@ -103,6 +103,10 @@ function CurrentResultPage() {
         <div className="description">
           <br /><h3>Career Description: </h3> {finishedResult.description}
         </div>
+        {/* Shows the average education needed for career */}
+        <div className="education">
+          <br /><h3>Education Requirement: </h3>{finishedResult.education}
+        </div>
         {/* Shows individual insights if finished loading */}
         <div className="results-list">
           <br /><h3>Individual Insights:</h3>

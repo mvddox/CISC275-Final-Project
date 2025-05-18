@@ -56,15 +56,19 @@ function PreviousResult({finishedResult, complete}: {finishedResult: PreviousRes
         </div>: <></>}
         {/* Shows the career's salary range */}
         <div className="salary">
-          {"Salary Range: " + finishedResult.salary}
+          <strong>Salary Range: </strong>{finishedResult.salary}
         </div>
         {/* Shows a description of the career */}
         <div className="description">
-          <strong>Career Description: </strong> <br /> {finishedResult.description}
+          <br /><h3>Career Description: </h3>{finishedResult.description}
+        </div>
+        {/* Shows the average education needed for career */}
+        <div className="education">
+          <br /><h3>Education Requirement: </h3>{finishedResult.education}
         </div>
         {/* Shows character analysis */}
         <div className="final-results">
-          <h3>Character Analysis:</h3>
+          <br /><h3>Character Analysis:</h3>
           <p>{finishedResult.finalResult}</p>
         </div>
         {/* Shows career prediction */}
